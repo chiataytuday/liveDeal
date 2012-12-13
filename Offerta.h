@@ -27,6 +27,7 @@
 @property (nonatomic, assign) int CouponAcquistati;
 @property (nonatomic, assign) NSString *categoria;
 @property (nonatomic, assign) CLLocationDistance distanza;
+@property (nonatomic, assign) BOOL isLive;
 
 -(id)initWithTitolo:(NSString *)titolo Descrizione:(NSString *)condizione Condizioni:(NSString *)condizioni;
 @end

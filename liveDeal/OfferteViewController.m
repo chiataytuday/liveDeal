@@ -25,11 +25,11 @@
     
     nextPageToken = @"";
     Esercenti = [[NSMutableArray alloc] init];
-    UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sfondoRegistrati.png"]];
-    [tempImageView setContentMode:UIViewContentModeScaleAspectFill];
-    [tempImageView setFrame:self.self.myTable.frame];
+    //UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sfondoRegistrati.png"]];
+    //[tempImageView setContentMode:UIViewContentModeScaleAspectFill];
+    //[tempImageView setFrame:self.self.myTable.frame];
     
-    self.self.myTable.backgroundView = tempImageView;
+    //self.self.myTable.backgroundView = tempImageView;
     
     [self.mapView setHidden:YES];
     tipo=0; //offerte
@@ -157,6 +157,8 @@
                                                Descrizione:[off valueForKey:@"description"]
                                                 Condizioni:[off valueForKey:@"conditions"]];
             
+           [offerta setIsLive:[[off valueForKey:@"is_live"] boolValue]];
+           
             CLLocation *distanzaEsercente = [[CLLocation alloc] initWithCoordinate: CLLocationCoordinate2DMake(lat, lng) altitude:1 horizontalAccuracy:1 verticalAccuracy:-1 timestamp:nil];
 
             offerta.distanza = [newLocation distanceFromLocation:distanzaEsercente] / 1000;
@@ -329,7 +331,35 @@
     if (indexPath.section==2)
         return 60;
     
-    return 78;
+    return 80;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section==1)
+        return 19;
+    else return 0;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (section==1)
+    {
+        UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 19)];
+        [v setBackgroundColor:[UIColor colorWithRed:47.0f / 255 green:47.0f / 255 blue:47.0f / 255 alpha:1]];
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.bounds.size.width - 10, 10)];
+        label.text = @"Altri esercenti nelle vicinanze";
+        label.textColor = [UIColor whiteColor];
+        [label setFont:[UIFont fontWithName:@"Helvetica Neue" size:12]];
+        label.backgroundColor = [UIColor clearColor];
+        
+        [v addSubview:label];
+        
+        return v;
+    }
+    
+    return nil;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -352,9 +382,9 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
    
     if (section==1)
-        return @"Esercenti nelle vicinanze";
+        return @"Altri esercenti nelle vicinanze";
     else if (section==0)
-        return @"Deals";
+        return @"";
     
     return @"";
 }
@@ -369,86 +399,207 @@
         
          Offerta *offerta = [Offerte objectAtIndex:indexPath.row];        
         
-        static NSString *CellIdentifier = @"offertaCell";
-        
-        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        if (!cell) {
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
-        
-        //aspetto della cella
-        UIImageView *av = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 78)];
-        av.backgroundColor = [UIColor clearColor];
-        av.opaque = NO;
-        av.image = [UIImage imageNamed:@"baseCell.png"];
-        cell.backgroundView = av;
-        
-       
-        //label titolo
-        UILabel *cellTitolo = (UILabel *)[cell viewWithTag:1];
-        [cellTitolo setText:offerta.Titolo];
-        [cellTitolo setFont:[UIFont fontWithName:@"Bebas Neue" size:18]];
-        [cellTitolo setTextColor:[UIColor colorWithRed:43.0f / 255
-                                                 green:45.0f / 255
-                                                  blue:48.0f / 255 alpha:1.0f]];
-
-        
-        UILabel *cellDescrizione = (UILabel *)[cell viewWithTag:2];
-        cellDescrizione.text = [NSString stringWithFormat:@"%@   -   %.2f Km", offerta.Esercente.RagioneSociale, offerta.distanza];
-
-        //label prezzo
-        
-        
-        [cellDescrizione setBackgroundColor:[UIColor clearColor]];
-        cellDescrizione.opaque = NO;
-        cellDescrizione.backgroundColor = [UIColor clearColor];
-        [self hideGradientBackground:cellDescrizione];
-        
-        
-        UILabel *lblPrezzo = (UILabel *)[cell viewWithTag:4];
-        [lblPrezzo setText:[NSString stringWithFormat:@"%.0f€", offerta.PrezzoFinale]];
-        [lblPrezzo setTextColor:[UIColor colorWithRed:255.0f / 255
-                                                      green:77.0f / 255
-                                                       blue:137.0f / 255 alpha:1.0f]];
-        
-        
-        //label offerta
-        UILabel *lblOfferta = (UILabel *)[cell viewWithTag:5];
-        [lblOfferta setText: [NSString stringWithFormat:@"Valido fino al %@", offerta.DataScadenza]];
-       
-
-        
-        if ([offerta.immagini count]>=1)
+        if (offerta.isLive)
         {
+            static NSString *CellIdentifier = @"offertaLiveCell";
             
-            UIImageView *cellImage = (UIImageView *)[cell viewWithTag:3];
-            UIImageView *cellBorder = (UIImageView *)[cell viewWithTag:6];
+            cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             
-            [cellImage.layer setBorderColor:[[UIColor whiteColor] CGColor]];
-            [cellImage.layer setBorderWidth: 3.0];
+            if (!cell) {
+                cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            }
             
-            [cellBorder.layer setBorderColor:[[UIColor colorWithRed:245.0f / 255 green:101.0f / 255 blue:34.0f / 255 alpha:1] CGColor]];
-            [cellBorder.layer setBorderWidth: 2.0];
-
+            CustomLabel *lblTitolo = (CustomLabel *)[cell viewWithTag:1];
+            [lblTitolo setText:offerta.Titolo];
+            [lblTitolo setLineHeight:10];
+            [lblTitolo setVerticalAlignment:MSLabelVerticalAlignmentTop];
+            
+            // [cellTitolo setFont:[UIFont fontWithName:@"Bebas Neue" size:18]];
+            [lblTitolo setTextColor:[UIColor colorWithRed:43.0f / 255
+                                                    green:45.0f / 255
+                                                     blue:48.0f / 255 alpha:1.0f]];
+            
+            UILabel *lblPrezzo = (UILabel *)[cell viewWithTag:2];
+            [lblPrezzo setText:[NSString stringWithFormat:@"%.2f€", offerta.PrezzoFinale]];
+            [lblPrezzo setTextColor:[UIColor colorWithRed:255.0f / 255
+                                                    green:77.0f / 255
+                                                     blue:137.0f / 255 alpha:1.0f]];
+            
+             UILabel *cellDescrizione = (UILabel *)[cell viewWithTag:5];
+            
+            cellDescrizione.text = [NSString stringWithFormat:@"%@   -   %.2f Km", offerta.Esercente.RagioneSociale, offerta.distanza];
+            
+            //label prezzo
+            
+            
+            [cellDescrizione setBackgroundColor:[UIColor clearColor]];
+            cellDescrizione.opaque = NO;
+            cellDescrizione.backgroundColor = [UIColor clearColor];
+            [self hideGradientBackground:cellDescrizione];
+            
+            UILabel *lblValidita = (UILabel *)[cell viewWithTag:4];
+        /*
+            NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
+            [dateformatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+            
+            NSDate *currentDate = [dateformatter dateFromString:offerta.DataScadenza];
+            
+            NSDate *today = [NSDate date];
+            
+            NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+            int unitFlags = NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+            NSDateComponents *components = [gregorian components:unitFlags fromDate:today toDate:currentDate options:0];
+            
+            if (components.day==1)*/
+            lblValidita.text = [NSString stringWithFormat:@"Utilizzabile domani dalle 08:00 alle 23:59"];
+            
+            if ([offerta.immagini count]>=1)
+            {
+                
+                UIImageView *cellImage = (UIImageView *)[cell viewWithTag:3];
+                UIImageView *cellBorder = (UIImageView *)[cell viewWithTag:6];
+                
+                [cellImage.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+                [cellImage.layer setBorderWidth: 3.0];
+                
+                [cellBorder.layer setBorderColor:[[UIColor colorWithRed:245.0f / 255 green:101.0f / 255 blue:34.0f / 255 alpha:1] CGColor]];
+                [cellBorder.layer setBorderWidth: 1.0];
+                
+                
+                dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+                
+                dispatch_async(queue, ^{
                     
-            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-        
-            dispatch_async(queue, ^{
-            
-                NSString *url = [NSString stringWithFormat:@"http://www.specialdeal.it/crop/80x80/%@",[offerta.immagini objectAtIndex:0]];
-                NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:url]];
-            
+                    NSString *url = [NSString stringWithFormat:@"http://www.specialdeal.it/crop/80x80/%@",[offerta.immagini objectAtIndex:0]];
+                    NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:url]];
+                    
                     UIImage *img = [UIImage imageWithData:data];
-            
-            
-                            dispatch_sync(dispatch_get_main_queue(), ^{
-                    offerta.Immagine = img;
-                    cellImage.image = img;
-                    [cellImage setNeedsLayout];
+                    
+                    
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                        offerta.Immagine = img;
+                        cellImage.image = img;
+                        [cellImage setNeedsLayout];
+                    });
                 });
-            });
+            }
+
+
+            
         }
+        else
+        {
+            static NSString *CellIdentifier = @"offertaCell";
+            
+            cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            
+            if (!cell) {
+                cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            }
+            
+            //aspetto della cella
+            UIImageView *av = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 78)];
+            av.backgroundColor = [UIColor clearColor];
+            av.opaque = NO;
+            av.image = [UIImage imageNamed:@"baseCell.png"];
+            cell.backgroundView = av;
+            
+            
+            //label titolo
+            CustomLabel *lblTitolo = (CustomLabel *)[cell viewWithTag:1];
+            [lblTitolo setText:offerta.Titolo];
+            [lblTitolo setLineHeight:10];
+            [lblTitolo setVerticalAlignment:MSLabelVerticalAlignmentTop];
+            
+            // [cellTitolo setFont:[UIFont fontWithName:@"Bebas Neue" size:18]];
+            [lblTitolo setTextColor:[UIColor colorWithRed:43.0f / 255
+                                                    green:45.0f / 255
+                                                     blue:48.0f / 255 alpha:1.0f]];
+            
+            
+            
+            UIImageView *ticket = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ticket.png"]];
+            [ticket setFrame:CGRectMake(65, 30, 28,36)];
+            
+            
+            UILabel *lblPercSconto = [[UILabel alloc] initWithFrame:CGRectMake(1,12, 30, 30)];
+            
+            [lblPercSconto setFont:[UIFont fontWithName:@"Helvetica" size:10]];
+            [lblPercSconto setText:[NSString stringWithFormat:@"%.f%%", offerta.Sconto]];
+            [lblPercSconto setTextColor:[UIColor whiteColor]];
+            [lblPercSconto setBackgroundColor:[UIColor clearColor]];
+            
+            //rotate label in 45 degrees
+            lblPercSconto.transform = CGAffineTransformMakeRotation( 70 * M_PI / 180);
+            
+            //  lblPercSconto.frame = CGRectIntegral(lblPercSconto.frame);
+            
+            [ticket addSubview:lblPercSconto];
+            
+            
+            [cell addSubview:ticket];
+            
+            UILabel *cellDescrizione = (UILabel *)[cell viewWithTag:2];
+            cellDescrizione.text = [NSString stringWithFormat:@"%@   -   %.2f Km", offerta.Esercente.RagioneSociale, offerta.distanza];
+            
+            //label prezzo
+            
+            
+            [cellDescrizione setBackgroundColor:[UIColor clearColor]];
+            cellDescrizione.opaque = NO;
+            cellDescrizione.backgroundColor = [UIColor clearColor];
+            [self hideGradientBackground:cellDescrizione];
+            
+            UILabelStrikethrough *lblPrezzoOriginario = (UILabelStrikethrough *)[cell viewWithTag:7];
+            [lblPrezzoOriginario setText:[NSString stringWithFormat:@"%.2f€", offerta.PrezzoPartenza]];
+                       
+            UILabel *lblPrezzo = (UILabel *)[cell viewWithTag:4];
+            [lblPrezzo setText:[NSString stringWithFormat:@"%.2f€", offerta.PrezzoFinale]];
+            [lblPrezzo setTextColor:[UIColor colorWithRed:255.0f / 255
+                                                    green:77.0f / 255
+                                                     blue:137.0f / 255 alpha:1.0f]];
+            
+            
+            //label offerta
+            UILabel *lblOfferta = (UILabel *)[cell viewWithTag:5];
+            [lblOfferta setText: [NSString stringWithFormat:@"Valido fino al %@", offerta.DataScadenza]];
+            
+            
+            
+            if ([offerta.immagini count]>=1)
+            {
+                
+                UIImageView *cellImage = (UIImageView *)[cell viewWithTag:3];
+                UIImageView *cellBorder = (UIImageView *)[cell viewWithTag:6];
+                
+                [cellImage.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+                [cellImage.layer setBorderWidth: 3.0];
+                
+                [cellBorder.layer setBorderColor:[[UIColor colorWithRed:245.0f / 255 green:101.0f / 255 blue:34.0f / 255 alpha:1] CGColor]];
+                [cellBorder.layer setBorderWidth: 1.8];
+                
+                
+                dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+                
+                dispatch_async(queue, ^{
+                    
+                    NSString *url = [NSString stringWithFormat:@"http://www.specialdeal.it/crop/80x80/%@",[offerta.immagini objectAtIndex:0]];
+                    NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:url]];
+                    
+                    UIImage *img = [UIImage imageWithData:data];
+                    
+                    
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                        offerta.Immagine = img;
+                        cellImage.image = img;
+                        [cellImage setNeedsLayout];
+                    });
+                });
+            }
+        } UIView *cellBackView = [[UIView alloc] initWithFrame:CGRectZero];
+        cellBackView.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed:@"sfondoCellOfferta.png"]];
+        cell.backgroundView = cellBackView;
+         
         
     }
     else if (indexPath.section==1){
@@ -470,9 +621,10 @@
         [cellRagSoc setText:es.RagioneSociale];
         
         
-        UILabel *cellIndirizzo = (UILabel *)[cell viewWithTag:2];
+        CustomLabel *cellIndirizzo = (CustomLabel *)[cell viewWithTag:2];
         [cellIndirizzo setText:es.Indirizzo];
-
+        [cellIndirizzo setLineHeight:10];
+        [cellIndirizzo setVerticalAlignment:MSLabelVerticalAlignmentMiddle];
         UILabel *lblDistanza = (UILabel *)[cell viewWithTag:3];
         [lblDistanza setText:[NSString stringWithFormat:@"%.2f Km", es.distanza]];
         
@@ -505,7 +657,11 @@
         
             cellImage.image = nil;
         }
-
+        
+        UIView *cellBackView = [[UIView alloc] initWithFrame:CGRectZero];
+        cellBackView.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed:@"sfondoCellAltriEsercenti.png"]];
+        cell.backgroundView = cellBackView;
+   
         
     }
     else if (indexPath.section==2){
@@ -527,6 +683,10 @@
         UILabel *cellCount = (UILabel *)[cell viewWithTag:2];
         [cellCount setText:[NSString stringWithFormat:@"Visibili %i risultati", [Esercenti count]]];
 
+        UIView *cellBackView = [[UIView alloc] initWithFrame:CGRectZero];
+        cellBackView.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed:@"sfondoCellAltriEsercenti.png"]];
+        cell.backgroundView = cellBackView;
+        
     }
     
     return cell;
@@ -574,7 +734,9 @@
         
         vc.esercenteSelezionato = [Esercenti objectAtIndex:selectedIndex];
     }
-    else if ([[segue identifier] isEqualToString:@"offertaList"] || [[segue identifier] isEqualToString:@"offertaMap"]){
+    else if ([[segue identifier] isEqualToString:@"offertaList"] ||
+             [[segue identifier] isEqualToString:@"offertaMap"] ||
+             [[segue identifier] isEqualToString:@"offertaLive"]){
     
         // Get reference to the destination view controller
         OffertaViewController *vc = [segue destinationViewController];
