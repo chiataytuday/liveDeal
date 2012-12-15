@@ -505,7 +505,8 @@
                                                         </imageView>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="exX-6i-cCf" customClass="CustomLabel">
                                                             <rect key="frame" x="91" y="6" width="202" height="32"/>
-                                                            <string key="text">Check up donna a scelta tra 3 opzionidentale, facciale, beauty</string>
+                                                            <string key="text">Check up donna a scelta tra 3 opzioni
+dentale, facciale, beauty</string>
                                                             <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="11"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -616,7 +617,8 @@
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uHn-n3-pID" customClass="CustomLabel">
                                                             <rect key="frame" x="90" y="4" width="202" height="32"/>
-                                                            <string key="text">Check up donna a scelta tra 3 opzionidentale, facciale, beauty</string>
+                                                            <string key="text">Check up donna a scelta tra 3 opzioni
+dentale, facciale, beauty</string>
                                                             <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="11"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -657,7 +659,7 @@
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <connections>
-                                                    <segue destination="K9T-H2-rCe" kind="push" trigger="accessoryAction" id="zRT-KE-fRW"/>
+                                                    <segue destination="K9T-H2-rCe" kind="modal" identifier="offertaLive" id="yds-g9-CD9"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -695,7 +697,7 @@
                         <outlet property="mapView" destination="Dxj-yx-qBY" id="vct-HT-C4a"/>
                         <outlet property="myTable" destination="iU1-pg-jIe" id="03M-Hn-ciG"/>
                         <outlet property="vwOfferta" destination="v22-Dw-Seh" id="oyU-j3-aDp"/>
-                        <segue destination="K9T-H2-rCe" kind="modal" identifier="offertaLive" id="3Ev-zc-g5U"/>
+                        <segue destination="K9T-H2-rCe" kind="modal" identifier="offertaMap" id="3Ev-zc-g5U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ewW-P8-T3A" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -713,20 +715,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="sfondoBarraAcquista.png" id="ckN-FV-4Ne">
                                 <rect key="frame" x="0.0" y="416" width="320" height="44"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="P0K-Dg-oDR">
-                                <rect key="frame" x="171" y="418" width="144" height="39"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="pulsanteAcquista.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="AW6-2t-BpH" kind="modal" identifier="pagamento" id="6bp-NC-CQR"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="tempo rimanente" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0H2-2O-SWL">
                                 <rect key="frame" x="0.0" y="436" width="163" height="21"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
@@ -756,14 +744,29 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DY8-6l-bhh">
+                                <rect key="frame" x="159" y="421" width="150" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" image="pulsanteAcquista.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="AW6-2t-BpH" kind="modal" id="gZX-tD-SXN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="QQc-ed-y0E"/>
                     <connections>
-                        <outlet property="btnAcquista" destination="P0K-Dg-oDR" id="6Jj-Cm-zbu"/>
                         <outlet property="btnAction" destination="Y2I-kz-HOW" id="XHv-yM-kiM"/>
                         <outlet property="lblCountdown" destination="Vb8-xI-WQZ" id="Vh6-9N-6oB"/>
+                        <outlet property="navBar" destination="obR-TS-10C" id="mTi-gH-u22"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dpy-OV-G0N" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1249,7 +1252,7 @@
         <image name="infoMap.png" width="33" height="33"/>
         <image name="loginFB.png" width="251" height="31"/>
         <image name="logoPayPal.png" width="75" height="22"/>
-        <image name="pulsanteAcquista.png" width="169" height="38"/>
+        <image name="pulsanteAcquista.png" width="150" height="34"/>
         <image name="remove.png" width="25" height="26"/>
         <image name="separator.png" width="314" height="1"/>
         <image name="separator3.png" width="314" height="1"/>
@@ -1257,6 +1260,125 @@
         <image name="sfondoPulsantePaga.png" width="251" height="31"/>
         <image name="signIn.png" width="251" height="31"/>
     </resources>
+    <classes>
+        <class className="CategorieViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategorieViewController.h"/>
+        </class>
+        <class className="CitiesViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CitiesViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
+            </relationships>
+        </class>
+        <class className="CustomLabel" superclassName="UILabel">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomLabel.h"/>
+        </class>
+        <class className="EsercenteViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EsercenteViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="img" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="lblIndirizzo" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblRagioneSociale" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblTelefono" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblWebSite" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="LoginViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="goBack:"/>
+                <relationship kind="action" name="logon:"/>
+                <relationship kind="action" name="performLogin:"/>
+                <relationship kind="outlet" name="imgViewLogFB" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="navBar" candidateClass="UINavigationBar"/>
+                <relationship kind="outlet" name="txtEmail" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="txtPwd" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="NavViewController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NavViewController.h"/>
+        </class>
+        <class className="OffertaViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/OffertaViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="goBack:"/>
+                <relationship kind="action" name="showActionSheet:"/>
+                <relationship kind="outlet" name="btnAcquista" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnAction" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="lblCountdown" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="navBar" candidateClass="UINavigationBar"/>
+            </relationships>
+        </class>
+        <class className="OfferteViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/OfferteViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="switchMap:"/>
+                <relationship kind="outlet" name="gridView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="imgOffertaSelezionata" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="lblAcquistatiOffertaSelezionata" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblDescrizioneOffertaSelezionata" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblTitoloOffertaSelezionata" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="mapButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="myTable" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="vwOfferta" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="PagamentoViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PagamentoViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="decrementa:"/>
+                <relationship kind="action" name="goBack:"/>
+                <relationship kind="action" name="incrementa:"/>
+                <relationship kind="action" name="test:"/>
+                <relationship kind="outlet" name="btnPaga" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="img" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="imgCell" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="imgPaypal" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="lblCC" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblDescrizione" candidateClass="CustomLabel"/>
+                <relationship kind="outlet" name="lblQta" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblTitolo" candidateClass="CustomLabel"/>
+                <relationship kind="outlet" name="lblTot" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblValidita" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="RegistrazioneViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RegistrazioneViewController.h"/>
+        </class>
+        <class className="ScegliPagamentoViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ScegliPagamentoViewController.h"/>
+        </class>
+        <class className="StartViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/StartViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="lblCurrentAddress" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="mapButtonItem" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="wait" candidateClass="UIActivityIndicatorView"/>
+            </relationships>
+        </class>
+        <class className="TabBarViewController" superclassName="UITabBarController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TabBarViewController.h"/>
+        </class>
+        <class className="TitoloViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TitoloViewController.h"/>
+        </class>
+        <class className="UILabelStrikethrough" superclassName="UILabel">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UILabelStrikethrough.h"/>
+        </class>
+        <class className="UserViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UserViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="goToLogin:"/>
+                <relationship kind="action" name="logout:"/>
+                <relationship kind="outlet" name="btnLogin" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnLogout" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnRegistrati" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="lbl" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="mainView" candidateClass="UIView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
@@ -1265,6 +1387,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="qVj-8x-8uO"/>
         <segue reference="SCn-j2-MPx"/>
-        <segue reference="3Ev-zc-g5U"/>
+        <segue reference="yds-g9-CD9"/>
     </inferredMetricsTieBreakers>
 </document>

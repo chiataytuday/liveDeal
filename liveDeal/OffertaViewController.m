@@ -13,12 +13,24 @@
 @end
 
 @implementation OffertaViewController
-@synthesize offertaSelezionata, lblCountdown, share, btnAction, btnAcquista;
+@synthesize offertaSelezionata, lblCountdown, share, btnAction, btnAcquista, navBar;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    [self.navBar setBackgroundImage:[UIImage imageNamed: @"backgroundTop.png"]
+                      forBarMetrics:UIBarMetricsDefault];
+    
+    UIImageView *img = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
+    
+    [img setFrame:CGRectMake(160 - 45,7,
+                             //navBar.bounds.size.width / 2 - img.bounds.size.width / 2,
+                             //navBar.bounds.size.height / 2 - img.bounds.size.height / 2,
+                             img.bounds.size.width,
+                             img.bounds.size.height)];
+    [navBar addSubview:img];
     
     AppDelegate *app=[[UIApplication sharedApplication]delegate];
     share = [[GPPShare alloc] initWithClientID:@"1028890509676.apps.googleusercontent.com"];
@@ -28,167 +40,40 @@
     [myticker invalidate];
     myticker = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(showActivity) userInfo:nil repeats:YES];
 
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
-
+      
     
-    
-    UIScrollView *scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44, 320, 374)];
+    scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44, 320, 374)];
     [scroll setScrollEnabled:YES];
     [scroll setContentSize:CGSizeMake(320, 900)];
     [scroll setBackgroundColor:[UIColor colorWithRed:212.0f / 255 green:212.0f / 255 blue:212.0f / 255 alpha:1]];
-    CustomLabel *lblTitolo = [[CustomLabel alloc] initWithFrame:CGRectMake(10, 10, 300, 90)];
-    [lblTitolo setLineHeight:20];
+   
+    CustomLabel *lblTitolo = [[CustomLabel alloc] initWithFrame:CGRectMake(15, 15, 300, 90)];
+    [lblTitolo setLineHeight:16];
     [lblTitolo setVerticalAlignment:MSLabelVerticalAlignmentTop];
     [lblTitolo setNumberOfLines:3];
     [lblTitolo setText:offertaSelezionata.Titolo];
     
-    [lblTitolo setFont:[UIFont fontWithName:@"Bebas Neue" size:18]];
+    [lblTitolo setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:14]];
     [lblTitolo setTextColor:[UIColor colorWithRed:56.0f / 255 green:57.0f / 255 blue:59.0f / 255 alpha:1]];
     [lblTitolo setBackgroundColor:[UIColor clearColor]];
     
     [scroll addSubview:lblTitolo];
     
-    NSString *html= [NSString stringWithFormat:@"<b><font color='#e14d89' size='7' face='Helvetica Neue'>€%.0f<small>.<sup>00</sup></small></font></b>", offertaSelezionata.PrezzoFinale];
+        
+    UIImageView *imgBorder = [[UIImageView alloc] initWithFrame:CGRectMake(15, 80, 155, 127)];
+    [scroll addSubview:imgBorder];
     
-    UIWebView *prezzoFinale = [[UIWebView alloc] initWithFrame:CGRectMake(170, 80, 140, 70)];
-    [prezzoFinale loadHTMLString:html baseURL:nil];
-    [prezzoFinale setBackgroundColor:[UIColor clearColor]];
-    prezzoFinale.opaque = NO;
-    prezzoFinale.backgroundColor = [UIColor clearColor];
-    [self hideGradientBackground:prezzoFinale];
-    
-    [scroll addSubview:prezzoFinale];
-    
-    UILabelStrikethrough *lblPrezzoPartenza = [[UILabelStrikethrough alloc] initWithFrame:CGRectMake(220, 140, 70, 30)];
-  
-
-    [lblPrezzoPartenza setText:[NSString stringWithFormat:@"€%.2f", offertaSelezionata.PrezzoPartenza]];
-    [lblPrezzoPartenza setBackgroundColor:[UIColor clearColor]];
-    [lblPrezzoPartenza setFont:[UIFont fontWithName:@"Helvetica Neue-Regular" size:18]];
-    [lblPrezzoPartenza setTextColor:[UIColor colorWithRed:91.0f / 255
-                                                  green:91.0f /
-                                   255 blue:91.0f / 255
-                                                  alpha:1]];
-    [scroll addSubview:lblPrezzoPartenza];
-    
-    
-    UIImageView *sep1 = [[UIImageView alloc] initWithFrame:CGRectMake(170, 170, 136, 2)];
-    [sep1 setImage:[UIImage imageNamed:@"separator1.png"]];
-    
-    [scroll addSubview:sep1];
-    
-    UIImageView *sep2 = [[UIImageView alloc] initWithFrame:CGRectMake(235, 185, 1, 51)];
-    [sep2 setImage:[UIImage imageNamed:@"separator2.png"]];
-    
-    [scroll addSubview:sep2];
-    
-    UILabel *lblSconto = [[UILabel alloc] initWithFrame:CGRectMake(185, 170, 80, 50)];
-    [lblSconto setText:[NSString stringWithFormat:@"%.0f%%", offertaSelezionata.Sconto]];
-    [lblSconto setBackgroundColor:[UIColor clearColor]];
-    [lblSconto setFont:[UIFont fontWithName:@"Helvetica Neue" size:20]];
-    [lblSconto setTextColor:[UIColor colorWithRed:7.0f / 255
-                                            green:0
-                                             blue:0
-                                            alpha:1]];
-    [scroll addSubview:lblSconto];
+    UIImageView *imgd = [[UIImageView alloc] initWithFrame:CGRectMake(3, 3, 150, 122)];
+    [imgBorder addSubview:imgd];
 
     
-    UILabel *lblIntestazioneSconto = [[UILabel alloc] initWithFrame:CGRectMake(175, 190, 80, 50)];
-    [lblIntestazioneSconto setText:@"Sconto"];
-    [lblIntestazioneSconto setBackgroundColor:[UIColor clearColor]];
-    [lblIntestazioneSconto setFont:[UIFont fontWithName:@"Helvetica Neue" size:12]];
-    [lblIntestazioneSconto setTextColor:[UIColor colorWithRed:162.0f / 255
-                                            green:162.0f / 255
-                                             blue:162.0f / 255
-                                            alpha:1]];
+      
+    [imgd.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    [imgd.layer setBorderWidth: 4.0];
+    
+   [imgBorder.layer setBorderColor:[[UIColor colorWithRed:245.0f / 255 green:101.0f / 255 blue:34.0f / 255 alpha:1] CGColor]];
+    [imgBorder.layer setBorderWidth: 2.0];
 
-    
-    [scroll addSubview:lblIntestazioneSconto];
-    
-    UILabel *lblAcquistati= [[UILabel alloc] initWithFrame:CGRectMake(263, 170, 80, 50)];
-    [lblAcquistati setText:[NSString stringWithFormat:@"%i", offertaSelezionata.CouponAcquistati]];
-    [lblAcquistati setBackgroundColor:[UIColor clearColor]];
-    [lblAcquistati setFont:[UIFont fontWithName:@"Helvetica Neue" size:20]];
-    [lblAcquistati setTextColor:[UIColor colorWithRed:7.0f / 255
-                                            green:0
-                                             blue:0
-                                            alpha:1]];
-    [scroll addSubview:lblAcquistati];
-    
-    
-    UILabel *lblIntestazioneAcquistati = [[UILabel alloc] initWithFrame:CGRectMake(245, 190, 80, 50)];
-    [lblIntestazioneAcquistati setText:@"Acquistati"];
-    [lblIntestazioneAcquistati setBackgroundColor:[UIColor clearColor]];
-    [lblIntestazioneAcquistati setFont:[UIFont fontWithName:@"Helvetica Neue" size:12]];
-    [lblIntestazioneAcquistati setTextColor:[UIColor colorWithRed:162.0f / 255
-                                                        green:162.0f / 255
-                                                         blue:162.0f / 255
-                                                        alpha:1]];
-    
-    
-    [scroll addSubview:lblIntestazioneAcquistati];
-    
-       NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
-    [dateformatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    
-    NSDate *dataScadenza = [dateformatter dateFromString:offertaSelezionata.DataScadenza];
-    
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit  | NSHourCalendarUnit | NSMinuteCalendarUnit| NSSecondCalendarUnit fromDate:dataScadenza];
-
-    
-    UILabel *lblValidita = [[UILabel alloc] initWithFrame:CGRectMake(80, 235, 250, 50)];
-    [lblValidita setText:[NSString stringWithFormat:@"Valido fino alle %i:%i del %i/%i/%i", components.hour, components.minute, components.day, components.month, components.year]];
-    [lblValidita setBackgroundColor:[UIColor clearColor]];
-    [lblValidita setFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:12]];
-    [lblValidita setTextColor:[UIColor colorWithRed:108.0f / 255
-                                                            green:108.0f / 255
-                                                             blue:108.0f / 255
-                                                            alpha:1]];
-    
-    
-    [scroll addSubview:lblValidita];
-    
-    UIImageView *imgTime = [[UIImageView alloc] initWithFrame:CGRectMake(56, 253, 15, 16)];
-    [imgTime setImage:[UIImage imageNamed:@"iconTime2.png"]];
-    [scroll addSubview:imgTime];
-    
-    UIImageView *sep3 = [[UIImageView alloc] initWithFrame:CGRectMake(10, 275, 314, 1)];
-    [sep3 setImage:[UIImage imageNamed:@"separator.png"]];
-    
-    [scroll addSubview:sep3];
-
-    UILabel *lblInBreve = [[UILabel alloc] initWithFrame:CGRectMake(10, 280, 50, 50)];
-    [lblInBreve setText:@"In breve"];
-    [lblInBreve setBackgroundColor:[UIColor clearColor]];
-    [lblInBreve setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:12]];
-    [lblInBreve setTextColor:[UIColor colorWithRed:56.0f / 255
-                                              green:57.0f / 255
-                                               blue:59.0f / 255
-                                              alpha:1]];
-    
-    [scroll addSubview:lblInBreve];
-    
-    
-    UIWebView *lblDescrizione = [[UIWebView alloc] initWithFrame:CGRectMake(10, 320, 300, 1200)];
-   
-     NSString *res = [NSString stringWithFormat:@"<font color='#38393b' size='2' face='Helvetica'>%@</font>", offertaSelezionata.Descrizione];
-    
-    [lblDescrizione loadHTMLString:res baseURL:nil];
-    [lblDescrizione setBackgroundColor:[UIColor clearColor]];
-    lblDescrizione.opaque = NO;
-    lblDescrizione.backgroundColor = [UIColor clearColor];
-    [self hideGradientBackground:lblDescrizione];
-    [lblDescrizione.scrollView setScrollEnabled:NO];
-    [scroll addSubview:lblDescrizione];
-
-    int webViewHeigth = [[lblDescrizione stringByEvaluatingJavaScriptFromString: @"document.body.offsetHeight"] intValue];
- 
-    
-    [scroll setContentSize:CGSizeMake(320,  webViewHeigth - lblDescrizione.frame.origin.y + scroll.contentSize.height)];
-    
-    UIImageView *imgd = [[UIImageView alloc] initWithFrame:CGRectMake(10, 90, 150, 150)];
-     [scroll addSubview:imgd];
-    
     
     if ([offertaSelezionata.immagini count]>=1)
     {
@@ -197,7 +82,7 @@
         
         dispatch_async(queue, ^{
             
-            NSString *url = [NSString stringWithFormat:@"http://www.specialdeal.it/crop/170x170/%@",[offertaSelezionata.immagini objectAtIndex:0]];
+            NSString *url = [NSString stringWithFormat:@"http://www.specialdeal.it/crop/150x122/%@",[offertaSelezionata.immagini objectAtIndex:0]];
             NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:url]];
             
             UIImage *img = [UIImage imageWithData:data];
@@ -211,11 +96,147 @@
         });
     }
     
+    UILabel *lblPrezzoFinale = [[UILabel alloc] initWithFrame:CGRectMake(180, 75, 140, 70)];
+    [lblPrezzoFinale setBackgroundColor:[UIColor clearColor]];
+    lblPrezzoFinale.opaque = NO;
+    [lblPrezzoFinale setTextColor:[UIColor colorWithRed:225.0f / 255 green:77.0f / 255 blue:137.0f / 255 alpha:1]];
+    [lblPrezzoFinale setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:36]];
+    [lblPrezzoFinale setText:[NSString stringWithFormat:@"%.2f €", offertaSelezionata.PrezzoFinale]];
+     [scroll addSubview:lblPrezzoFinale];
+    
+    UILabelStrikethrough *lblPrezzoPartenza = [[UILabelStrikethrough alloc] initWithFrame:CGRectMake(210, 125, 70, 30)];
+    
+    
+    [lblPrezzoPartenza setText:[NSString stringWithFormat:@"€%.2f", offertaSelezionata.PrezzoPartenza]];
+    [lblPrezzoPartenza setBackgroundColor:[UIColor clearColor]];
+    [lblPrezzoPartenza setFont:[UIFont fontWithName:@"Helvetica Neue-Regular" size:18]];
+    [lblPrezzoPartenza setTextColor:[UIColor colorWithRed:91.0f / 255
+                                                    green:91.0f /
+                                     255 blue:91.0f / 255
+                                                    alpha:1]];
+    [scroll addSubview:lblPrezzoPartenza];
+
+    UIImageView *sep1 = [[UIImageView alloc] initWithFrame:CGRectMake(190, 160, 107, 59)];
+    [sep1 setImage:[UIImage imageNamed:@"separatorOfferta.png"]];
+    
+    [scroll addSubview:sep1];
+
+
+    UILabel *lblSconto = [[UILabel alloc] initWithFrame:CGRectMake(188, 160, 80, 50)];
+    [lblSconto setText:[NSString stringWithFormat:@"%.0f%%", offertaSelezionata.Sconto]];
+    [lblSconto setBackgroundColor:[UIColor clearColor]];
+    [lblSconto setFont:[UIFont fontWithName:@"Helvetica Neue" size:20]];
+    [lblSconto setTextColor:[UIColor colorWithRed:7.0f / 255
+                                            green:0
+                                             blue:0
+                                            alpha:1]];
+    [scroll addSubview:lblSconto];
+
+
+    UILabel *lblIntestazioneSconto = [[UILabel alloc] initWithFrame:CGRectMake(185, 185, 80, 50)];
+    [lblIntestazioneSconto setText:@"Sconto"];
+    [lblIntestazioneSconto setBackgroundColor:[UIColor clearColor]];
+    [lblIntestazioneSconto setFont:[UIFont fontWithName:@"Helvetica Neue" size:12]];
+    [lblIntestazioneSconto setTextColor:[UIColor colorWithRed:162.0f / 255
+                                                        green:162.0f / 255
+                                                         blue:162.0f / 255
+                                                        alpha:1]];
+    
+    [scroll addSubview:lblIntestazioneSconto];
+    
+    UILabel *lblAcquistati= [[UILabel alloc] initWithFrame:CGRectMake(270, 160, 80, 50)];
+    [lblAcquistati setText:[NSString stringWithFormat:@"%i", offertaSelezionata.CouponAcquistati]];
+    [lblAcquistati setBackgroundColor:[UIColor clearColor]];
+    [lblAcquistati setFont:[UIFont fontWithName:@"Helvetica Neue" size:20]];
+    [lblAcquistati setTextColor:[UIColor colorWithRed:7.0f / 255
+                                                green:0
+                                                 blue:0
+                                                alpha:1]];
+    [scroll addSubview:lblAcquistati];
+
+    
+    UILabel *lblIntestazioneAcquistati = [[UILabel alloc] initWithFrame:CGRectMake(255, 185, 80, 50)];
+    [lblIntestazioneAcquistati setText:@"Acquistati"];
+    [lblIntestazioneAcquistati setBackgroundColor:[UIColor clearColor]];
+    [lblIntestazioneAcquistati setFont:[UIFont fontWithName:@"Helvetica Neue" size:12]];
+    [lblIntestazioneAcquistati setTextColor:[UIColor colorWithRed:162.0f / 255
+                                                            green:162.0f / 255
+                                                             blue:162.0f / 255
+                                                            alpha:1]];
+    
+    
+    [scroll addSubview:lblIntestazioneAcquistati];
+
+    
+    NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+    NSDate *dataScadenza = [dateformatter dateFromString:offertaSelezionata.DataScadenza];
+    
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit  | NSHourCalendarUnit | NSMinuteCalendarUnit| NSSecondCalendarUnit fromDate:dataScadenza];
+    
+    
+    UILabel *lblValidita = [[UILabel alloc] initWithFrame:CGRectMake(35, 214, 290, 50)];
+    [lblValidita setText:[NSString stringWithFormat:@"Coupon utilizzabile domani dalle 08:00 alle 23:59"]];
+    [lblValidita setBackgroundColor:[UIColor clearColor]];
+    [lblValidita setFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:12]];
+    [lblValidita setTextColor:[UIColor colorWithRed:108.0f / 255
+                                              green:108.0f / 255
+                                               blue:108.0f / 255
+                                              alpha:1]];
+    
+    
+    [scroll addSubview:lblValidita];
+    
+    UIImageView *imgTime = [[UIImageView alloc] initWithFrame:CGRectMake(15, 230, 15, 16)];
+    [imgTime setImage:[UIImage imageNamed:@"iconTime2.png"]];
+    [scroll addSubview:imgTime];
+    
+
+    
+    UIImageView *sep3 = [[UIImageView alloc] initWithFrame:CGRectMake(10, 255, 314, 1)];
+    [sep3 setImage:[UIImage imageNamed:@"separator.png"]];
+    
+    [scroll addSubview:sep3];
+    
+    UILabel *lblInBreve = [[UILabel alloc] initWithFrame:CGRectMake(10, 250, 50, 50)];
+    [lblInBreve setText:@"In breve"];
+    [lblInBreve setBackgroundColor:[UIColor clearColor]];
+    [lblInBreve setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:12]];
+    [lblInBreve setTextColor:[UIColor colorWithRed:56.0f / 255
+                                             green:57.0f / 255
+                                              blue:59.0f / 255
+                                             alpha:1]];
+    
+    [scroll addSubview:lblInBreve];
+    
+    UIWebView *lblDescrizione = [[UIWebView alloc] initWithFrame:CGRectMake(10, 290, 300, 1000)];
+    [lblDescrizione setDelegate:self];
+    NSString *res = [NSString stringWithFormat:@"<div id='content'><font color='#38393b' size='1' face='Helvetica'>%@</font></div>", offertaSelezionata.Descrizione];
+    
+    [lblDescrizione loadHTMLString:res baseURL:nil];
+    [lblDescrizione setBackgroundColor:[UIColor clearColor]];
+    lblDescrizione.opaque = NO;
+    lblDescrizione.backgroundColor = [UIColor clearColor];
+    [self hideGradientBackground:lblDescrizione];
+    [lblDescrizione.scrollView setScrollEnabled:NO];
+    [scroll addSubview:lblDescrizione];
+    
+      
     [self.view addSubview:scroll];
     
     
 }
 
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+
+{
+    int h = [[webView stringByEvaluatingJavaScriptFromString:@"document.getElementById(\"content\").offsetHeight;"] intValue];
+     
+    [scroll setContentSize:CGSizeMake(320,  h + 330)];
+    
+    
+}
 
 - (void) hideGradientBackground:(UIView*)theView
 {
