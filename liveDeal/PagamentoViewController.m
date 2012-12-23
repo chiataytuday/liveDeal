@@ -14,7 +14,7 @@
 @end
 
 @implementation PagamentoViewController
-@synthesize img, lblTitolo, lblDescrizione, offertaSelezionata, lblValidita, lblQta, lblTot, btnPaga, imgCell, lblCC, imgPaypal;
+@synthesize img, lblTitolo, lblDescrizione, offertaSelezionata, lblValidita, lblQta, lblTot, btnPaga, imgCell, lblCC, imgPaypal, imgBorder;
 
 
 - (void)viewDidLoad
@@ -58,22 +58,31 @@
 
     [self aggiornaTotaleWithQuantita:1];
     
-    if (offertaSelezionata.Immagine!=nil)
-        img.image = offertaSelezionata.Immagine;
-    else
+    
+    
+    [img.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    [img.layer setBorderWidth: 4.0];
+    
+    [imgBorder.layer setBorderColor:[[UIColor colorWithRed:245.0f / 255 green:101.0f / 255 blue:34.0f / 255 alpha:1] CGColor]];
+    [imgBorder.layer setBorderWidth: 2.0];
+    
+    
+    if ([offertaSelezionata.immagini count]>=1)
     {
         
         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
         
         dispatch_async(queue, ^{
             
-            NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:[offertaSelezionata.immagini objectAtIndex:0]]];
+            NSString *url = [NSString stringWithFormat:@"http://www.specialdeal.it/crop/150x122/%@",[offertaSelezionata.immagini objectAtIndex:0]];
+            NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:url]];
             
-            imgDeal = [UIImage imageWithData:data];
-                        
+            UIImage *imgT = [UIImage imageWithData:data];
+            
+            
             dispatch_sync(dispatch_get_main_queue(), ^{
-                offertaSelezionata.Immagine = imgDeal;
-                img.image = imgDeal;
+                // offerta.Immagine = img;
+                img.image = imgT;
                 [img setNeedsLayout];
             });
         });

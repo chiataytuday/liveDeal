@@ -9,20 +9,13 @@
 #import <Foundation/Foundation.h>
 
 @interface Categoria : NSObject
-{
-    NSString *descrizione;
-    NSString *codice;
-    NSString *immagine;
-    NSString *tipiGoogle;
-}
+
 
 @property (nonatomic, retain) NSString *Descrizione;
-@property (nonatomic, retain) NSString *Codice;
-@property (nonatomic, retain) NSString *Immagine;
+@property (nonatomic, assign) int Codice;
+@property (nonatomic, retain) NSString *Slug;
 @property (nonatomic, retain) NSString *TipiGoogle;
-@property (nonatomic, retain) NSString *TipiLiveDeal;
 @property (nonatomic, retain) UIColor *ColoreCornice;
 
--(id)initWithDescrizione:(NSString *)laDescrizione codice:(NSString *)ilCodice immagine:(NSString *)img andArrayOfTypes:(NSString *)tipiGoogle;
 
 @end

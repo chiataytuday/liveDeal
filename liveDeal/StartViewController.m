@@ -19,60 +19,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    isShowed=false;
     
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"sfondoRegistrati.png"]]];
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"sfondoHome.png"]]];
 
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
 
     
-	// Do any additional setup after loading the view.
-  //  [lblCurrentAddress setText:@"Localizzando..."];
-   // [wait startAnimating];
-    /*CLLocationCoordinate2D clloc = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).locationManager.location.coordinate;
- 
+	    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    CLLocation *location = [[CLLocation alloc]
-                            initWithLatitude:clloc.latitude longitude:clloc.longitude];
-    
-    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
-        NSLog(@"reverseGeocodeLocation:completionHandler: Completion Handler called!");
-        
-        if (error){
-            NSLog(@"Geocode failed with error: %@", error);
-            
-        }
-        if(placemarks && placemarks.count > 0)
-        {
-            //do something
-            CLPlacemark *topResult = [placemarks objectAtIndex:0];
-            
-            NSMutableString *addressTxt = [[NSMutableString alloc] initWithCapacity:4];
-            
-            if (topResult.subThoroughfare!=nil)
-                [addressTxt appendFormat:@"%@ - ", topResult.subThoroughfare];
 
-            if (topResult.thoroughfare!=nil)
-                [addressTxt appendFormat:@"%@, ", topResult.thoroughfare];
-            
-            if (topResult.locality!=nil)
-                [addressTxt appendFormat:@"%@ ", topResult.locality];
-            
-            if (topResult.administrativeArea!=nil)
-                [addressTxt appendFormat:@"(%@)", topResult.administrativeArea];
-
-            lblCurrentAddress.text = addressTxt;
-            [wait stopAnimating];
-           
-        }
-    }];*/
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    // BOOL spiga = [defaults boolForKey:@"spiga"];
     NSString *des = [defaults objectForKey:@"citta.display"];
-    NSString *foto = [defaults objectForKey:@"citta.foto"];
-   // NSString *sl = [defaults objectForKey:@"citta.slug"];
+  /*  NSString *foto = [defaults objectForKey:@"citta.foto"];
+   
     
     if (foto!=nil)
     {
@@ -82,10 +41,16 @@
        
         
     }
+*/
+    
 
+    
 
     lblCurrentAddress.text = [NSString stringWithFormat:@"SpecialDeal - %@", des];
 }
+
+   
+
 
 
 -(void)aggiornaFoto:(NSString *)idFoto
@@ -161,6 +126,8 @@
     {
         OfferteViewController *vc = [segue destinationViewController];
         vc.isFood = YES;
+        vc.categoriaSelezionata = [app getCategoriaFood];
+
         vc.cittaSelezionata = c;
     }
     else if ([[segue identifier] isEqualToString:@"noFood"])
@@ -194,8 +161,8 @@
     
     [defaults synchronize];
     
-    lblCurrentAddress.text = [NSString stringWithFormat:@"SpecialDeal - %@", city.Descrizione];
-    [self aggiornaFoto:city.foto];
+  //  lblCurrentAddress.text = [NSString stringWithFormat:@"SpecialDeal - %@", city.Descrizione];
+ //   [self aggiornaFoto:city.foto];
     
 }
 

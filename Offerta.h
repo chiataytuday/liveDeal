@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "Esercente.h"
+#import "Categoria.h"
 
 @interface Offerta : NSObject
 
 
 @property (nonatomic, retain) NSString *Titolo;
 @property (nonatomic, assign) double PrezzoPartenza;
+@property (nonatomic, retain) NSString *DataInizio;
 @property (nonatomic, retain) NSString *DataScadenza;
 @property (nonatomic, assign) double Sconto;
 @property (nonatomic, assign) double PrezzoFinale;
@@ -25,7 +27,7 @@
 @property (nonatomic, retain) UIImage *Immagine;
 @property (nonatomic, retain) Esercente *Esercente;
 @property (nonatomic, assign) int CouponAcquistati;
-@property (nonatomic, assign) NSString *categoria;
+@property (nonatomic, retain) Categoria *Categoria;
 @property (nonatomic, assign) CLLocationDistance distanza;
 @property (nonatomic, assign) BOOL isLive;
 

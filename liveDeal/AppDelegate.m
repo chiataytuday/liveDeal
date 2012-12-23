@@ -14,9 +14,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    [self Ricerca:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/city_list?include_without_deals=true"];
-
+    tipoRicerca=CITTA;
     
+    [self Ricerca];
     [FBProfilePictureView class];
     
     UIImage *navBarImage = [UIImage imageNamed:@"backgroundTop.png"];
@@ -48,11 +48,13 @@
     locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters; // 100 m
     [locationManager startUpdatingLocation];
 
-    [self caricaCategorie];
+    //[self caricaCategorie];
     return YES;
 }
 
 
+    
+/*
 -(void)caricaCategorie{
 
     categorie = [[NSMutableArray alloc] init];
@@ -60,34 +62,55 @@
     
     Categoria *cat = [[Categoria alloc] initWithDescrizione:@"Tutte le offerte"
                                                      codice:@"all"
-                                                   immagine:@"img"
+                                                   immagine:@"all.png"
                                             andArrayOfTypes: @"lodging%7Chair_care%7Cbeauty_salon"];
     
     [categorie addObject:cat];
     
     
     
-    cat = [[Categoria alloc] initWithDescrizione:@"Hotel"
+    cat = [[Categoria alloc] initWithDescrizione:@"Soggiorni"
                                           codice:@"lodging"
-                                        immagine:@"img"
+                                        immagine:@"cuore.png"
                                  andArrayOfTypes: @"lodging"];
     cat.TipiLiveDeal = @"soggiorni";
-    [cat setColoreCornice:[UIColor colorWithRed:245.0f / 255 green:101.0f / 255 blue:34.0f / 255 alpha:1]];
+    [cat setColoreCornice:[UIColor colorWithRed:145.0f / 255 green:181.0f / 255 blue:34.0f / 255 alpha:1]];
 
     [categorie addObject:cat];
     
+    cat = [[Categoria alloc] initWithDescrizione:@"Ristoranti"
+                                          codice:@"lodging"
+                                        immagine:@"posate.png"
+                                 andArrayOfTypes: @"food"];
+    cat.TipiLiveDeal = @"ristoranti";
+    [cat setColoreCornice:[UIColor colorWithRed:25.0f / 255 green:25.0f / 255 blue:25.0f / 255 alpha:1]];
     
-    cat = [[Categoria alloc] initWithDescrizione:@"Wellness"
-                                          codice:@"beauty"
-                                        immagine:@"img"
+    [categorie addObject:cat];
+    
+    
+    cat = [[Categoria alloc] initWithDescrizione:@"Benessere"
+                                          codice:@"welness"
+                                        immagine:@"fiore.png"
                                  andArrayOfTypes:@"hair_care%7Cbeauty_salon"];
     cat.TipiLiveDeal = @"benessere";
     [cat setColoreCornice:[UIColor colorWithRed:245.0f / 255 green:101.0f / 255 blue:34.0f / 255 alpha:1]];
 
     [categorie addObject:cat];
+    
+    cat = [[Categoria alloc] initWithDescrizione:@"Servizi"
+                                          codice:@"services"
+                                        immagine:@"forbice.png"
+                                 andArrayOfTypes:@"hair_care%7Cbeauty_salon"];
+    cat.TipiLiveDeal = @"servizi";
+    [cat setColoreCornice:[UIColor colorWithRed:245.0f / 255 green:101.0f / 255 blue:34.0f / 255 alpha:1]];
+    
+    [categorie addObject:cat];
+    
+    
+    
 
     
-}
+}*/
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
@@ -141,9 +164,19 @@
   }
 
 
--(void)Ricerca:(NSString *)url
+-(void)Ricerca
 {
-    NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:url]
+    
+    NSString *urlString =@"";
+    
+    
+    if (tipoRicerca==CITTA)
+        urlString = @"http://www.specialdeal.it/api/jsonrpc2/v1/deals/city_list?include_without_deals=true";
+    else
+        urlString = @"http://www.specialdeal.it/api/jsonrpc2/v1/deals/category_list";
+    
+    
+    NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]
                                          cachePolicy:NSURLRequestUseProtocolCachePolicy
                                      timeoutInterval:60.0];
     
@@ -167,6 +200,17 @@
     }
 }
 
+-(Categoria *)getCategoriaFood
+{
+    for (Categoria *c in categorie) {
+        if ([c.Slug isEqualToString:@"ristoranti"])
+            return  c;
+    }
+    
+    
+    return nil;
+}
+
 #pragma mark - dati relativi alla connessione
 
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
@@ -181,33 +225,74 @@
 
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    
-    citta = [[NSMutableArray alloc] init];
-    
-    NSArray* json = [NSJSONSerialization
-                     JSONObjectWithData:tempArray
-                     options:kNilOptions error:nil];
-    
-    
-    NSArray *result = [json valueForKeyPath:@"result"];
-    NSArray *items = [result valueForKeyPath:@"items"];
-    
-    for (NSDictionary *d in items)
+    if (tipoRicerca==CITTA)
     {
-        Citta *c = [[Citta alloc] initWithDescrizione:[d valueForKey:@"display"]];
+        citta = [[NSMutableArray alloc] init];
         
-        NSArray *foto = [d valueForKey:@"images"];
+        NSArray* json = [NSJSONSerialization
+                         JSONObjectWithData:tempArray
+                         options:kNilOptions error:nil];
         
-        c.foto =[foto valueForKey:@"id"];
+        
+        NSArray *result = [json valueForKeyPath:@"result"];
+        NSArray *items = [result valueForKeyPath:@"items"];
+        
+        for (NSDictionary *d in items)
+        {
+            Citta *c = [[Citta alloc] initWithDescrizione:[d valueForKey:@"display"]];
+            
+            NSArray *foto = [d valueForKey:@"images"];
+            
+            c.foto =[foto valueForKey:@"id"];
+            
+            
+            
+            c.Coordinate = CLLocationCoordinate2DMake([[d valueForKey:@"latitude"] doubleValue], [[d valueForKey:@"longitude"] doubleValue]);
+            c.Slug = [d valueForKey:@"slug"];
+            [citta addObject:c];
+        }
+        
+        tipoRicerca=CATEGORIE;
+        [self Ricerca];
+    }
+    else{
+    
+        categorie = [[NSMutableArray alloc] init];
+        
+        NSArray* json = [NSJSONSerialization
+                         JSONObjectWithData:tempArray
+                         options:kNilOptions error:nil];
         
         
+        NSArray *result = [json valueForKeyPath:@"result"];
+        NSArray *items = [result valueForKeyPath:@"items"];
         
-        c.Coordinate = CLLocationCoordinate2DMake([[d valueForKey:@"latitude"] doubleValue], [[d valueForKey:@"longitude"] doubleValue]);
-        c.Slug = [d valueForKey:@"slug"];
-        [citta addObject:c];
+        for (NSDictionary *d in items)
+        {
+            Categoria *c = [[Categoria alloc] init];
+            [c setDescrizione:[d objectForKey:@"display"]];
+            [c setCodice:[[d objectForKey:@"id"] intValue]];
+            [c setSlug:[d objectForKey:@"slug"]];
+            
+            if (![[d objectForKey:@"framecolor"] isKindOfClass: [NSNull class]])
+            {
+                c.ColoreCornice = [UIColor colorWithHexString:[[d valueForKey:@"framecolor"] uppercaseString]];
+                         }
+            [c setTipiGoogle:[d objectForKey:@"gp"]];
+            [categorie addObject:c];
+        }
+
     }
     
     
+}
+
+-(UIColor *)colorFromHexString:(NSString *)hexString {
+    unsigned rgbValue = 0;
+    NSScanner *scanner = [NSScanner scannerWithString:hexString];
+    [scanner setScanLocation:1]; // bypass '#' character
+    [scanner scanHexInt:&rgbValue];
+    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
 }
 
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{

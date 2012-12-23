@@ -11,11 +11,15 @@
 #import "CitiesViewController.h"
 #import "CategorieViewController.h"
 
-@interface StartViewController : UIViewController<SelectDelegate>
+@interface StartViewController : UIViewController<SelectDelegate, UIGestureRecognizerDelegate>
+{
+    BOOL isShowed;
+}
 @property (nonatomic, assign) CLLocationCoordinate2D Coordinate;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *mapButtonItem;
 @property (nonatomic, retain) IBOutlet UILabel *lblCurrentAddress;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *wait;
+@property (nonatomic, retain) IBOutlet UIView *viewControl;
 
 
 @end

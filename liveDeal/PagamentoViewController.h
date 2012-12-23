@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import "ScegliPagamentoViewController.h"
 #import "LoginViewController.h"
+#import "QuartzCore/QuartzCore.h"
 
 @interface PagamentoViewController : UIViewController <SelectDelegate>
 {
@@ -22,6 +23,7 @@
 @property (nonatomic, retain) IBOutlet CustomLabel *lblTitolo;
 @property (nonatomic, retain) IBOutlet CustomLabel *lblDescrizione;
 @property (nonatomic, retain) IBOutlet UIImageView  *img;
+@property (nonatomic, retain) IBOutlet UIImageView  *imgBorder;
 @property (nonatomic, retain) IBOutlet UILabel *lblValidita;
 @property (nonatomic, retain) IBOutlet UILabel *lblQta;
 @property (nonatomic, retain) IBOutlet UILabel *lblTot;

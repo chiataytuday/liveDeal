@@ -14,18 +14,34 @@
 @end
 
 @implementation UserViewController
-@synthesize lbl,btnLogin, btnLogout, mainView, btnRegistrati;
+@synthesize lbl;
+
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
-    UIStoryboard *storyboard = [UIApplication sharedApplication].delegate.window.rootViewController.storyboard;
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
+   
+    UIImageView *imgSfondo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sfondoRegistrati.png"]];
+    [imgSfondo setContentMode:UIViewContentModeScaleAspectFill];
     
-    UIViewController *loginController = [storyboard instantiateViewControllerWithIdentifier:@"loginScreen"];
+    [imgSfondo setFrame:self.view.frame];
     
-    [self presentModalViewController:loginController animated:YES];
+    self.tableView.backgroundView = imgSfondo;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    bool isLoggedIn = [defaults boolForKey:@"isLoggedIn"];
+    
+    if (!isLoggedIn){
+        UIStoryboard *storyboard = [UIApplication sharedApplication].delegate.window.rootViewController.storyboard;
+        
+        UIViewController *loginController = [storyboard instantiateViewControllerWithIdentifier:@"loginScreen"];
+        
+        [self.navigationController pushViewController:loginController animated:NO];//
+    }
+    
+ //  presentModalViewController:loginController animated:NO];
 
     
     /*[mainView setHidden:YES];
@@ -55,6 +71,7 @@
 
 -(IBAction)logout:(id)sender{
 
+    /*
     if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded)
      [FBSession.activeSession closeAndClearTokenInformation];
     
@@ -69,20 +86,28 @@
     [btnLogin setHidden:NO];
     
     [mainView setHidden:YES];
-    [btnRegistrati setHidden:NO];
+    [btnRegistrati setHidden:NO];*/
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    [defaults setBool:NO forKey:@"isLoggedIn"];
+    [defaults synchronize];
+    [self.navigationController popViewControllerAnimated:YES];
+    
+    UIStoryboard *storyboard = [UIApplication sharedApplication].delegate.window.rootViewController.storyboard;
+    
+    UIViewController *loginController = [storyboard instantiateViewControllerWithIdentifier:@"loginScreen"];
+    
+    [self.navigationController pushViewController:loginController animated:NO];//
+
+    
+
 }
 
--(IBAction)goToLogin:(id)sender{
-
-    [self performSegueWithIdentifier:@"login" sender:self];
-}
 
 -(void)didAuthenticateWithFB:(BOOL)isFb
 {
     
-    [btnLogout setHidden:NO];
-    [btnLogin setHidden:YES];
-    [btnRegistrati setHidden:YES];
      
     if (isFb){
     [[[FBRequest alloc] initWithSession:FBSession.activeSession graphPath:@"me"]  startWithCompletionHandler:
@@ -135,17 +160,6 @@
 }
 
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    
-    // Make sure we're referring to the correct segue
-    if ([[segue identifier] isEqualToString:@"login"]) {
-    
-        LoginViewController *l = [segue destinationViewController];
-        l.delegate = self;
-        
-    }
-}
 
 
 
@@ -175,7 +189,7 @@
     [lbl setText:[user valueForKey:@"email"]];
            
     
-    [mainView setHidden:NO];
+   // [mainView setHidden:NO];
     [hud hide:YES];
     
 }
@@ -187,5 +201,49 @@
     
     [alert show];}
 
+#pragma mark - Table View Delegate
 
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 100;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(50, 50, 50, 50)];
+    UILabel *lblInt = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 320, 25)];
+    [lblInt setText:@"Sei collegato come barbera.claudio@gmail.com"];
+    [lblInt setFont:[UIFont systemFontOfSize:12]];
+    [lblInt setBackgroundColor:[UIColor clearColor]];
+    [header addSubview:lblInt];
+    return header;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    
+    return 100;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(50, 50, 50, 50)];
+     
+    UIImageView *base = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"baseLoginFb.png"]];
+    [base setFrame:CGRectMake(20, 20, 280, 64)];
+    [base setUserInteractionEnabled:YES];
+    
+    UIButton *btnDisconnetti = [[UIButton alloc] initWithFrame:CGRectMake(20, 17, 240, 30)];
+ //   [btnDisconnetti setTitle:@"Disconnetti" forState:UIControlStateNormal];
+    [btnDisconnetti setImage:[UIImage imageNamed:@"disconnetti.png"] forState:UIControlStateNormal];
+
+    [btnDisconnetti addTarget:self action:@selector(logout:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [base addSubview:btnDisconnetti];
+
+
+    [footer addSubview:base];
+    
+    return  footer;
+}
 @end

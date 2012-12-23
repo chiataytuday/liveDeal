@@ -10,28 +10,11 @@
 
 @implementation Categoria
 
-@synthesize Descrizione, Codice, Immagine, TipiGoogle, TipiLiveDeal, ColoreCornice;
-
--(id)initWithDescrizione:(NSString *)laDescrizione codice:(NSString *)ilCodice immagine:(NSString *)img andArrayOfTypes:(NSString *)tipiDiGoogle{
-
-    self = [super init];
-    
-    if (self != nil)
-    {
-        
-        self.Codice = ilCodice;
-        self.Descrizione = laDescrizione;
-        self.Immagine = img;
-        self.TipiGoogle = tipiDiGoogle;
-    }
-    
-    return self;
-    
-}
+@synthesize Descrizione, Codice, TipiGoogle, ColoreCornice, Slug;
 
 -(NSArray *)DatiGoogle
 {
-    if (self.Codice==@"beauty")
+    if (self.Slug==@"beauty")
     {
         NSArray *dati = [[NSArray alloc] initWithObjects:@"hair_care", @"beauty_salon",nil];
         

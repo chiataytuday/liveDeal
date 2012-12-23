@@ -20,13 +20,15 @@
 #import "CustomLabel.h"
 #import "Citta.h"
 #import "QuartzCore/QuartzCore.h"
+#import "Utility.h"
+#import "ODRefreshControl.h"
 
-@interface OfferteViewController : UIViewController<UITableViewDelegate, MKMapViewDelegate>
+@interface OfferteViewController : UIViewController<UITableViewDelegate, MKMapViewDelegate, NSURLConnectionDelegate>
 {
     NSMutableData *tempArray;
     MBProgressHUD *hud;
     int tipo;
-  
+    ODRefreshControl *refreshControl ;
        
 
 }
@@ -34,8 +36,8 @@
 @property (nonatomic, assign) BOOL isViewOffertaShow;
 @property (nonatomic, retain) NSMutableArray *Offerte;
 @property (nonatomic, retain) NSMutableArray *Esercenti;
+@property (nonatomic, retain) NSMutableArray *EsercentiInVetrina;
 @property (nonatomic, retain) Categoria *categoriaSelezionata;
-//@property (nonatomic, assign) CLLocationCoordinate2D coordinataSelezionata;
 @property (nonatomic, retain) Citta *cittaSelezionata;
 @property (nonatomic, assign) BOOL isFood;
 @property (nonatomic, retain) IBOutlet UITableView *myTable;

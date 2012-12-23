@@ -12,8 +12,11 @@
 #import "GPPShare.h"
 #import "Citta.h"
 #import "Categoria.h"
+#import "UIColor+UIColor_Expanded.h"
 
 #define GOOGLE_PLACES_KEY @"AIzaSyCb2aMRq1POO-aXsj5XdvWEIgzm_7y8OkQ"
+#define CITTA 1
+#define CATEGORIE 2
 
 @protocol SelectDelegate <NSObject>
 
@@ -24,6 +27,7 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 {
     NSMutableData *tempArray;
+    int tipoRicerca;
 }
 @property (retain, nonatomic) GPPShare *share;
 @property (strong, nonatomic) UIWindow *window;
@@ -33,5 +37,6 @@
 @property (strong, nonatomic) NSMutableArray *citta;
 @property (strong, nonatomic) NSMutableArray *categorie;
 
+-(Categoria *)getCategoriaFood;
 
 @end

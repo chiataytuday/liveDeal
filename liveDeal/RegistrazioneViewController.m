@@ -19,18 +19,24 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
 
-           
+    
     scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 374)];
-    [scroll setContentSize:CGSizeMake(320, 493)];
+    [scroll setContentSize:CGSizeMake(320, 453)];
     [scroll setBounces:YES];
     [scroll setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"sfondoRegistrati.png"]]];
     
     UIButton *btnRegFB = [UIButton buttonWithType:UIButtonTypeCustom];
     [btnRegFB setFrame:CGRectMake(32, 20, 251, 31)];
-    [btnRegFB setImage:[UIImage imageNamed:@"loginFb.png"] forState:UIControlStateNormal];
+    [btnRegFB setImage:[UIImage imageNamed:@"loginFB.png"] forState:UIControlStateNormal];
     [btnRegFB addTarget:self action:@selector(loginFb) forControlEvents:UIControlEventTouchUpInside];
-    [scroll addSubview:btnRegFB];   
+    [scroll addSubview:btnRegFB];
+    
+    UIImageView *accessoIstantaneo = [[UIImageView alloc] initWithFrame:CGRectMake(80, 52, 149, 20)];
+    [accessoIstantaneo setImage:[UIImage imageNamed:@"accessoIstantaneo.png"]];
+    [scroll addSubview:accessoIstantaneo];    
     
     UIImageView *sfondoReg = [[UIImageView alloc] initWithFrame:CGRectMake(25, 75, 271, 337)];
     [sfondoReg setImage:[UIImage imageNamed:@"sfondoRegistrazione.png"]];
@@ -41,41 +47,55 @@
     [scroll addSubview:baseReg];
     
     
-    txtEmail = [[UITextField alloc] initWithFrame:CGRectMake(115, 93, 165, 30)];
+    txtEmail = [[UITextField alloc] initWithFrame:CGRectMake(70, 96, 190, 25)];
+    [txtEmail setPlaceholder:@"E-mail"];
+    [txtEmail setFont:[UIFont fontWithName:@"HelveticaNeue-Italic" size:15]];
     [txtEmail setDelegate:self];
     [txtEmail setKeyboardType:UIKeyboardTypeEmailAddress];
     [scroll addSubview:txtEmail];
     
-    txtPassword = [[UITextField alloc] initWithFrame:CGRectMake(135, 133, 145, 30)];
-    [txtPassword setDelegate:self];    
+    txtPassword = [[UITextField alloc] initWithFrame:CGRectMake(70, 138, 190, 25)];
+    [txtPassword setDelegate:self];
+    [txtPassword setPlaceholder:@"Password"];
+    [txtPassword setFont:[UIFont fontWithName:@"HelveticaNeue-Italic" size:15]];
     [txtPassword setKeyboardType:UIKeyboardTypeDefault];
     txtPassword.secureTextEntry=YES;
     [scroll addSubview:txtPassword];
     
-    txtConfermaPassword = [[UITextField alloc] initWithFrame:CGRectMake(165, 173, 115, 30)];
+    txtConfermaPassword = [[UITextField alloc] initWithFrame:CGRectMake(70, 178, 190, 25)];
     [txtConfermaPassword setDelegate:self];
+    [txtConfermaPassword setPlaceholder:@"Ripeti Password"];
+    [txtConfermaPassword setFont:[UIFont fontWithName:@"HelveticaNeue-Italic" size:15]];
     [txtConfermaPassword setKeyboardType:UIKeyboardTypeDefault];
     txtConfermaPassword.secureTextEntry=YES;
     [scroll addSubview:txtConfermaPassword];    
     
-    txtNome = [[UITextField alloc] initWithFrame:CGRectMake(125, 220, 155, 30)];
+    txtNome = [[UITextField alloc] initWithFrame:CGRectMake(70, 228, 190, 25)];
     [txtNome setDelegate:self];
+    [txtNome setPlaceholder:@"Nome"];
+    [txtNome setFont:[UIFont fontWithName:@"HelveticaNeue-Italic" size:15]];
     [txtNome setKeyboardType:UIKeyboardTypeDefault];
     [scroll addSubview:txtNome];
     
-    txtCognome= [[UITextField alloc] initWithFrame:CGRectMake(130, 257, 150, 30)];
+    txtCognome= [[UITextField alloc] initWithFrame:CGRectMake(70, 262, 190, 25)];
     [txtCognome setDelegate:self];
+    [txtCognome setPlaceholder:@"Cognome"];
+    [txtCognome setFont:[UIFont fontWithName:@"HelveticaNeue-Italic" size:15]];
     [txtCognome setKeyboardType:UIKeyboardTypeDefault];
     [scroll addSubview:txtCognome];
 
-    txtSesso= [[UITextField alloc] initWithFrame:CGRectMake(125, 300, 155, 30)];
+    txtSesso= [[UITextField alloc] initWithFrame:CGRectMake(70, 305, 190, 25)];
     [txtSesso setDelegate:self];
+    [txtSesso setPlaceholder:@"Sesso"];
+    [txtSesso setFont:[UIFont fontWithName:@"HelveticaNeue-Italic" size:15]];
     [txtSesso setKeyboardType:UIKeyboardTypeDefault];
     [txtSesso setTag:2];
     [scroll addSubview:txtSesso];
     
-    txtCitta= [[UITextField alloc] initWithFrame:CGRectMake(155, 340, 125, 30)];
+    txtCitta= [[UITextField alloc] initWithFrame:CGRectMake(70, 345, 190, 25)];
     [txtCitta setDelegate:self];
+    [txtCitta setPlaceholder:@"Città offerte"];
+    [txtCitta setFont:[UIFont fontWithName:@"HelveticaNeue-Italic" size:15]];
     [txtCitta setTag:3];
     [scroll addSubview:txtCitta];
 

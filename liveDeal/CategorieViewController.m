@@ -21,7 +21,27 @@
 {
     [super viewDidLoad];
 
-    self.Categorie  =  ((AppDelegate *)[[UIApplication sharedApplication]delegate]).categorie;
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
+
+    
+    UIImageView *imgSfondo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sfondoRegistrati.png"]];
+    [imgSfondo setContentMode:UIViewContentModeScaleAspectFill];
+    
+    [imgSfondo setFrame:self.view.frame];
+    
+    self.tableView.backgroundView = imgSfondo;
+    
+   NSMutableArray *tempArray = ((AppDelegate *)[[UIApplication sharedApplication]delegate]).categorie;
+    
+    self.Categorie  =   [[NSMutableArray alloc ] initWithCapacity:[tempArray count] - 1];
+    
+    for (Categoria *c in tempArray) {
+        
+        if (![c.Slug isEqualToString:@"ristoranti"])
+        {
+            [Categorie addObject:c];
+        }
+    }
 
 }
 
@@ -53,15 +73,37 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
+    Categoria *cat = [Categorie objectAtIndex:indexPath.row];
     
     UILabel *cellLabel = (UILabel *)[cell viewWithTag:1];
-    [cellLabel setText:[[Categorie objectAtIndex:indexPath.row] Descrizione]];
-    return cell;
+    [cellLabel setText:cat.Descrizione];
+    [cellLabel setTextColor:cat.ColoreCornice];
+    [cell setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"SfondoCellAltriEsercenti.png"]]];
+    
+    UIImageView *img = (UIImageView *)[cell viewWithTag:2];
+    [img setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.png", cat.Slug]]];
+    
+    
+     return cell;
     
 }
 
 
+#pragma mark - Table View Delegate
 
+-(float)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 50;
+}
+-(float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 70;
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return @"Seleziona una categoria";
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {

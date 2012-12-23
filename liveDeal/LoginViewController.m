@@ -19,6 +19,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.navigationItem.hidesBackButton = YES;
+    
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
     
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"sfondoRegistrati.png"]]];
     
@@ -27,7 +30,7 @@
 
 
 -(IBAction)logon:(id)sender{
-
+/*
     NSString *url = [NSString stringWithFormat:@"http://www.psicologapalermo.com/login.txt?email=%@&pwd=%@", txtEmail.text, txtPwd.text];
     NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:url]  cachePolicy:NSURLRequestUseProtocolCachePolicy
                                      timeoutInterval:60.0];
@@ -51,8 +54,13 @@
         
         [alert show];
     }
-
+*/
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    [defaults setBool:YES forKey:@"isLoggedIn"];
+    [defaults synchronize];
+    [self.navigationController popViewControllerAnimated:YES];
     
 }
 
@@ -123,15 +131,27 @@
                       state:(FBSessionState) state
                       error:(NSError *)error
 {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+   
+    
     switch (state) {
         case FBSessionStateOpen:
            
-            if ([self respondsToSelector:@selector(dismissViewControllerAnimated:animated:completion:)]){
+            
+           
+            [defaults setBool:YES forKey:@"isLoggedIn"];
+            [defaults synchronize];
+            [self.navigationController popViewControllerAnimated:YES];
+            
+            /*if ([self respondsToSelector:@selector(dismissViewControllerAnimated:animated:completion:)]){
                 [self dismissViewControllerAnimated:YES completion:nil];
             } else {
                 [self dismissViewControllerAnimated:YES completion:nil];
             }
-            [self.delegate didAuthenticateWithFB:YES];
+            [self.delegate didAuthenticateWithFB:YES]*/
+             
             break;
         case FBSessionStateClosed:
         case FBSessionStateClosedLoginFailed:

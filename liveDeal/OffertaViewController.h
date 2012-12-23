@@ -13,6 +13,7 @@
 #import "Twitter/Twitter.h"
 #import "PagamentoViewController.h"
 #import "QuartzCore/QuartzCore.h"
+#import "Utility.h"
 
 @interface OffertaViewController : UIViewController <GPPShareDelegate, UIActionSheetDelegate, UIWebViewDelegate>
 {

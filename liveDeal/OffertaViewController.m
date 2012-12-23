@@ -68,11 +68,16 @@
 
     
       
-    [imgd.layer setBorderColor:[[UIColor whiteColor] CGColor]];
-    [imgd.layer setBorderWidth: 4.0];
-    
-   [imgBorder.layer setBorderColor:[[UIColor colorWithRed:245.0f / 255 green:101.0f / 255 blue:34.0f / 255 alpha:1] CGColor]];
-    [imgBorder.layer setBorderWidth: 2.0];
+       
+    if (offertaSelezionata.Categoria.ColoreCornice != nil)
+    {
+        [imgd.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+        [imgd.layer setBorderWidth: 4.0];
+
+        
+        [imgBorder.layer setBorderColor:[offertaSelezionata.Categoria.ColoreCornice CGColor]];
+        [imgBorder.layer setBorderWidth: 2.0];
+    }
 
     
     if ([offertaSelezionata.immagini count]>=1)
@@ -168,17 +173,13 @@
     [scroll addSubview:lblIntestazioneAcquistati];
 
     
-    NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
-    [dateformatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    
-    NSDate *dataScadenza = [dateformatter dateFromString:offertaSelezionata.DataScadenza];
-    
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit  | NSHourCalendarUnit | NSMinuteCalendarUnit| NSSecondCalendarUnit fromDate:dataScadenza];
-    
-    
+       
     UILabel *lblValidita = [[UILabel alloc] initWithFrame:CGRectMake(35, 214, 290, 50)];
-    [lblValidita setText:[NSString stringWithFormat:@"Coupon utilizzabile domani dalle 08:00 alle 23:59"]];
-    [lblValidita setBackgroundColor:[UIColor clearColor]];
+   
+    lblValidita.text = [Utility getValiditaWithDataInizio:offertaSelezionata.DataInizio
+                                          andDataScadenza:offertaSelezionata.DataScadenza];
+    
+       [lblValidita setBackgroundColor:[UIColor clearColor]];
     [lblValidita setFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:12]];
     [lblValidita setTextColor:[UIColor colorWithRed:108.0f / 255
                                               green:108.0f / 255
