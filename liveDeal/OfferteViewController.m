@@ -6,7 +6,7 @@
 @end
 
 @implementation OfferteViewController
-@synthesize Offerte, Esercenti, categoriaSelezionata, myTable, mapButton, mapView, gridView, vwOfferta, isViewOffertaShow, imgOffertaSelezionata, lblAcquistatiOffertaSelezionata, lblDescrizioneOffertaSelezionata, lblTitoloOffertaSelezionata, nextPageToken, cittaSelezionata;
+@synthesize Offerte, Esercenti, categoriaSelezionata, myTable, mapButton, mapView, gridView, vwOfferta, isViewOffertaShow, imgOffertaSelezionata, lblAcquistatiOffertaSelezionata, lblDescrizioneOffertaSelezionata, lblTitoloOffertaSelezionata, nextPageToken, cittaSelezionata, EsercentiInVetrina;
 
 
 - (void)viewDidLoad
@@ -19,21 +19,12 @@
     
     nextPageToken = @"";
     Esercenti = [[NSMutableArray alloc] init];
-    //EsercentiInVetrina = [[NSMutableArray alloc]init];
-    
-    //UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sfondoRegistrati.png"]];
-    //[tempImageView setContentMode:UIViewContentModeScaleAspectFill];
-    //[tempImageView setFrame:self.self.myTable.frame];
-    
-    //self.self.myTable.backgroundView = tempImageView;
-    
+     
     [self.mapView setHidden:YES];
     tipo=0;
     
-    if (categoriaSelezionata==nil)
-        [self Ricerca:[NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/deals_list?city=%@", cittaSelezionata.Slug]];
-    else
-        [self Ricerca:[NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/deals_list?city=%@&category=%i", cittaSelezionata.Slug, categoriaSelezionata.Codice]];
+
+   [self Ricerca:[NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/deals_list?city=%@&category=%i", cittaSelezionata.Slug, categoriaSelezionata.Codice]];
     
 }
 
@@ -201,6 +192,50 @@
         }
         
         tipo=1;
+        
+        NSString *strUrl = [NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/_aziende_in_vetrina?lat=%f&lng=%f&radius=%i",
+                            cittaSelezionata.Coordinate.latitude,
+                            cittaSelezionata.Coordinate.longitude,
+                            2];
+        
+        [self Ricerca:[strUrl stringByAddingPercentEscapesUsingEncoding:NSStringEnumerationByWords]];        
+    }
+    else if (tipo==1)
+    {
+        
+        EsercentiInVetrina = [[NSMutableArray alloc] init];
+        
+        NSArray* json = [NSJSONSerialization
+                         JSONObjectWithData:tempArray
+                         options:kNilOptions error:nil];
+        
+        
+        NSArray *result = [json valueForKeyPath:@"result"];
+        NSArray *items = [result valueForKeyPath:@"items"];
+        
+        
+        for (NSDictionary *es in items)
+        {
+            Esercente *e = [[Esercente alloc] init];
+            [e setRagioneSociale:[es objectForKey:@"name"]];
+            
+            double lat = [[es valueForKey:@"latitude"] doubleValue];
+            double lng = [[es valueForKey: @"longitude"] doubleValue];
+
+            
+            EsercenteVetrinaAnnotation *annot = [[EsercenteVetrinaAnnotation alloc] initWithName:[es valueForKey:@"name"]
+                                                                           address:[es valueForKey:@"address"]
+                                                                        coordinate:CLLocationCoordinate2DMake(lat, lng)];
+            [annot setIdEsercente:e];
+            [mapView addAnnotation:annot];
+
+            
+            [EsercentiInVetrina addObject:e];
+        }
+        
+        tipo=2;
+        
+        
         NSString *strUrl = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f,%f&rankby=distance&types=%@&sensor=false&key=%@",
                             cittaSelezionata.Coordinate.latitude,
                             cittaSelezionata.Coordinate.longitude,
@@ -208,10 +243,9 @@
                             GOOGLE_PLACES_KEY];
         
         [self Ricerca:[strUrl stringByAddingPercentEscapesUsingEncoding:NSStringEnumerationByWords]];
-
-        
+               
     }
-    else if (tipo==1)
+    else if (tipo==2)
     {
         
         
@@ -259,12 +293,7 @@
             
             
             
-            EsercenteAnnotation *annot = [[EsercenteAnnotation alloc] initWithName:[esercenti valueForKey:@"name"]
-                                                                           address:[esercenti valueForKey:@"vicinity"]
-                                                                        coordinate:CLLocationCoordinate2DMake(lat, lng)];
-            [annot setIdEsercente:es];
-            [mapView addAnnotation:annot];
-            [Esercenti addObject:es];
+                       [Esercenti addObject:es];
         }
         
         
@@ -288,12 +317,12 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 3;
+    return 4;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section==2)
+    if (indexPath.section==3)
         return 60;
     
     return 80;
@@ -302,19 +331,37 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section==1)
-        return 19;
-    else return 0;
+    {
+        if ([EsercentiInVetrina count] >= 1)
+            return 19;
+        else
+            return 0;
+    }
+    
+    if (section==2)
+    {
+        if ([Esercenti count]>=1)
+            return 19;
+        else
+            return 0;
+    }
+        
+    return 0;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    if (section==1)
+    if (section==1 || section==2)
     {
         UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 19)];
         [v setBackgroundColor:[UIColor colorWithRed:47.0f / 255 green:47.0f / 255 blue:47.0f / 255 alpha:1]];
         
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.bounds.size.width - 10, 10)];
-        label.text = @"Altri esercenti nelle vicinanze";
+        
+        if (section==1)
+            label.text = @"Esercenti in primo piano";
+        else
+            label.text=@"Altri esercenti nelle vicinanze";
         label.textColor = [UIColor whiteColor];
         [label setFont:[UIFont fontWithName:@"Helvetica Neue" size:12]];
         label.backgroundColor = [UIColor clearColor];
@@ -329,30 +376,26 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
+   
     if (section==0)
         return [Offerte count];
     else if (section == 1)
+        return [EsercentiInVetrina count];
+    else if (section==2){
         return [Esercenti count];
-    else if (section==2)
+
+    }
+    else if (section==3)
     {
         if (nextPageToken!=nil)
             return 1;
     }
     
     
+    
     return 0;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    
-    if (section==1)
-        return @"Altri esercenti nelle vicinanze";
-    else if (section==0)
-        return @"";
-    
-    return @"";
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -554,7 +597,28 @@
         
         
     }
-    else if (indexPath.section==1){
+    else if (indexPath.section==1)
+    {
+        Esercente *ev = [EsercentiInVetrina objectAtIndex:indexPath.row];
+        
+        static NSString *CellIdentifier = @"vetrinaCell";
+        
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (!cell) {
+            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        
+        UILabel *cellRagSoc = (UILabel *)[cell viewWithTag:1];
+        [cellRagSoc setText:ev.RagioneSociale];
+        
+        UIView *cellBackView = [[UIView alloc] initWithFrame:CGRectZero];
+        cellBackView.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed:@"sfondoCellAltriEsercenti.png"]];
+        cell.backgroundView = cellBackView;
+        
+        
+    }
+    else if (indexPath.section==2){
         
         
         //altri esercenti
@@ -616,7 +680,7 @@
         
         
     }
-    else if (indexPath.section==2){
+    else if (indexPath.section==3){
         
         
         static NSString *CellIdentifier = @"altriRisultatiCell";
@@ -640,6 +704,7 @@
         cell.backgroundView = cellBackView;
         
     }
+   
     
     return cell;
 }
@@ -675,6 +740,16 @@
         NSInteger selectedIndex = [[self.myTable indexPathForSelectedRow] row];
         
         vc.esercenteSelezionato = [Esercenti objectAtIndex:selectedIndex];
+    }
+    else if ([[segue identifier] isEqualToString:@"esercenteInVetrina"])
+    {
+        EsercenteVetrinaViewController *vc = [segue destinationViewController];
+        
+        // get the selected index
+        NSInteger selectedIndex = [[self.myTable indexPathForSelectedRow] row];
+        
+        vc.esercenteSelezionato = [EsercentiInVetrina objectAtIndex:selectedIndex];
+        
     }
     else if ([[segue identifier] isEqualToString:@"offertaList"] ||
              [[segue identifier] isEqualToString:@"offertaMap"] ||
@@ -768,7 +843,7 @@
     
     static NSString *identifier = @"offertaAnnotation";
     
-    if ([annotation isKindOfClass:[OffertaAnnotation class]] || [annotation isKindOfClass:[EsercenteAnnotation class]]){
+    if ([annotation isKindOfClass:[OffertaAnnotation class]] || [annotation isKindOfClass:[EsercenteVetrinaAnnotation class]]){
         
         
         
@@ -844,9 +919,9 @@
     }
     else
     {
-        EsercenteAnnotation *of = (EsercenteAnnotation *)view.annotation;
+        EsercenteVetrinaAnnotation *of = (EsercenteVetrinaAnnotation *)view.annotation;
         
-        EsercenteViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"esercenteVC"];
+        EsercenteVetrinaViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"esercenteVetrinaVC"];
         [vc setEsercenteSelezionato:of.idEsercente];
         [self.navigationController pushViewController:vc animated:YES];
         

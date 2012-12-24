@@ -15,6 +15,7 @@
 #import "MapKit/MapKit.h"
 #import "OffertaAnnotation.h"
 #import "EsercenteAnnotation.h"
+#import "EsercenteVetrinaAnnotation.h"
 #import "EsercenteViewController.h"
 #import "OffertaViewController.h"
 #import "CustomLabel.h"
@@ -22,6 +23,7 @@
 #import "QuartzCore/QuartzCore.h"
 #import "Utility.h"
 #import "ODRefreshControl.h"
+#import "EsercenteVetrinaViewController.h"
 
 @interface OfferteViewController : UIViewController<UITableViewDelegate, MKMapViewDelegate, NSURLConnectionDelegate>
 {

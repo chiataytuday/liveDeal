@@ -235,6 +235,8 @@
 		F6DB16A8167E457500F3CC07 /* ODRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F6DB16A7167E457500F3CC07 /* ODRefreshControl.m */; };
 		F6F3929B16551E8E0032180E /* EsercenteAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F3929A16551E8E0032180E /* EsercenteAnnotation.m */; };
 		F6F3929F165525D60032180E /* OffertaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F3929E165525D60032180E /* OffertaViewController.m */; };
+		F6F7569C1688821F00803DF6 /* EsercenteVetrinaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F7569B1688821F00803DF6 /* EsercenteVetrinaViewController.m */; };
+		F6F756A01688836F00803DF6 /* EsercenteVetrinaAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F7569F1688836F00803DF6 /* EsercenteVetrinaAnnotation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -548,6 +550,10 @@
 		F6F3929A16551E8E0032180E /* EsercenteAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EsercenteAnnotation.m; sourceTree = "<group>"; };
 		F6F3929D165525D60032180E /* OffertaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OffertaViewController.h; sourceTree = "<group>"; };
 		F6F3929E165525D60032180E /* OffertaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OffertaViewController.m; sourceTree = "<group>"; };
+		F6F7569A1688821F00803DF6 /* EsercenteVetrinaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EsercenteVetrinaViewController.h; sourceTree = "<group>"; };
+		F6F7569B1688821F00803DF6 /* EsercenteVetrinaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EsercenteVetrinaViewController.m; sourceTree = "<group>"; };
+		F6F7569E1688836F00803DF6 /* EsercenteVetrinaAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EsercenteVetrinaAnnotation.h; sourceTree = "<group>"; };
+		F6F7569F1688836F00803DF6 /* EsercenteVetrinaAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EsercenteVetrinaAnnotation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -923,6 +929,8 @@
 				F6905E32164FBB4200F9319B /* Esercente.m */,
 				F61ADE2E16528F1A009D4594 /* Citta.h */,
 				F61ADE2F16528F1A009D4594 /* Citta.m */,
+				F6F7569E1688836F00803DF6 /* EsercenteVetrinaAnnotation.h */,
+				F6F7569F1688836F00803DF6 /* EsercenteVetrinaAnnotation.m */,
 			);
 			name = "Object Model";
 			path = ..;
@@ -963,6 +971,8 @@
 				F65D8D371668E4AB00D775F3 /* ScegliPagamentoViewController.m */,
 				F67FB983168084E3001F115B /* CouponsViewController.h */,
 				F67FB984168084E3001F115B /* CouponsViewController.m */,
+				F6F7569A1688821F00803DF6 /* EsercenteVetrinaViewController.h */,
+				F6F7569B1688821F00803DF6 /* EsercenteVetrinaViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1405,6 +1415,8 @@
 				F6DB16A8167E457500F3CC07 /* ODRefreshControl.m in Sources */,
 				F67FB985168084E3001F115B /* CouponsViewController.m in Sources */,
 				F6431AD11684B4DE00171063 /* UIColor+UIColor_Expanded.m in Sources */,
+				F6F7569C1688821F00803DF6 /* EsercenteVetrinaViewController.m in Sources */,
+				F6F756A01688836F00803DF6 /* EsercenteVetrinaAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
