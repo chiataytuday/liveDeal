@@ -12,10 +12,11 @@
 #import "EGOPhotoGlobal.h"
 #import "MyPhoto.h"
 #import "MyPhotoSource.h"
-
+#import "EsercenteST.h"
 
 @interface EsercenteViewController : UITableViewController<UIAlertViewDelegate>{
  NSMutableData *tempArray;
+    BOOL pref;
 }
 
 
@@ -25,7 +26,8 @@
 @property (nonatomic, retain) IBOutlet UILabel *lblTelefono;
 @property (nonatomic, retain) IBOutlet UILabel *lblWebSite;
 @property (nonatomic, retain) IBOutlet UIImageView *img;
+@property (nonatomic, retain) IBOutlet UIButton *btnPreferiti;
 
 - (void)showPhotoView;
-
+-(IBAction)AggiungiAPreferiti:(id)sender;
 @end

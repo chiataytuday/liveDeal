@@ -10,9 +10,6 @@
 #import "MapKit/MapKit.h"
 #import "Citta.h"
 
-
-
-
 @interface Citta : NSObject
 
 @property (nonatomic, retain) NSString *Descrizione;

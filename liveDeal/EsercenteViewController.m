@@ -13,9 +13,26 @@
 @end
 
 @implementation EsercenteViewController
-@synthesize esercenteSelezionato, lblRagioneSociale, lblIndirizzo, lblTelefono, lblWebSite, img;
+@synthesize esercenteSelezionato, lblRagioneSociale, lblIndirizzo, lblTelefono, lblWebSite, img, btnPreferiti;
 
+-(void)viewWillAppear:(BOOL)animated{
+    
+    //se l'oggetto è già tra i preferiti disattivo il pulsante
+    
+    pref = [self controllaSeOggettoEsiste:esercenteSelezionato.Codice];
 
+    
+    
+    if (pref)
+    {
+        [btnPreferiti setImage:[UIImage imageNamed:@"preferitiOn.png"] forState:UIControlStateNormal];
+    }
+    else
+    {
+        [btnPreferiti setImage:[UIImage imageNamed:@"preferitiOff.png"] forState:UIControlStateNormal];
+    }
+    
+}
 
 - (void)viewDidLoad
 {
@@ -216,4 +233,106 @@
        
     }
 }
+
+
+#pragma mark - Core data
+
+-(IBAction)AggiungiAPreferiti:(id)sender{
+    
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [app managedObjectContext];
+    
+    
+    if (!pref){
+        [btnPreferiti setImage:[UIImage imageNamed:@"preferitiOn.png"] forState:UIControlStateNormal];
+        pref=true;
+        if (![self controllaSeOggettoEsiste:esercenteSelezionato.Codice])
+        {
+            EsercenteST *r = [NSEntityDescription insertNewObjectForEntityForName:@"EsercenteST" inManagedObjectContext:context];
+            
+            r.ragioneSociale = esercenteSelezionato.RagioneSociale;
+            r.codice = esercenteSelezionato.Codice;
+            r.indirizzo = esercenteSelezionato.Indirizzo;
+            r.immagine = [esercenteSelezionato.immagini objectAtIndex:0];
+            r.distance = [NSNumber numberWithDouble:esercenteSelezionato.distanza];
+            r.latitude = [NSNumber numberWithDouble:esercenteSelezionato.Coordinate.latitude];
+            r.longitude = [NSNumber numberWithDouble:esercenteSelezionato.Coordinate.longitude];
+            
+            NSError *err;
+            
+            if (![context save:&err])
+            {
+                NSLog(@"Errore");
+            }
+            
+        }
+    }
+    else{
+        
+        [btnPreferiti setImage:[UIImage imageNamed:@"preferitiOff.png"] forState:UIControlStateNormal];
+
+        pref=false;
+        NSFetchRequest *request = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity =
+        [NSEntityDescription entityForName:@"EsercenteST" inManagedObjectContext:context];
+        [request setEntity:entity];
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                  @"(codice = %@)", esercenteSelezionato.Codice];
+        [request setPredicate:predicate];
+        
+        NSError *error = nil;
+        NSArray *array = [context executeFetchRequest:request error:&error];
+        if (array != nil) {
+            
+            for (EsercenteST *rst in array){
+                
+                [context deleteObject:rst];
+                
+            }
+            
+            NSError *err;
+            
+            if (![context save:&err])
+            {
+                NSLog(@"Errore");
+            }
+        }
+        
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"esercenteAggiunto" object:self];
+    
+}
+
+-(BOOL)controllaSeOggettoEsiste:(NSString *)oggetto{
+    
+    NSUInteger count;
+    
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [app managedObjectContext];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity =
+    [NSEntityDescription entityForName:@"EsercenteST" inManagedObjectContext:context];
+    [request setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"(codice = %@)", oggetto];
+    [request setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSArray *array = [context executeFetchRequest:request error:&error];
+    if (array != nil) {
+        count = [array count]; // May be 0 if the object has been deleted.
+        
+        
+    }
+    else {
+        return false;
+    }
+    
+    return count > 0;
+}
+
 @end

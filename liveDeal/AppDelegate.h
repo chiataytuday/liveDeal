@@ -13,7 +13,7 @@
 #import "Citta.h"
 #import "Categoria.h"
 #import "UIColor+UIColor_Expanded.h"
-
+#import "CoreData/CoreData.h"
 #define GOOGLE_PLACES_KEY @"AIzaSyCb2aMRq1POO-aXsj5XdvWEIgzm_7y8OkQ"
 #define CITTA 1
 #define CATEGORIE 2
@@ -36,6 +36,11 @@
 @property (strong, nonatomic) FBSession *session;
 @property (strong, nonatomic) NSMutableArray *citta;
 @property (strong, nonatomic) NSMutableArray *categorie;
+
+@property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
 
 -(Categoria *)getCategoriaFood;
 

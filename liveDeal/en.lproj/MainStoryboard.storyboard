@@ -300,7 +300,7 @@ dentale, facciale, beauty</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sl6-om-DBR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="865" y="1349"/>
+            <point key="canvasLocation" x="803" y="1643"/>
         </scene>
         <!--User View Controller-->
         <scene sceneID="gTZ-Oo-e4F">
@@ -1188,6 +1188,21 @@ dentale, facciale, beauty</string>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="mut-BO-CFx">
                                                     <rect key="frame" x="6" y="6" width="70" height="70"/>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qig-Io-dRS">
+                                                    <rect key="frame" x="270" y="54" width="22" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" image="preferitiOff.png">
+                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="AggiungiAPreferiti:" destination="NG4-JD-dlc" eventType="touchUpInside" id="QPP-B3-46W"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -1284,6 +1299,7 @@ dentale, facciale, beauty</string>
                     </tableView>
                     <navigationItem key="navigationItem" id="C4x-uE-GvD"/>
                     <connections>
+                        <outlet property="btnPreferiti" destination="qig-Io-dRS" id="YLd-zn-dx8"/>
                         <outlet property="img" destination="mut-BO-CFx" id="8HM-Un-LBi"/>
                         <outlet property="lblIndirizzo" destination="k2c-MG-1Zk" id="7rM-Je-fBU"/>
                         <outlet property="lblRagioneSociale" destination="uGI-Hs-a3m" id="sYs-fs-6lc"/>
@@ -1308,11 +1324,80 @@ dentale, facciale, beauty</string>
                     <connections>
                         <segue destination="SCD-6s-R0m" kind="relationship" relationship="viewControllers" id="R0Z-b6-aD4"/>
                         <segue destination="CYy-me-cnE" kind="relationship" relationship="viewControllers" id="Ts0-Kk-TH3"/>
+                        <segue destination="5TU-eK-jKo" kind="relationship" relationship="viewControllers" id="uln-1A-CMQ"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Teg-H9-xYV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-229" y="135"/>
+        </scene>
+        <!--Esercenti Preferiti View Controller-->
+        <scene sceneID="d93-Jy-oWU">
+            <objects>
+                <tableViewController id="DyC-7v-gfN" customClass="EsercentiPreferitiViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="iMV-z6-W30">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="esercenteCell" rowHeight="80" id="dh4-j7-fmo">
+                                <rect key="frame" x="0.0" y="22" width="320" height="80"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="79"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="q40-vq-gSx">
+                                            <rect key="frame" x="86" y="7" width="200" height="22"/>
+                                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9yG-IH-NPb" customClass="CustomLabel">
+                                            <rect key="frame" x="86" y="27" width="200" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZXA-Qm-c82">
+                                            <rect key="frame" x="86" y="51" width="200" height="26"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="scaleAspectFill" id="uJ3-sa-h4K">
+                                            <rect key="frame" x="12" y="7" width="67" height="67"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <connections>
+                                    <segue destination="NG4-JD-dlc" kind="push" id="H5X-CV-MrU"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="hq6-bf-Aoa"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qcS-WY-aM6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="836" y="1037"/>
+        </scene>
+        <!--Navigation Controller - Preferiti-->
+        <scene sceneID="YBR-Vn-M6h">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="5TU-eK-jKo" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Preferiti" id="SCn-xf-SBr"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="x12-TQ-NgE">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="DyC-7v-gfN" kind="relationship" relationship="rootViewController" id="gWv-TG-jYJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lv3-p6-o09" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-84" y="979"/>
         </scene>
         <!--Navigation Controller - Account-->
         <scene sceneID="kAl-qi-gSq">
@@ -1352,6 +1437,7 @@ dentale, facciale, beauty</string>
         <image name="infoMap.png" width="33" height="33"/>
         <image name="loginFB.png" width="251" height="31"/>
         <image name="logoPayPal.png" width="75" height="22"/>
+        <image name="preferitiOff.png" width="21" height="21"/>
         <image name="pulsanteAcquista.png" width="150" height="34"/>
         <image name="remove.png" width="25" height="26"/>
         <image name="separator.png" width="314" height="1"/>
@@ -1360,14 +1446,141 @@ dentale, facciale, beauty</string>
         <image name="sfondoPulsantePaga.png" width="251" height="31"/>
         <image name="signIn.png" width="251" height="31"/>
     </resources>
+    <classes>
+        <class className="CategorieViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategorieViewController.h"/>
+        </class>
+        <class className="CitiesViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CitiesViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
+            </relationships>
+        </class>
+        <class className="CouponsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CouponsViewController.h"/>
+        </class>
+        <class className="CustomLabel" superclassName="UILabel">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomLabel.h"/>
+        </class>
+        <class className="EsercenteVetrinaViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EsercenteVetrinaViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="lblRagSoc" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="EsercenteViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EsercenteViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="AggiungiAPreferiti:"/>
+                <relationship kind="outlet" name="btnPreferiti" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="img" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="lblIndirizzo" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblRagioneSociale" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblTelefono" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblWebSite" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="EsercentiPreferitiViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EsercentiPreferitiViewController.h"/>
+        </class>
+        <class className="LoginViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="goBack:"/>
+                <relationship kind="action" name="logon:"/>
+                <relationship kind="action" name="performLogin:"/>
+                <relationship kind="outlet" name="imgViewLogFB" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="navBar" candidateClass="UINavigationBar"/>
+                <relationship kind="outlet" name="txtEmail" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="txtPwd" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="NavViewController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NavViewController.h"/>
+        </class>
+        <class className="OffertaViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/OffertaViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="goBack:"/>
+                <relationship kind="action" name="showActionSheet:"/>
+                <relationship kind="outlet" name="btnAcquista" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnAction" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="lblCountdown" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="navBar" candidateClass="UINavigationBar"/>
+            </relationships>
+        </class>
+        <class className="OfferteViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/OfferteViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="switchMap:"/>
+                <relationship kind="outlet" name="gridView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="imgOffertaSelezionata" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="lblAcquistatiOffertaSelezionata" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblDescrizioneOffertaSelezionata" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblTitoloOffertaSelezionata" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="mapButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="myTable" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="vwOfferta" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="PagamentoViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PagamentoViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="decrementa:"/>
+                <relationship kind="action" name="goBack:"/>
+                <relationship kind="action" name="incrementa:"/>
+                <relationship kind="action" name="test:"/>
+                <relationship kind="outlet" name="btnPaga" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="img" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="imgBorder" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="imgCell" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="imgPaypal" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="lblCC" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblDescrizione" candidateClass="CustomLabel"/>
+                <relationship kind="outlet" name="lblQta" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblTitolo" candidateClass="CustomLabel"/>
+                <relationship kind="outlet" name="lblTot" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblValidita" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="RegistrazioneViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RegistrazioneViewController.h"/>
+        </class>
+        <class className="ScegliPagamentoViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ScegliPagamentoViewController.h"/>
+        </class>
+        <class className="StartViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/StartViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="lblCurrentAddress" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="mapButtonItem" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="viewControl" candidateClass="UIView"/>
+                <relationship kind="outlet" name="wait" candidateClass="UIActivityIndicatorView"/>
+            </relationships>
+        </class>
+        <class className="TitoloViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TitoloViewController.h"/>
+        </class>
+        <class className="UILabelStrikethrough" superclassName="UILabel">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UILabelStrikethrough.h"/>
+        </class>
+        <class className="UserViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UserViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="lbl" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="yds-g9-CD9"/>
         <segue reference="o5U-of-Ac7"/>
+        <segue reference="H5X-CV-MrU"/>
+        <segue reference="yds-g9-CD9"/>
         <segue reference="Z1E-Un-eaJ"/>
     </inferredMetricsTieBreakers>
 </document>

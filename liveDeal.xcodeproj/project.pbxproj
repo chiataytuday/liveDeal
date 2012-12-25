@@ -36,7 +36,6 @@
 		F619D96314B05BC0003EB79F /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F619D96214B05BC0003EB79F /* UserViewController.m */; };
 		F61ADE2116523FA2009D4594 /* Offerta.m in Sources */ = {isa = PBXBuildFile; fileRef = F61ADE2016523FA2009D4594 /* Offerta.m */; };
 		F61ADE25165255A1009D4594 /* CitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F61ADE24165255A1009D4594 /* CitiesViewController.m */; };
-		F61ADE3016528F1A009D4594 /* Citta.m in Sources */ = {isa = PBXBuildFile; fileRef = F61ADE2F16528F1A009D4594 /* Citta.m */; };
 		F61ADE3B1652A01F009D4594 /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F61ADE3A1652A01E009D4594 /* StartViewController.m */; };
 		F6431ACB16820ABC00171063 /* disconnetti.png in Resources */ = {isa = PBXBuildFile; fileRef = F6431AC916820ABB00171063 /* disconnetti.png */; };
 		F6431ACC16820ABC00171063 /* disconnetti@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6431ACA16820ABB00171063 /* disconnetti@2x.png */; };
@@ -237,6 +236,15 @@
 		F6F3929F165525D60032180E /* OffertaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F3929E165525D60032180E /* OffertaViewController.m */; };
 		F6F7569C1688821F00803DF6 /* EsercenteVetrinaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F7569B1688821F00803DF6 /* EsercenteVetrinaViewController.m */; };
 		F6F756A01688836F00803DF6 /* EsercenteVetrinaAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F7569F1688836F00803DF6 /* EsercenteVetrinaAnnotation.m */; };
+		F6F756CC1689BF0200803DF6 /* Citta.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F756CB1689BF0200803DF6 /* Citta.m */; };
+		F6F756CE1689D72000803DF6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6F756CD1689D72000803DF6 /* CoreData.framework */; };
+		F6F756D11689D73B00803DF6 /* LiveDeal.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F6F756CF1689D73B00803DF6 /* LiveDeal.xcdatamodeld */; };
+		F6F756DA1689DAAF00803DF6 /* EsercentiPreferitiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F756D91689DAAF00803DF6 /* EsercentiPreferitiViewController.m */; };
+		F6F756DF1689DEDB00803DF6 /* preferitiOn.png in Resources */ = {isa = PBXBuildFile; fileRef = F6F756DB1689DEDB00803DF6 /* preferitiOn.png */; };
+		F6F756E01689DEDB00803DF6 /* preferitiOn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6F756DC1689DEDB00803DF6 /* preferitiOn@2x.png */; };
+		F6F756E11689DEDB00803DF6 /* preferitiOff.png in Resources */ = {isa = PBXBuildFile; fileRef = F6F756DD1689DEDB00803DF6 /* preferitiOff.png */; };
+		F6F756E21689DEDB00803DF6 /* preferitiOff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6F756DE1689DEDB00803DF6 /* preferitiOff@2x.png */; };
+		F6F756F11689ED2C00803DF6 /* EsercenteST.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F756F01689ED2C00803DF6 /* EsercenteST.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -286,8 +294,6 @@
 		F61ADE2016523FA2009D4594 /* Offerta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Offerta.m; sourceTree = "<group>"; };
 		F61ADE23165255A1009D4594 /* CitiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CitiesViewController.h; sourceTree = "<group>"; };
 		F61ADE24165255A1009D4594 /* CitiesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CitiesViewController.m; sourceTree = "<group>"; };
-		F61ADE2E16528F1A009D4594 /* Citta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Citta.h; sourceTree = "<group>"; };
-		F61ADE2F16528F1A009D4594 /* Citta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Citta.m; sourceTree = "<group>"; };
 		F61ADE391652A01E009D4594 /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
 		F61ADE3A1652A01E009D4594 /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
 		F6431AC916820ABB00171063 /* disconnetti.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = disconnetti.png; path = "../../../img liveDeal/disconnetti.png"; sourceTree = "<group>"; };
@@ -554,6 +560,18 @@
 		F6F7569B1688821F00803DF6 /* EsercenteVetrinaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EsercenteVetrinaViewController.m; sourceTree = "<group>"; };
 		F6F7569E1688836F00803DF6 /* EsercenteVetrinaAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EsercenteVetrinaAnnotation.h; sourceTree = "<group>"; };
 		F6F7569F1688836F00803DF6 /* EsercenteVetrinaAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EsercenteVetrinaAnnotation.m; sourceTree = "<group>"; };
+		F6F756CA1689BF0200803DF6 /* Citta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Citta.h; sourceTree = "<group>"; };
+		F6F756CB1689BF0200803DF6 /* Citta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Citta.m; sourceTree = "<group>"; };
+		F6F756CD1689D72000803DF6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		F6F756D01689D73B00803DF6 /* LiveDeal.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LiveDeal.xcdatamodel; sourceTree = "<group>"; };
+		F6F756D81689DAAF00803DF6 /* EsercentiPreferitiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EsercentiPreferitiViewController.h; sourceTree = "<group>"; };
+		F6F756D91689DAAF00803DF6 /* EsercentiPreferitiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EsercentiPreferitiViewController.m; sourceTree = "<group>"; };
+		F6F756DB1689DEDB00803DF6 /* preferitiOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = preferitiOn.png; path = "../../../img liveDeal/preferitiOn.png"; sourceTree = "<group>"; };
+		F6F756DC1689DEDB00803DF6 /* preferitiOn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "preferitiOn@2x.png"; path = "../../../img liveDeal/preferitiOn@2x.png"; sourceTree = "<group>"; };
+		F6F756DD1689DEDB00803DF6 /* preferitiOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = preferitiOff.png; path = "../../../img liveDeal/preferitiOff.png"; sourceTree = "<group>"; };
+		F6F756DE1689DEDB00803DF6 /* preferitiOff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "preferitiOff@2x.png"; path = "../../../img liveDeal/preferitiOff@2x.png"; sourceTree = "<group>"; };
+		F6F756EF1689ED2C00803DF6 /* EsercenteST.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EsercenteST.h; sourceTree = "<group>"; };
+		F6F756F01689ED2C00803DF6 /* EsercenteST.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EsercenteST.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -561,6 +579,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6F756CE1689D72000803DF6 /* CoreData.framework in Frameworks */,
 				F60F00EE1675099500052CB9 /* MessageUI.framework in Frameworks */,
 				F60F00EC1675097300052CB9 /* QuartzCore.framework in Frameworks */,
 				F65946871664EC1100C5387E /* Twitter.framework in Frameworks */,
@@ -857,6 +876,7 @@
 		F6905DFB164FB52A00F9319B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F6F756CD1689D72000803DF6 /* CoreData.framework */,
 				F60F00ED1675099500052CB9 /* MessageUI.framework */,
 				F60F00EB1675097200052CB9 /* QuartzCore.framework */,
 				F6905E3B164FC6F300F9319B /* MBProgressHUD.h */,
@@ -910,6 +930,9 @@
 		F6905E34164FBB6500F9319B /* Object Model */ = {
 			isa = PBXGroup;
 			children = (
+				F6F756CF1689D73B00803DF6 /* LiveDeal.xcdatamodeld */,
+				F6F756CA1689BF0200803DF6 /* Citta.h */,
+				F6F756CB1689BF0200803DF6 /* Citta.m */,
 				F6DB16A9167E48B600F3CC07 /* external */,
 				F6DB16A1167DDB9600F3CC07 /* Utility.h */,
 				F6DB16A3167DDC0300F3CC07 /* Utility.m */,
@@ -918,6 +941,8 @@
 				F659467F1664C38F00C5387E /* CustomLabel.h */,
 				F65946801664C38F00C5387E /* CustomLabel.m */,
 				F6905EC516517C9E00F9319B /* OffertaAnnotation.h */,
+				F6F756EF1689ED2C00803DF6 /* EsercenteST.h */,
+				F6F756F01689ED2C00803DF6 /* EsercenteST.m */,
 				F6905EC616517C9E00F9319B /* OffertaAnnotation.m */,
 				F6F3929916551E8E0032180E /* EsercenteAnnotation.h */,
 				F6F3929A16551E8E0032180E /* EsercenteAnnotation.m */,
@@ -927,8 +952,6 @@
 				F6905E20164FB56300F9319B /* Categoria.m */,
 				F6905E31164FBB4200F9319B /* Esercente.h */,
 				F6905E32164FBB4200F9319B /* Esercente.m */,
-				F61ADE2E16528F1A009D4594 /* Citta.h */,
-				F61ADE2F16528F1A009D4594 /* Citta.m */,
 				F6F7569E1688836F00803DF6 /* EsercenteVetrinaAnnotation.h */,
 				F6F7569F1688836F00803DF6 /* EsercenteVetrinaAnnotation.m */,
 			);
@@ -973,6 +996,8 @@
 				F67FB984168084E3001F115B /* CouponsViewController.m */,
 				F6F7569A1688821F00803DF6 /* EsercenteVetrinaViewController.h */,
 				F6F7569B1688821F00803DF6 /* EsercenteVetrinaViewController.m */,
+				F6F756D81689DAAF00803DF6 /* EsercentiPreferitiViewController.h */,
+				F6F756D91689DAAF00803DF6 /* EsercentiPreferitiViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1000,6 +1025,10 @@
 		F6A11AB71657E75A00C1E0CE /* img */ = {
 			isa = PBXGroup;
 			children = (
+				F6F756DB1689DEDB00803DF6 /* preferitiOn.png */,
+				F6F756DC1689DEDB00803DF6 /* preferitiOn@2x.png */,
+				F6F756DD1689DEDB00803DF6 /* preferitiOff.png */,
+				F6F756DE1689DEDB00803DF6 /* preferitiOff@2x.png */,
 				F6431AC916820ABB00171063 /* disconnetti.png */,
 				F6431ACA16820ABB00171063 /* disconnetti@2x.png */,
 				F67FB98616808A9F001F115B /* 103.jpeg */,
@@ -1334,6 +1363,10 @@
 				F6431AEB168717AD00171063 /* ristoranti@2x.png in Resources */,
 				F6431AEC168717AD00171063 /* soggiorni.png in Resources */,
 				F6431AED168717AD00171063 /* soggiorni@2x.png in Resources */,
+				F6F756DF1689DEDB00803DF6 /* preferitiOn.png in Resources */,
+				F6F756E01689DEDB00803DF6 /* preferitiOn@2x.png in Resources */,
+				F6F756E11689DEDB00803DF6 /* preferitiOff.png in Resources */,
+				F6F756E21689DEDB00803DF6 /* preferitiOff@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1356,7 +1389,6 @@
 				F6905ECF16518F8800F9319B /* EsercenteViewController.m in Sources */,
 				F61ADE2116523FA2009D4594 /* Offerta.m in Sources */,
 				F61ADE25165255A1009D4594 /* CitiesViewController.m in Sources */,
-				F61ADE3016528F1A009D4594 /* Citta.m in Sources */,
 				F61ADE3B1652A01F009D4594 /* StartViewController.m in Sources */,
 				F6F3929B16551E8E0032180E /* EsercenteAnnotation.m in Sources */,
 				F6F3929F165525D60032180E /* OffertaViewController.m in Sources */,
@@ -1417,6 +1449,10 @@
 				F6431AD11684B4DE00171063 /* UIColor+UIColor_Expanded.m in Sources */,
 				F6F7569C1688821F00803DF6 /* EsercenteVetrinaViewController.m in Sources */,
 				F6F756A01688836F00803DF6 /* EsercenteVetrinaAnnotation.m in Sources */,
+				F6F756CC1689BF0200803DF6 /* Citta.m in Sources */,
+				F6F756D11689D73B00803DF6 /* LiveDeal.xcdatamodeld in Sources */,
+				F6F756DA1689DAAF00803DF6 /* EsercentiPreferitiViewController.m in Sources */,
+				F6F756F11689ED2C00803DF6 /* EsercenteST.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1574,6 +1610,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F6F756CF1689D73B00803DF6 /* LiveDeal.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F6F756D01689D73B00803DF6 /* LiveDeal.xcdatamodel */,
+			);
+			currentVersion = F6F756D01689D73B00803DF6 /* LiveDeal.xcdatamodel */;
+			path = LiveDeal.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F6905DEF164FB52A00F9319B /* Project object */;
 }
