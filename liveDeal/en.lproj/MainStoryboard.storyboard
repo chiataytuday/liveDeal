@@ -233,7 +233,7 @@ dentale, facciale, beauty</string>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="baseLoginFb.png" id="MlW-x4-BZw">
                                 <rect key="frame" x="20" y="294" width="280" height="64"/>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" id="kMK-yp-5wU">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="barbera.claudio@gmail.com" minimumFontSize="17" clearButtonMode="whileEditing" id="kMK-yp-5wU">
                                 <rect key="frame" x="132" y="78" width="144" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
@@ -241,7 +241,7 @@ dentale, facciale, beauty</string>
                                     <outlet property="delegate" destination="2LY-gU-UEY" id="unN-aj-5bg"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" id="10r-TD-KbJ">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="12345" minimumFontSize="17" clearButtonMode="whileEditing" id="10r-TD-KbJ">
                                 <rect key="frame" x="132" y="116" width="144" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>

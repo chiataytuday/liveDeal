@@ -223,6 +223,7 @@
 		F6A11ACD1659483D00C1E0CE /* backgroundTop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6A11ACC1659483D00C1E0CE /* backgroundTop@2x.png */; };
 		F6A11ACF1659596F00C1E0CE /* forgotPwd.png in Resources */ = {isa = PBXBuildFile; fileRef = F6A11ACE1659596F00C1E0CE /* forgotPwd.png */; };
 		F6A11AD11659693A00C1E0CE /* creaAccount.png in Resources */ = {isa = PBXBuildFile; fileRef = F6A11AD01659693A00C1E0CE /* creaAccount.png */; };
+		F6A18A4F168A2D7A008278A7 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A18A4E168A2D7A008278A7 /* User.m */; };
 		F6A9ACE4165CC56100529E78 /* RegistrazioneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A9ACE3165CC56100529E78 /* RegistrazioneViewController.m */; };
 		F6A9ACE7165D2E9200529E78 /* BebasNeue.otf in Resources */ = {isa = PBXBuildFile; fileRef = F6A9ACE6165D2E9200529E78 /* BebasNeue.otf */; };
 		F6A9ACEA165D312C00529E78 /* TitoloViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A9ACE9165D312C00529E78 /* TitoloViewController.m */; };
@@ -537,6 +538,8 @@
 		F6A11ACC1659483D00C1E0CE /* backgroundTop@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "backgroundTop@2x.png"; path = "../../../img liveDeal/backgroundTop@2x.png"; sourceTree = "<group>"; };
 		F6A11ACE1659596F00C1E0CE /* forgotPwd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = forgotPwd.png; path = "../../../img liveDeal/forgotPwd.png"; sourceTree = "<group>"; };
 		F6A11AD01659693A00C1E0CE /* creaAccount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = creaAccount.png; path = "../../../img liveDeal/creaAccount.png"; sourceTree = "<group>"; };
+		F6A18A4D168A2D7A008278A7 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		F6A18A4E168A2D7A008278A7 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		F6A9ACE2165CC56100529E78 /* RegistrazioneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistrazioneViewController.h; sourceTree = "<group>"; };
 		F6A9ACE3165CC56100529E78 /* RegistrazioneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistrazioneViewController.m; sourceTree = "<group>"; };
 		F6A9ACE6165D2E9200529E78 /* BebasNeue.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BebasNeue.otf; sourceTree = "<group>"; };
@@ -954,6 +957,8 @@
 				F6905E32164FBB4200F9319B /* Esercente.m */,
 				F6F7569E1688836F00803DF6 /* EsercenteVetrinaAnnotation.h */,
 				F6F7569F1688836F00803DF6 /* EsercenteVetrinaAnnotation.m */,
+				F6A18A4D168A2D7A008278A7 /* User.h */,
+				F6A18A4E168A2D7A008278A7 /* User.m */,
 			);
 			name = "Object Model";
 			path = ..;
@@ -1453,6 +1458,7 @@
 				F6F756D11689D73B00803DF6 /* LiveDeal.xcdatamodeld in Sources */,
 				F6F756DA1689DAAF00803DF6 /* EsercentiPreferitiViewController.m in Sources */,
 				F6F756F11689ED2C00803DF6 /* EsercenteST.m in Sources */,
+				F6A18A4F168A2D7A008278A7 /* User.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1537,7 +1543,7 @@
 		F6905E1D164FB52A00F9319B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: claudio barbera (C735Q5G4KF)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1557,7 +1563,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "CA7E1F47-B84F-4327-A24D-9597B7FBC19A";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};

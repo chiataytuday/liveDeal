@@ -14,7 +14,7 @@
 @end
 
 @implementation UserViewController
-@synthesize lbl;
+
 
 
 
@@ -31,14 +31,16 @@
     self.tableView.backgroundView = imgSfondo;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
+    UIStoryboard *storyboard = [UIApplication sharedApplication].delegate.window.rootViewController.storyboard;
+    
+    LoginViewController *loginController = [storyboard instantiateViewControllerWithIdentifier:@"loginScreen"];
+    loginController.delegate = self;
+
+    
     bool isLoggedIn = [defaults boolForKey:@"isLoggedIn"];
     
     if (!isLoggedIn){
-        UIStoryboard *storyboard = [UIApplication sharedApplication].delegate.window.rootViewController.storyboard;
-        
-        UIViewController *loginController = [storyboard instantiateViewControllerWithIdentifier:@"loginScreen"];
-        
-        [self.navigationController pushViewController:loginController animated:NO];//
+              [self.navigationController pushViewController:loginController animated:NO];//
     }
     
  //  presentModalViewController:loginController animated:NO];
@@ -68,7 +70,14 @@
     }*/
 }
 
-
+-(void)didSelect:(id)object andIdentifier:(NSString *)identifier
+{
+    if ([identifier isEqualToString:@"user"])
+    {
+        
+        [self.tableView reloadData];
+    }
+}
 -(IBAction)logout:(id)sender{
 
     /*
@@ -96,8 +105,8 @@
     
     UIStoryboard *storyboard = [UIApplication sharedApplication].delegate.window.rootViewController.storyboard;
     
-    UIViewController *loginController = [storyboard instantiateViewControllerWithIdentifier:@"loginScreen"];
-    
+    LoginViewController *loginController = [storyboard instantiateViewControllerWithIdentifier:@"loginScreen"];
+    loginController.delegate = self;
     [self.navigationController pushViewController:loginController animated:NO];//
 
     
@@ -179,14 +188,7 @@
 
 {    
     
-    NSArray* json = [NSJSONSerialization
-                     JSONObjectWithData:tempArray //1
-                     options:kNilOptions error:nil];
-    
-    
-    NSDictionary *user = [json valueForKeyPath:@"user"];
-    
-    [lbl setText:[user valueForKey:@"email"]];
+       
            
     
    // [mainView setHidden:NO];
@@ -212,8 +214,10 @@
 {
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(50, 50, 50, 50)];
     UILabel *lblInt = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 320, 25)];
-    [lblInt setText:@"Sei collegato come barbera.claudio@gmail.com"];
     [lblInt setFont:[UIFont systemFontOfSize:12]];
+    
+    
+    lblInt.text =  [NSString stringWithFormat:@"Benvenuto %@ %@",  [[NSUserDefaults standardUserDefaults] objectForKey:@"nomeUtenteLog"],   [[NSUserDefaults standardUserDefaults] objectForKey:@"cognomeUtenteLog"]];
     [lblInt setBackgroundColor:[UIColor clearColor]];
     [header addSubview:lblInt];
     return header;

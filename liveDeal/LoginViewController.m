@@ -30,8 +30,11 @@
 
 
 -(IBAction)logon:(id)sender{
-/*
-    NSString *url = [NSString stringWithFormat:@"http://www.psicologapalermo.com/login.txt?email=%@&pwd=%@", txtEmail.text, txtPwd.text];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+    NSString *url = [NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/login?username=%@&password=%@&tokenAPN=%@", txtEmail.text, txtPwd.text, [defaults objectForKey:@"tokenAPN"]];
+    
     NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:url]  cachePolicy:NSURLRequestUseProtocolCachePolicy
                                      timeoutInterval:60.0];
     
@@ -54,13 +57,10 @@
         
         [alert show];
     }
-*/
+
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    [defaults setBool:YES forKey:@"isLoggedIn"];
-    [defaults synchronize];
-    [self.navigationController popViewControllerAnimated:YES];
+   
+   
     
 }
 
@@ -91,31 +91,49 @@
     
         
     NSArray* json = [NSJSONSerialization
-                     JSONObjectWithData:tempArray //1
+                     JSONObjectWithData:tempArray
                      options:kNilOptions error:nil];
     
     
-    BOOL aut = [[json valueForKeyPath:@"authorized"] boolValue];
+    NSArray *result = [json valueForKeyPath:@"result"];
+    NSDictionary *member = [result valueForKeyPath:@"Member"];
     
-    if (aut)
+    if (member!=nil)
     {
+        User *u = [[User alloc] init];
+        [u setNome:[member objectForKey:@"firstname"]];
+        [u setCognome:[member objectForKey:@"lastname"]];
+        
+        
+        
+        [[NSUserDefaults standardUserDefaults] setObject:[member objectForKey:@"firstname"] forKey:@"nomeUtenteLog"];
+        [[NSUserDefaults standardUserDefaults] setObject:[member objectForKey:@"lastname"] forKey:@"cognomeUtenteLog"];
+        [[NSUserDefaults standardUserDefaults] setObject:[member objectForKey:@"id"] forKey:@"idUtenteLog"];
+
         [[NSUserDefaults standardUserDefaults] setObject:txtEmail.text forKey:@"emailLogged"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLoggedIn"];
+        
         [[NSUserDefaults standardUserDefaults] synchronize];
-        [self.delegate didAuthenticateWithFB:NO];
+    
+        if (self.delegate != nil)
+            [self.delegate didSelect:u  andIdentifier:@"user"];
        
-        if ([self respondsToSelector:@selector(dismissViewControllerAnimated:animated:completion:)]){
-            [self dismissViewControllerAnimated:YES completion:nil];
-        } else {
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }
+        
+        [self.navigationController popViewControllerAnimated:YES];
         
     }
     else
     {
-        NSLog(@"Non autorizzato");
+        [hud hide:YES];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Errore" message:@"email non trovata o password errata" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        
+        [alert show];
+
     }
     
 }
+
+
 
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
     
@@ -139,6 +157,7 @@
     switch (state) {
         case FBSessionStateOpen:
            
+               
             
            
             [defaults setBool:YES forKey:@"isLoggedIn"];

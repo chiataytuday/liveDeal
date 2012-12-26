@@ -9,14 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+#import "User.h"
 
-@interface UserViewController : UITableViewController <UITableViewDelegate>
+@interface UserViewController : UITableViewController <UITableViewDelegate, SelectDelegate>
 {
     MBProgressHUD *hud;
     NSMutableData *tempArray;
 }
 
-@property (nonatomic, retain) IBOutlet UILabel *lbl;
+@property (nonatomic, retain) IBOutlet UILabel *lblInt;
 
 
 
