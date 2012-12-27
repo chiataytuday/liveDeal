@@ -13,14 +13,17 @@
 @end
 
 @implementation CouponsViewController
-@synthesize Offerte;
+@synthesize coupons, sortedKey;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
-    [self.tableView setBackgroundColor:[UIColor clearColor]];
-    [self.tableView setOpaque:YES];
+
+    
+    NSString *url = [NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/get_coupons?token_access=%@&get_info_deal=true", [[NSUserDefaults standardUserDefaults] objectForKey:@"token_access"]];
+    
+    [self Ricerca:url];
 }
 
 
@@ -54,40 +57,120 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 3;
-}
+   return [sortedKey count];}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    NSArray *listData =[coupons objectForKey:
+                        [sortedKey objectAtIndex:section]];
+    
+    if ([listData count]==0)
+        return 1;
+    
+    return [listData count];
 }
 
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"couponCell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (!cell) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
+       
+    UITableViewCell *cell = nil;
  
+    NSArray *listData =[coupons objectForKey:
+                        [sortedKey objectAtIndex:[indexPath section]]];
+ 
+    
+    if ([listData count]==0){
+    
+        static NSString *CellIdentifier = @"nessunCouponCell";
+        
+        
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (!cell) {
+            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+
+        UILabel *lblTitolo = (UILabel *)[cell viewWithTag:1];
+        
+        [self.sortedKey objectAtIndex:indexPath.section];
+        
+        [lblTitolo setText:[NSString stringWithFormat:@"Non sono presenti coupons %@", [[self.sortedKey objectAtIndex:indexPath.section] lowercaseString]]];
+        
+        
+    }
+    else
+    {
+        static NSString *CellIdentifier = @"couponCell";
+
+        
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (!cell) {
+            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        
+        Offerta *offerta = [listData objectAtIndex:indexPath.row];
+        
+        //label titolo
+        CustomLabel *lblTitolo = (CustomLabel *)[cell viewWithTag:1];
+        [lblTitolo setText:offerta.Titolo];
+        [lblTitolo setLineHeight:10];
+        [lblTitolo setVerticalAlignment:MSLabelVerticalAlignmentTop];
+        
+        // [cellTitolo setFont:[UIFont fontWithName:@"Bebas Neue" size:18]];
+        [lblTitolo setTextColor:[UIColor colorWithRed:43.0f / 255
+                                                green:45.0f / 255
+                                                 blue:48.0f / 255 alpha:1.0f]];
+        
+     
+         
+        UIImageView *cellImage = (UIImageView *)[cell viewWithTag:3];
+        UIImageView *cellBorder = (UIImageView *)[cell viewWithTag:6];
+        
+        [cellImage.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+        [cellImage.layer setBorderWidth: 3.0];
+        
+        [cellImage.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+        [cellImage.layer setBorderWidth: 3.0];
+        [cellBorder.layer setBorderColor:[offerta.Categoria.ColoreCornice CGColor]];
+        [cellBorder.layer setBorderWidth: 1.0];
+        
+        
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+        
+        dispatch_async(queue, ^{
+            
+            NSString *url = [NSString stringWithFormat:@"http://www.specialdeal.it/crop/80x80/%i", offerta.Id];
+            NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:url]];
+            
+            UIImage *img = [UIImage imageWithData:data];
+            
+            
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                offerta.Immagine = img;
+                cellImage.image = img;
+                [cellImage setNeedsLayout];
+            });
+        });
+        
+
+    }
+    
+    //aspetto della cella
+    UIImageView *av = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 78)];
+    av.backgroundColor = [UIColor clearColor];
+    av.opaque = NO;
+    av.image = [UIImage imageNamed:@"baseCell.png"];
+    cell.backgroundView = av;
+
     UIView *cellBackView = [[UIView alloc] initWithFrame:CGRectZero];
-    cellBackView.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed:@"sfondoCellAltriEsercenti.png"]];
+    cellBackView.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed:@"sfondoCellOfferta.png"]];
     cell.backgroundView = cellBackView;
 
-    UIImageView *cellImage = (UIImageView *)[cell viewWithTag:3];
-    UIImageView *cellBorder = (UIImageView *)[cell viewWithTag:6];
-    
-    [cellImage.layer setBorderColor:[[UIColor whiteColor] CGColor]];
-    [cellImage.layer setBorderWidth: 2.0];
-    
-    [cellBorder.layer setBorderColor:[[UIColor colorWithRed:245.0f / 255 green:101.0f / 255 blue:34.0f / 255 alpha:1] CGColor]];
-    [cellBorder.layer setBorderWidth: 1.0];
 
-    
+
     return cell;
 }
 
@@ -103,10 +186,15 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSArray *listData =[coupons objectForKey:
+                        [sortedKey objectAtIndex:indexPath.section]];
+    
+    if ([listData count]==0)
+        return 44;
+
     
     return 80;
 }
-
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 19)];
@@ -114,12 +202,9 @@
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.bounds.size.width - 10, 10)];
     
-    if (section==0)
-        label.text = @"Utilizzati";
-    else if (section ==1)
-        label.text = @"Validi";
-    else
-        label.text = @"Scaduti";
+   
+    label.text = [self.sortedKey objectAtIndex:section];
+   
     
       label.textColor = [UIColor whiteColor];
     [label setFont:[UIFont fontWithName:@"Helvetica Neue" size:12]];
@@ -146,8 +231,6 @@
 
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    Offerte = [[NSMutableArray alloc] init];
-    
     NSArray* json = [NSJSONSerialization
                      JSONObjectWithData:tempArray
                      options:kNilOptions error:nil];
@@ -156,50 +239,50 @@
     NSArray *result = [json valueForKeyPath:@"result"];
     NSArray *items = [result valueForKeyPath:@"items"];
     
+    NSMutableArray *tempUtilizzati = [[NSMutableArray alloc]init];
+    NSMutableArray *tempValidi = [[NSMutableArray alloc]init];
+    NSMutableArray *tempScaduti = [[NSMutableArray alloc]init];
     
     for (NSDictionary *off in items)
     {
+        NSDictionary *deal = [off objectForKey:@"Deal"];
+        NSArray *du = [off objectForKey:@"DealUserCoupon"];
+        Offerta *o = [[Offerta alloc] init];
+        [o setTitolo:[deal objectForKey:@"name"]];
+        [o setId:[[deal objectForKey:@"id"] intValue]];
+        AppDelegate *app =  (AppDelegate *)[[UIApplication sharedApplication]delegate];
         
-        NSDictionary *esercente = [off valueForKey:@"company"];
-        NSDictionary *prices = [off valueForKey:@"prices"];
-        NSDictionary *discounts = [off valueForKey:@"discounts"];
-        NSDictionary *category = [off valueForKey:@"category"];        
+        Categoria *c = [app getCategoriaById:[[deal objectForKey:@"deal_category_id"] intValue]];
+        [o setCategoria: c];
+        NSDictionary *a = [du objectAtIndex:0];
         
-        double lat = [[esercente valueForKey:@"latitude"] doubleValue];
-        double lng = [[esercente valueForKey: @"longitude"] doubleValue];
-        
-        Esercente *es = [[Esercente alloc] initWithRagioneSociale:[esercente valueForKey:@"name"]
-                                                           Codice:[esercente valueForKey:@"id"]
-                                                        Indirizzo:[esercente valueForKey:@"address"]
-                                                       Coordinate:CLLocationCoordinate2DMake(lat, lng)];
-        
-        
-        Offerta *offerta = [[Offerta alloc] initWithTitolo:[off valueForKey:@"title"]
-                                               Descrizione:[off valueForKey:@"description"]
-                                                Condizioni:[off valueForKey:@"conditions"]];
-        
-        [offerta setIsLive:[[off valueForKey:@"is_live"] boolValue]];
-        
-        NSArray *images = [off valueForKey:@"images"];
-        for (NSDictionary *img in images)
+        if ([[a objectForKey:@"is_used"] boolValue])
         {
-            [offerta.immagini addObject:[[img valueForKey:@"id"] stringValue]];
-            
+            [tempUtilizzati addObject:o];
+        }
+        else if  ([[a objectForKey:@"is_expired"] boolValue])
+        {
+            [tempScaduti addObject:o];
+        }
+        else
+        {
+            [tempValidi addObject:o];
         }
         
-        [offerta setCategoria:[category valueForKey:@"slug"]];
-        [offerta setValidita:[off valueForKey:@"validita"]];
-        [offerta setUrl:[off valueForKey:@"url"]];
-        [offerta setPrezzoFinale:[[prices valueForKey:@"discounted"] doubleValue]];
-        [offerta setEsercente:es];
-        [offerta setPrezzoPartenza:[[prices valueForKey:@"original"] doubleValue]];
-        [offerta setSconto:[[discounts valueForKey:@"percentage"] doubleValue]];
-        [offerta setDataInizio:[off valueForKey:@"start_date"]];
-        [offerta setDataScadenza:[off valueForKey:@"end_date"]];
-        [offerta setCouponAcquistati:[[off valueForKey:@"purchased"] integerValue]];
-        
-        [Offerte addObject:offerta];
     }
+    
+   coupons =[[NSDictionary alloc]
+                         initWithObjectsAndKeys:tempUtilizzati,@"Utilizzati",tempValidi,@"Validi", tempScaduti, @"Scaduti", nil];
+    
+    NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:nil ascending:NO selector:@selector(localizedCompare:)];
+
+    sortedKey =[[self.coupons allKeys]
+                     sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    
+    [hud hide:YES];
+    [self.tableView reloadData];
+
+    
 }
 
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{

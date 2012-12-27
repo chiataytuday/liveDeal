@@ -14,9 +14,7 @@
 @end
 
 @implementation UserViewController
-
-
-
+@synthesize loginController, user;
 
 - (void)viewDidLoad
 {
@@ -33,83 +31,51 @@
     
     UIStoryboard *storyboard = [UIApplication sharedApplication].delegate.window.rootViewController.storyboard;
     
-    LoginViewController *loginController = [storyboard instantiateViewControllerWithIdentifier:@"loginScreen"];
+    loginController = [storyboard instantiateViewControllerWithIdentifier:@"loginScreen"];
     loginController.delegate = self;
 
     
-    bool isLoggedIn = [defaults boolForKey:@"isLoggedIn"];
+    NSString *tokenAccess = [defaults objectForKey:@"token_access"];
     
-    if (!isLoggedIn){
+    if (tokenAccess==nil)
               [self.navigationController pushViewController:loginController animated:NO];//
-    }
-    
- //  presentModalViewController:loginController animated:NO];
-
-    
-    /*[mainView setHidden:YES];
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    NSString *emailLogged = [defaults objectForKey:@"emailLogged"];
-    
-    if (emailLogged!=NULL)
-    {
-        //login effettuato con user e pwd
-        [self didAuthenticateWithFB:NO];
-    }
-    else if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
-       
-        [self didAuthenticateWithFB:YES];
+    else{
+        NSString *url=@"";
         
-    } else {
-        // No, display the login page.
-        [btnLogout setHidden:YES];
-        [btnLogin setHidden:NO];
-        [btnRegistrati setHidden:NO];
+        if ([defaults objectForKey:@"tokenAPN"]!= nil)
+            url =[NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/login?token_access=%@&tokenAPN=%@",
+                        tokenAccess, [defaults objectForKey:@"tokenAPN"]];
+        else
+            url= [NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/login?token_access=%@",
+                  tokenAccess];
 
-    }*/
+        [self Ricerca:url];
+    }
+      
+
 }
 
 -(void)didSelect:(id)object andIdentifier:(NSString *)identifier
 {
     if ([identifier isEqualToString:@"user"])
     {
-        
+        user = (User *)object;
         [self.tableView reloadData];
     }
 }
 -(IBAction)logout:(id)sender{
 
-    /*
+    
     if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded)
      [FBSession.activeSession closeAndClearTokenInformation];
     
-    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"emailLogged"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-
-    
-    //nascondo il pulsante di logout
-    [btnLogout setHidden:YES];
-    
-    //mostro il pulsante di login
-    [btnLogin setHidden:NO];
-    
-    [mainView setHidden:YES];
-    [btnRegistrati setHidden:NO];*/
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    [defaults setBool:NO forKey:@"isLoggedIn"];
+    [defaults setObject:NULL forKey:@"token_access"];
     [defaults synchronize];
-    [self.navigationController popViewControllerAnimated:YES];
     
-    UIStoryboard *storyboard = [UIApplication sharedApplication].delegate.window.rootViewController.storyboard;
-    
-    LoginViewController *loginController = [storyboard instantiateViewControllerWithIdentifier:@"loginScreen"];
-    loginController.delegate = self;
     [self.navigationController pushViewController:loginController animated:NO];//
-
-    
 
 }
 
@@ -121,11 +87,11 @@
     if (isFb){
     [[[FBRequest alloc] initWithSession:FBSession.activeSession graphPath:@"me"]  startWithCompletionHandler:
      ^(FBRequestConnection *connection,
-       NSDictionary<FBGraphUser> *user,
+       NSDictionary<FBGraphUser> *userFB,
        NSError *error) {
          if (!error) {
              //ho ottenuto l'id FB. faccio una richiesta per ottenere i dati attraverso l'id FB
-             NSString *url = [NSString stringWithFormat:@"http://www.psicologapalermo.com/userInfo.txt?FacebookUserID=%@", user.id];
+             NSString *url = [NSString stringWithFormat:@"http://www.psicologapalermo.com/userInfo.txt?FacebookUserID=%@", userFB.id];
              [self Ricerca:url];
          }
      }];
@@ -168,9 +134,17 @@
     }
 }
 
-
-
-
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+    // Make sure we're referring to the correct segue
+    if ([[segue identifier] isEqualToString:@"datiUtente"]) {
+    
+        UserDetailViewController *vc = [segue destinationViewController];
+        
+        vc.user = user;
+    }
+}
 
 #pragma mark - dati relativi alla connessione
 
@@ -185,13 +159,37 @@
 }
 
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    NSArray* json = [NSJSONSerialization
+                     JSONObjectWithData:tempArray
+                     options:kNilOptions error:nil];
+    
+    
+    NSArray *result = [json valueForKeyPath:@"result"];
+    NSDictionary *member = [result valueForKeyPath:@"Member"];
+    
+    if (member!=nil)
+    {
+        user = [[User alloc] init];
+        [user setNome:[member objectForKey:@"firstname"]];
+        [user setCognome:[member objectForKey:@"lastname"]];
+        [user setEmail:[member objectForKey:@"email"]];
+        if ([[member objectForKey:@"gender"] isEqualToString:@"M"])
+            [user setSesso:@"Maschio"];
+        else if ([[member objectForKey:@"gender"] isEqualToString:@"F"])
+            [user setSesso:@"Femmina"];
 
-{    
-    
-       
+        
+        [self.tableView reloadData];
            
+    }
+    else
+    {
+        [hud hide:YES];
+        [self.navigationController pushViewController:loginController animated:NO];
+        
+    }
     
-   // [mainView setHidden:NO];
     [hud hide:YES];
     
 }
@@ -199,9 +197,10 @@
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
     
     [hud hide:YES];
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Errore" message:@"Impossibile connettersi" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+   
+    [self.navigationController pushViewController:loginController animated:NO];//
     
-    [alert show];}
+}
 
 #pragma mark - Table View Delegate
 
@@ -216,8 +215,9 @@
     UILabel *lblInt = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 320, 25)];
     [lblInt setFont:[UIFont systemFontOfSize:12]];
     
+    if (user!=nil)
+        lblInt.text =  [NSString stringWithFormat:@"Benvenuto %@ %@", user.nome, user.cognome];
     
-    lblInt.text =  [NSString stringWithFormat:@"Benvenuto %@ %@",  [[NSUserDefaults standardUserDefaults] objectForKey:@"nomeUtenteLog"],   [[NSUserDefaults standardUserDefaults] objectForKey:@"cognomeUtenteLog"]];
     [lblInt setBackgroundColor:[UIColor clearColor]];
     [header addSubview:lblInt];
     return header;

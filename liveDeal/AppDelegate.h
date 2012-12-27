@@ -43,5 +43,5 @@
 
 
 -(Categoria *)getCategoriaFood;
-
+-(Categoria *)getCategoriaById:(int)Id;
 @end

@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "User.h"
+#import "UserDetailViewController.h"
 
 @interface UserViewController : UITableViewController <UITableViewDelegate, SelectDelegate>
 {
@@ -18,7 +19,8 @@
 }
 
 @property (nonatomic, retain) IBOutlet UILabel *lblInt;
-
+@property (nonatomic, retain) LoginViewController *loginController;
+@property (nonatomic, retain) User *user;
 
 
 

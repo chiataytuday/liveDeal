@@ -232,6 +232,17 @@
     return nil;
 }
 
+-(Categoria *)getCategoriaById:(int)Id
+{
+    for (Categoria *c in categorie) {
+        if (c.Codice == Id)
+            return  c;
+    }
+    
+    
+    return nil;
+}
+
 #pragma mark - dati relativi alla connessione
 
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{

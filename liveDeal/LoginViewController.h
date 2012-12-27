@@ -24,15 +24,12 @@
 }
 
 
-@property (nonatomic, retain) IBOutlet UINavigationBar *navBar;
 @property (nonatomic, retain) IBOutlet UITextField *txtEmail;
 @property (nonatomic, retain) IBOutlet UITextField *txtPwd;
-@property (nonatomic, retain) IBOutlet UIImageView *imgViewLogFB;
 @property (strong, nonatomic) id<FBGraphUser> loggedInUser;
-//@property (nonatomic,retain) id<LoginDelegate> delegate;
 @property (nonatomic, retain) id<SelectDelegate> delegate;
 -(IBAction)logon:(id)sender;
-- (IBAction)goBack:(id)sender;
+
 - (IBAction)performLogin:(id)sender;
 
 @end

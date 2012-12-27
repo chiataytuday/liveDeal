@@ -9,5 +9,5 @@
 #import "User.h"
 
 @implementation User
-@synthesize nome, cognome;
+@synthesize nome, cognome, sesso, email;
 @end

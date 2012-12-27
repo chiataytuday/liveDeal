@@ -11,6 +11,9 @@
 #import "Offerta.h"
 #import "Esercente.h"
 #import "QuartzCore/QuartzCore.h"
+#import "CustomLabel.h"
+#import "AppDelegate.h"
+
 @interface CouponsViewController : UITableViewController
 {
     NSMutableData *tempArray;
@@ -18,5 +21,6 @@
 
 }
 
-@property (nonatomic, retain) NSMutableArray *Offerte;
+@property (nonatomic, retain) NSDictionary *coupons;
+@property (nonatomic, retain) NSArray *sortedKey;
 @end

@@ -13,28 +13,40 @@
 @end
 
 @implementation LoginViewController
-@synthesize navBar, txtEmail, txtPwd, imgViewLogFB, loggedInUser, delegate;
+@synthesize txtEmail, txtPwd, loggedInUser, delegate;
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    txtPwd.text=@"";
+    txtEmail.text=@"";
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.navigationItem.hidesBackButton = YES;
-    
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
-    
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"sfondoRegistrati.png"]]];
-    
-  
 }
 
+- (IBAction)performLogin:(id)sender
+{
+    [self openSession];
+}
 
 -(IBAction)logon:(id)sender{
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
-    NSString *url = [NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/login?username=%@&password=%@&tokenAPN=%@", txtEmail.text, txtPwd.text, [defaults objectForKey:@"tokenAPN"]];
+      [txtPwd resignFirstResponder];
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *url = @"";
+    
+    if ([defaults objectForKey:@"tokenAPN"]!=nil)
+        url = [NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/login?username=%@&password=%@&tokenAPN=%@", txtEmail.text, txtPwd.text, [defaults objectForKey:@"tokenAPN"]];
+    else
+        url = [NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/login?username=%@&password=%@", txtEmail.text, txtPwd.text];
+
     NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:url]  cachePolicy:NSURLRequestUseProtocolCachePolicy
                                      timeoutInterval:60.0];
     
@@ -44,7 +56,6 @@
     if (myConn)
     {
         tempArray = [[NSMutableData alloc] init];
-        
         
         hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeIndeterminate;
@@ -56,19 +67,13 @@
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Errore" message:@"Impossibile connettersi" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
         
         [alert show];
-    }
-
-    
-   
-   
-    
+    }    
 }
 
 #pragma mark - uitextfielddelegate
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-
     [textField resignFirstResponder];
     return YES;
 }
@@ -86,9 +91,7 @@
 }
 
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    
-    
+{    
         
     NSArray* json = [NSJSONSerialization
                      JSONObjectWithData:tempArray
@@ -103,29 +106,34 @@
         User *u = [[User alloc] init];
         [u setNome:[member objectForKey:@"firstname"]];
         [u setCognome:[member objectForKey:@"lastname"]];
-        
-        
-        
-        [[NSUserDefaults standardUserDefaults] setObject:[member objectForKey:@"firstname"] forKey:@"nomeUtenteLog"];
-        [[NSUserDefaults standardUserDefaults] setObject:[member objectForKey:@"lastname"] forKey:@"cognomeUtenteLog"];
-        [[NSUserDefaults standardUserDefaults] setObject:[member objectForKey:@"id"] forKey:@"idUtenteLog"];
+        [u setEmail:[member objectForKey:@"email"]];
 
-        [[NSUserDefaults standardUserDefaults] setObject:txtEmail.text forKey:@"emailLogged"];
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLoggedIn"];
         
+        if ([[member objectForKey:@"gender"] isEqualToString:@"M"])
+            [u setSesso:@"Maschio"];
+        else if ([[member objectForKey:@"gender"] isEqualToString:@"F"])
+            [u setSesso:@"Femmina"];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:[member objectForKey:@"token_access"] forKey:@"token_access"];
+
         [[NSUserDefaults standardUserDefaults] synchronize];
     
         if (self.delegate != nil)
             [self.delegate didSelect:u  andIdentifier:@"user"];
        
+        [hud hide:YES];
         
         [self.navigationController popViewControllerAnimated:YES];
         
     }
     else
     {
+        
         [hud hide:YES];
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Errore" message:@"email non trovata o password errata" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        
+         NSDictionary *error = [json valueForKeyPath:@"error"];
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:[NSString stringWithFormat: @"Errore %@", [error objectForKey:@"code"]] message:[error objectForKey:@"message"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         
         [alert show];
 
@@ -145,24 +153,18 @@
     
 }
 
+#pragma mark - Facebook delegate
 - (void)sessionStateChanged:(FBSession *)session
                       state:(FBSessionState) state
                       error:(NSError *)error
 {
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-   
-    
     switch (state) {
         case FBSessionStateOpen:
            
-               
-            
-           
-            [defaults setBool:YES forKey:@"isLoggedIn"];
-            [defaults synchronize];
             [self.navigationController popViewControllerAnimated:YES];
+            
+            NSLog(@"%@",[session accessToken]);
             
             /*if ([self respondsToSelector:@selector(dismissViewControllerAnimated:animated:completion:)]){
                 [self dismissViewControllerAnimated:YES completion:nil];
@@ -212,13 +214,7 @@
 }
 
 
-- (IBAction)performLogin:(id)sender
-{
-       [self openSession];
-}
 
-- (IBAction)goBack:(id)sender
-{
-     [self dismissViewControllerAnimated:YES completion:nil];
-}
+
+
 @end

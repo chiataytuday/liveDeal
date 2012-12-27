@@ -11,4 +11,6 @@
 @interface User : NSObject
 @property (nonatomic, retain) NSString *nome;
 @property (nonatomic, retain) NSString *cognome;
+@property (nonatomic, retain) NSString *sesso;
+@property (nonatomic, retain) NSString *email;
 @end

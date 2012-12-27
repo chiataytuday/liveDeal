@@ -10,7 +10,7 @@
 
 @implementation Offerta
 
-@synthesize Titolo, Descrizione, Condizioni, Validita, Sconto, PrezzoPartenza, Esercente, CouponAcquistati ,immagini, DataScadenza, Url, Immagine, Categoria, distanza, isLive, DataInizio;
+@synthesize Titolo, Descrizione, Condizioni, Validita, Sconto, PrezzoPartenza, Esercente, CouponAcquistati ,immagini, DataScadenza, Url, Immagine, Categoria, distanza, isLive, DataInizio, Id;
 
 -(id)initWithTitolo:(NSString *)titolo Descrizione:(NSString *)descrizione Condizioni:(NSString *)condizioni{
     
