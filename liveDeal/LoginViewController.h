@@ -10,6 +10,7 @@
 #import "MBProgressHUD.h"
 #import "AppDelegate.h"
 #import "User.h"
+
 @protocol LoginDelegate <NSObject>
 
 -(void)didAuthenticateWithFB:(BOOL)isFb;
@@ -28,6 +29,8 @@
 @property (nonatomic, retain) IBOutlet UITextField *txtPwd;
 @property (strong, nonatomic) id<FBGraphUser> loggedInUser;
 @property (nonatomic, retain) id<SelectDelegate> delegate;
+
+
 -(IBAction)logon:(id)sender;
 
 - (IBAction)performLogin:(id)sender;

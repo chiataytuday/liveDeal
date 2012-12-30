@@ -11,11 +11,13 @@
 #import "LoginViewController.h"
 #import "User.h"
 #import "UserDetailViewController.h"
+#import "DealsAcquistatiViewController.h"
 
-@interface UserViewController : UITableViewController <UITableViewDelegate, SelectDelegate>
+@interface UserViewController : UITableViewController <UITableViewDelegate, SelectDelegate, LoginDelegate>
 {
     MBProgressHUD *hud;
     NSMutableData *tempArray;
+
 }
 
 @property (nonatomic, retain) IBOutlet UILabel *lblInt;

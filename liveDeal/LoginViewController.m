@@ -149,8 +149,6 @@
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Errore" message:@"Impossibile connettersi" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
     
     [alert show];
-    
-    
 }
 
 #pragma mark - Facebook delegate
@@ -163,8 +161,6 @@
         case FBSessionStateOpen:
            
             [self.navigationController popViewControllerAnimated:YES];
-            
-            NSLog(@"%@",[session accessToken]);
             
             /*if ([self respondsToSelector:@selector(dismissViewControllerAnimated:animated:completion:)]){
                 [self dismissViewControllerAnimated:YES completion:nil];
@@ -212,9 +208,5 @@
          [self sessionStateChanged:session state:state error:error];
      }];
 }
-
-
-
-
 
 @end

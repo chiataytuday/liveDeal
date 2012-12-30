@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F601FF15168CB8E5003630E2 /* Coupon.m in Sources */ = {isa = PBXBuildFile; fileRef = F601FF14168CB8E5003630E2 /* Coupon.m */; };
+		F601FF19168DA475003630E2 /* CouponsAcquistatiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F601FF18168DA475003630E2 /* CouponsAcquistatiViewController.m */; };
 		F60F00A81675087A00052CB9 /* EGOCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F60F00A21675087900052CB9 /* EGOCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F60F00A91675087A00052CB9 /* EGOImageLoadConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = F60F00A51675087900052CB9 /* EGOImageLoadConnection.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F60F00AA1675087A00052CB9 /* EGOImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F60F00A71675087900052CB9 /* EGOImageLoader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -203,7 +205,7 @@
 		F67FB97E1680778D001F115B /* accessoIstantaneo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F67FB97C1680778D001F115B /* accessoIstantaneo@2x.png */; };
 		F67FB98116808033001F115B /* loginFB.png in Resources */ = {isa = PBXBuildFile; fileRef = F67FB97F16808032001F115B /* loginFB.png */; };
 		F67FB98216808033001F115B /* loginFB@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F67FB98016808032001F115B /* loginFB@2x.png */; };
-		F67FB985168084E3001F115B /* CouponsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F67FB984168084E3001F115B /* CouponsViewController.m */; };
+		F67FB985168084E3001F115B /* DealsAcquistatiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F67FB984168084E3001F115B /* DealsAcquistatiViewController.m */; };
 		F67FB98716808AA0001F115B /* 103.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F67FB98616808A9F001F115B /* 103.jpeg */; };
 		F6905DFD164FB52A00F9319B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6905DFC164FB52A00F9319B /* UIKit.framework */; };
 		F6905DFF164FB52A00F9319B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6905DFE164FB52A00F9319B /* Foundation.framework */; };
@@ -258,6 +260,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F601FF13168CB8E5003630E2 /* Coupon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coupon.h; sourceTree = "<group>"; };
+		F601FF14168CB8E5003630E2 /* Coupon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coupon.m; sourceTree = "<group>"; };
+		F601FF17168DA475003630E2 /* CouponsAcquistatiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponsAcquistatiViewController.h; sourceTree = "<group>"; };
+		F601FF18168DA475003630E2 /* CouponsAcquistatiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponsAcquistatiViewController.m; sourceTree = "<group>"; };
 		F60F00A11675087900052CB9 /* EGOCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOCache.h; sourceTree = "<group>"; };
 		F60F00A21675087900052CB9 /* EGOCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOCache.m; sourceTree = "<group>"; };
 		F60F00A41675087900052CB9 /* EGOImageLoadConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOImageLoadConnection.h; sourceTree = "<group>"; };
@@ -515,8 +521,8 @@
 		F67FB97C1680778D001F115B /* accessoIstantaneo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "accessoIstantaneo@2x.png"; path = "../../../img liveDeal/accessoIstantaneo@2x.png"; sourceTree = "<group>"; };
 		F67FB97F16808032001F115B /* loginFB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = loginFB.png; path = "../../../img liveDeal/loginFB.png"; sourceTree = "<group>"; };
 		F67FB98016808032001F115B /* loginFB@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "loginFB@2x.png"; path = "../../../img liveDeal/loginFB@2x.png"; sourceTree = "<group>"; };
-		F67FB983168084E3001F115B /* CouponsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponsViewController.h; sourceTree = "<group>"; };
-		F67FB984168084E3001F115B /* CouponsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponsViewController.m; sourceTree = "<group>"; };
+		F67FB983168084E3001F115B /* DealsAcquistatiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealsAcquistatiViewController.h; sourceTree = "<group>"; };
+		F67FB984168084E3001F115B /* DealsAcquistatiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealsAcquistatiViewController.m; sourceTree = "<group>"; };
 		F67FB98616808A9F001F115B /* 103.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 103.jpeg; sourceTree = "<group>"; };
 		F6905DF8164FB52A00F9319B /* liveDeal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = liveDeal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6905DFC164FB52A00F9319B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -978,6 +984,8 @@
 				F6F7569F1688836F00803DF6 /* EsercenteVetrinaAnnotation.m */,
 				F6A18A4D168A2D7A008278A7 /* User.h */,
 				F6A18A4E168A2D7A008278A7 /* User.m */,
+				F601FF13168CB8E5003630E2 /* Coupon.h */,
+				F601FF14168CB8E5003630E2 /* Coupon.m */,
 			);
 			name = "Object Model";
 			path = ..;
@@ -1016,14 +1024,16 @@
 				F619D96214B05BC0003EB79F /* UserViewController.m */,
 				F65D8D361668E4AA00D775F3 /* ScegliPagamentoViewController.h */,
 				F65D8D371668E4AB00D775F3 /* ScegliPagamentoViewController.m */,
-				F67FB983168084E3001F115B /* CouponsViewController.h */,
-				F67FB984168084E3001F115B /* CouponsViewController.m */,
+				F67FB983168084E3001F115B /* DealsAcquistatiViewController.h */,
+				F67FB984168084E3001F115B /* DealsAcquistatiViewController.m */,
 				F6F7569A1688821F00803DF6 /* EsercenteVetrinaViewController.h */,
 				F6F7569B1688821F00803DF6 /* EsercenteVetrinaViewController.m */,
 				F6F756D81689DAAF00803DF6 /* EsercentiPreferitiViewController.h */,
 				F6F756D91689DAAF00803DF6 /* EsercentiPreferitiViewController.m */,
 				F641131F168C507B00265403 /* UserDetailViewController.h */,
 				F6411320168C507B00265403 /* UserDetailViewController.m */,
+				F601FF17168DA475003630E2 /* CouponsAcquistatiViewController.h */,
+				F601FF18168DA475003630E2 /* CouponsAcquistatiViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1487,7 +1497,7 @@
 				F60F00EA1675091900052CB9 /* EGOPhotoScrollView.m in Sources */,
 				F6DB16A4167DDC0300F3CC07 /* Utility.m in Sources */,
 				F6DB16A8167E457500F3CC07 /* ODRefreshControl.m in Sources */,
-				F67FB985168084E3001F115B /* CouponsViewController.m in Sources */,
+				F67FB985168084E3001F115B /* DealsAcquistatiViewController.m in Sources */,
 				F6431AD11684B4DE00171063 /* UIColor+UIColor_Expanded.m in Sources */,
 				F6F7569C1688821F00803DF6 /* EsercenteVetrinaViewController.m in Sources */,
 				F6F756A01688836F00803DF6 /* EsercenteVetrinaAnnotation.m in Sources */,
@@ -1497,6 +1507,8 @@
 				F6F756F11689ED2C00803DF6 /* EsercenteST.m in Sources */,
 				F6A18A4F168A2D7A008278A7 /* User.m in Sources */,
 				F6411321168C507B00265403 /* UserDetailViewController.m in Sources */,
+				F601FF15168CB8E5003630E2 /* Coupon.m in Sources */,
+				F601FF19168DA475003630E2 /* CouponsAcquistatiViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

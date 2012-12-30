@@ -144,6 +144,18 @@
         
         vc.user = user;
     }
+    else if ([[segue identifier] isEqualToString:@"dealsAcquistati"])
+    {
+        DealsAcquistatiViewController *dealsAcqVC = [segue destinationViewController];
+        dealsAcqVC.logDelegate = self;
+    }
+}
+
+-(void)didDisconnectForInvalidToken
+{
+   // [self logout:nil];
+  //  [dealsAcqVC dismissViewControllerAnimated:YES completion:NULL];
+
 }
 
 #pragma mark - dati relativi alla connessione
