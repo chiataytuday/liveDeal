@@ -10,6 +10,10 @@
 #import "MBProgressHUD.h"
 #import "AppDelegate.h"
 #import "User.h"
+#import "NSString+UrlEncode.h"
+
+#define LOGIN 0
+#define FORGOT_PASSWORD 1
 
 @protocol LoginDelegate <NSObject>
 
@@ -17,11 +21,11 @@
 
 @end
 
-@interface LoginViewController : UIViewController <UITextFieldDelegate, FBLoginViewDelegate>
+@interface LoginViewController : UIViewController <UITextFieldDelegate, FBLoginViewDelegate, UIAlertViewDelegate>
 {
     NSMutableData *tempArray;
     MBProgressHUD *hud;
-    
+    int tipoRichiesta;
 }
 
 
@@ -34,5 +38,5 @@
 -(IBAction)logon:(id)sender;
 
 - (IBAction)performLogin:(id)sender;
-
+-(IBAction)richiediPassword:(id)sender;
 @end

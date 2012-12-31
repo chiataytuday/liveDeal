@@ -71,67 +71,10 @@
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
 {
-	NSLog(@"Failed to get token, error: %@", error);
+	//NSLog(@"Failed to get token, error: %@", error);
 }
 
 
-/*
--(void)caricaCategorie{
-
-    categorie = [[NSMutableArray alloc] init];
-    
-    
-    Categoria *cat = [[Categoria alloc] initWithDescrizione:@"Tutte le offerte"
-                                                     codice:@"all"
-                                                   immagine:@"all.png"
-                                            andArrayOfTypes: @"lodging%7Chair_care%7Cbeauty_salon"];
-    
-    [categorie addObject:cat];
-    
-    
-    
-    cat = [[Categoria alloc] initWithDescrizione:@"Soggiorni"
-                                          codice:@"lodging"
-                                        immagine:@"cuore.png"
-                                 andArrayOfTypes: @"lodging"];
-    cat.TipiLiveDeal = @"soggiorni";
-    [cat setColoreCornice:[UIColor colorWithRed:145.0f / 255 green:181.0f / 255 blue:34.0f / 255 alpha:1]];
-
-    [categorie addObject:cat];
-    
-    cat = [[Categoria alloc] initWithDescrizione:@"Ristoranti"
-                                          codice:@"lodging"
-                                        immagine:@"posate.png"
-                                 andArrayOfTypes: @"food"];
-    cat.TipiLiveDeal = @"ristoranti";
-    [cat setColoreCornice:[UIColor colorWithRed:25.0f / 255 green:25.0f / 255 blue:25.0f / 255 alpha:1]];
-    
-    [categorie addObject:cat];
-    
-    
-    cat = [[Categoria alloc] initWithDescrizione:@"Benessere"
-                                          codice:@"welness"
-                                        immagine:@"fiore.png"
-                                 andArrayOfTypes:@"hair_care%7Cbeauty_salon"];
-    cat.TipiLiveDeal = @"benessere";
-    [cat setColoreCornice:[UIColor colorWithRed:245.0f / 255 green:101.0f / 255 blue:34.0f / 255 alpha:1]];
-
-    [categorie addObject:cat];
-    
-    cat = [[Categoria alloc] initWithDescrizione:@"Servizi"
-                                          codice:@"services"
-                                        immagine:@"forbice.png"
-                                 andArrayOfTypes:@"hair_care%7Cbeauty_salon"];
-    cat.TipiLiveDeal = @"servizi";
-    [cat setColoreCornice:[UIColor colorWithRed:245.0f / 255 green:101.0f / 255 blue:34.0f / 255 alpha:1]];
-    
-    [categorie addObject:cat];
-    
-    
-    
-
-    
-}*/
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
@@ -152,7 +95,6 @@
 }
 
 
-//locationManager:didUpdateToLocation:fromLocation
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

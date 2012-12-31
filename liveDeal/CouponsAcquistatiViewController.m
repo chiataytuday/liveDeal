@@ -13,7 +13,7 @@
 @end
 
 @implementation CouponsAcquistatiViewController
-@synthesize offertaSelezionata, coupons, sortedKey;
+@synthesize offertaSelezionata, coupons, sortedKey, mostraScaduti;
 
 
 - (void)viewDidLoad
@@ -56,27 +56,41 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
-    return [sortedKey count];
+    if (mostraScaduti)
+        return [sortedKey count];
+    else
+        return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSArray *listData =[coupons objectForKey:[sortedKey objectAtIndex:section]];
-  
-    return [listData count];
+ 
+    if (!mostraScaduti)
+    {
+        if ([[sortedKey objectAtIndex:section] isEqualToString:@"Validi"]){
+             if ([listData count]>0)
+                 return [listData count];
+             else
+             {
+                 return 1;
+             }
+        }
+        else
+            return 1;
+    }
+    
+    if ([listData count]>0)
+        return [listData count];
+    else
+        return 1;
 }
-
+   
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    
-    NSArray *listData =[coupons objectForKey:[sortedKey objectAtIndex:section]];
-    
-    if ([listData count]==0)
-        return 0;
-    else
-        return 19;
+   
+    return 19;
     
 }
 
@@ -94,9 +108,22 @@
      
      UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.bounds.size.width - 10, 10)];
      
-     
-     label.text = [self.sortedKey objectAtIndex:section];
-     
+     if (mostraScaduti)
+     {
+         label.text = [self.sortedKey objectAtIndex:section];
+         
+     }
+     else
+     {
+         if (![[sortedKey objectAtIndex:section] isEqualToString:@"Validi"])
+         {
+             label.text = @"Utilizzati e scaduti";
+         }
+         else
+             label.text = [self.sortedKey objectAtIndex:section];
+         
+     }
+    
      
      label.textColor = [UIColor whiteColor];
      [label setFont:[UIFont fontWithName:@"Helvetica Neue" size:12]];
@@ -115,7 +142,23 @@
     UITableViewCell *cell = nil;
     
     NSArray *listData =[coupons objectForKey:[sortedKey objectAtIndex:[indexPath section]]];
+   
     
+    if (!mostraScaduti){
+        if (![[sortedKey objectAtIndex:indexPath.section] isEqualToString:@"Validi"])
+        {
+            static NSString *CellIdentifier = @"mostraScadutiCell";
+            
+            cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            
+            if (!cell) {
+                cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+                 
+            }
+            [self customizeCell:cell];
+            return cell;
+        }
+    }
     
     if ([listData count]==0){
         
@@ -126,6 +169,7 @@
         
         if (!cell) {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+             
         }
         
         UILabel *lblTitolo = (UILabel *)[cell viewWithTag:1];
@@ -141,23 +185,37 @@
         
         if (!cell) {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            [self customizeCell:cell];
         }
         
         NSArray *listData =[self.coupons objectForKey:
                             [self.sortedKey objectAtIndex:[indexPath section]]];
         
         Coupon *c = [listData objectAtIndex:indexPath.row];
-    
+        
         CustomLabel *lblCodice = (CustomLabel *)[cell viewWithTag:1];
         lblCodice.text = [c codice];
         
         CustomLabel *lblCodiceSicurezza = (CustomLabel *)[cell viewWithTag:2];
         lblCodiceSicurezza.text = [c codiceSicurezza];
         
-      
+        
         
     }
     
+    [self customizeCell:cell];
+    return cell;
+}
+
+-(IBAction)mostraScaduti:(id)sender{
+
+    mostraScaduti = !mostraScaduti;
+    
+    [self.tableView reloadData];
+}
+
+-(UITableViewCell *)customizeCell:(UITableViewCell *)cell
+{
     //aspetto della cella
     UIImageView *av = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 78)];
     av.backgroundColor = [UIColor clearColor];
@@ -169,10 +227,8 @@
     cellBackView.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed:@"sfondoCellOfferta.png"]];
     cell.backgroundView = cellBackView;
     
-    
-    
+
+
     return cell;
 }
-
-
 @end

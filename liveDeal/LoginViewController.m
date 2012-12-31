@@ -37,7 +37,9 @@
 
 -(IBAction)logon:(id)sender{
     
-      [txtPwd resignFirstResponder];
+    tipoRichiesta=LOGIN;
+    
+    [txtPwd resignFirstResponder];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *url = @"";
@@ -82,6 +84,7 @@
 
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
     
+    
     [tempArray setLength:0];
 }
 
@@ -90,53 +93,64 @@
     [tempArray appendData:data];
 }
 
+
+
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {    
+    if (tipoRichiesta==LOGIN) {
         
-    NSArray* json = [NSJSONSerialization
-                     JSONObjectWithData:tempArray
-                     options:kNilOptions error:nil];
-    
-    
-    NSArray *result = [json valueForKeyPath:@"result"];
-    NSDictionary *member = [result valueForKeyPath:@"Member"];
-    
-    if (member!=nil)
-    {
-        User *u = [[User alloc] init];
-        [u setNome:[member objectForKey:@"firstname"]];
-        [u setCognome:[member objectForKey:@"lastname"]];
-        [u setEmail:[member objectForKey:@"email"]];
-
+        NSArray* json = [NSJSONSerialization
+                         JSONObjectWithData:tempArray
+                         options:kNilOptions error:nil];
         
-        if ([[member objectForKey:@"gender"] isEqualToString:@"M"])
-            [u setSesso:@"Maschio"];
-        else if ([[member objectForKey:@"gender"] isEqualToString:@"F"])
-            [u setSesso:@"Femmina"];
         
-        [[NSUserDefaults standardUserDefaults] setObject:[member objectForKey:@"token_access"] forKey:@"token_access"];
-
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    
-        if (self.delegate != nil)
-            [self.delegate didSelect:u  andIdentifier:@"user"];
-       
-        [hud hide:YES];
+        NSArray *result = [json valueForKeyPath:@"result"];
+        NSDictionary *member = [result valueForKeyPath:@"Member"];
         
-        [self.navigationController popViewControllerAnimated:YES];
-        
+        if (member!=nil)
+        {
+            User *u = [[User alloc] init];
+            [u setNome:[member objectForKey:@"firstname"]];
+            [u setCognome:[member objectForKey:@"lastname"]];
+            [u setEmail:[member objectForKey:@"email"]];
+            
+            
+            if ([[member objectForKey:@"gender"] isEqualToString:@"M"])
+                [u setSesso:@"Maschio"];
+            else if ([[member objectForKey:@"gender"] isEqualToString:@"F"])
+                [u setSesso:@"Femmina"];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:[member objectForKey:@"token_access"] forKey:@"token_access"];
+            
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            if (self.delegate != nil)
+                [self.delegate didSelect:u  andIdentifier:@"user"];
+            
+            [hud hide:YES];
+            
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        }
+        else
+        {
+            
+            [hud hide:YES];
+            
+            NSDictionary *error = [json valueForKeyPath:@"error"];
+            
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:[NSString stringWithFormat: @"Errore %@", [error objectForKey:@"code"]] message:[error objectForKey:@"message"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            
+            [alert show];
+            
+        }
     }
     else
     {
-        
-        [hud hide:YES];
-        
-         NSDictionary *error = [json valueForKeyPath:@"error"];
-        
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:[NSString stringWithFormat: @"Errore %@", [error objectForKey:@"code"]] message:[error objectForKey:@"message"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+         [hud hide:YES];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Ok" message:@"Ti è stata inviata la password all'indirizzo specificato" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
         
         [alert show];
-
     }
     
 }
@@ -207,6 +221,52 @@
        FBSessionState state, NSError *error) {
          [self sessionStateChanged:session state:state error:error];
      }];
+}
+
+-(IBAction)richiediPassword:(id)sender{
+    
+    UIAlertView* dialog = [[UIAlertView alloc] initWithTitle:@"Richiesta password" message:@"Inserisci l'email con la quale ti sei registrato" delegate:self cancelButtonTitle:@"Annulla" otherButtonTitles:@"Ok", nil];
+    [dialog setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    
+    // Change keyboard type
+    [[dialog textFieldAtIndex:0] setKeyboardType:UIKeyboardTypeEmailAddress];
+    [dialog show];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex == 1){
+        
+        tipoRichiesta = FORGOT_PASSWORD;
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/forgotPassword"]
+                                                               cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                                           timeoutInterval:60.0];
+        
+        NSString *emailEncode = [[[alertView textFieldAtIndex:0]text] urlEncode];
+        
+        [request setHTTPMethod:@"POST"];
+        [request setHTTPBody:[[NSString stringWithFormat:@"email=%@",
+                              emailEncode] dataUsingEncoding:NSUTF8StringEncoding]];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+        
+        if (connection)
+        {
+            tempArray = [[NSMutableData alloc] init];
+            
+            hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.mode = MBProgressHUDModeIndeterminate;
+            hud.labelText = @"Attendere...";
+            
+        }
+        else{
+            
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Errore" message:@"Impossibile connettersi" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+            
+            [alert show];
+        }
+    }
 }
 
 @end

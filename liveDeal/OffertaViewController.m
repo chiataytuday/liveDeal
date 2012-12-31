@@ -17,6 +17,18 @@
 
 - (void)viewDidLoad
 {
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+
+        CGSize result = [[UIScreen mainScreen] bounds].size;
+        CGFloat scale = [UIScreen mainScreen].scale;
+        result = CGSizeMake(result.width * scale, result.height * scale);
+        
+        if(result.height == 1136){
+            isIphone5=YES;
+        }
+    }
+
+    
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
@@ -40,9 +52,17 @@
     [myticker invalidate];
     myticker = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(showActivity) userInfo:nil repeats:YES];
 
-      
+    int heigth=0;
     
-    scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44, 320, 374)];
+    if (isIphone5)
+    {
+        heigth=460;
+    }
+    else
+        heigth=374;
+    
+    
+    scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44, 320, heigth)];
     [scroll setScrollEnabled:YES];
     [scroll setContentSize:CGSizeMake(320, 900)];
     [scroll setBackgroundColor:[UIColor colorWithRed:212.0f / 255 green:212.0f / 255 blue:212.0f / 255 alpha:1]];

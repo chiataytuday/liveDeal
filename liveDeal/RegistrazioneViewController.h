@@ -15,6 +15,7 @@
 @interface RegistrazioneViewController : UIViewController <UITextFieldDelegate, SelectDelegate>
 {
     UIScrollView *scroll;
+    BOOL isIphone5;
 }
 @property (nonatomic, retain)  UITextField *txtNome;
 @property (nonatomic, retain)  UITextField *txtCognome;

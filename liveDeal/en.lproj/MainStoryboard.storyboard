@@ -359,10 +359,12 @@ dentale, facciale, beauty</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="base.png" id="NLl-qw-eba">
-                                <rect key="frame" x="20" y="63" width="280" height="166"/>
+                                <rect key="frame" x="20" y="48" width="280" height="166"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                             </imageView>
                             <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="UHd-hC-YWg">
-                                <rect key="frame" x="36" y="186" width="251" height="30"/>
+                                <rect key="frame" x="36" y="171" width="251" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Button" image="signIn.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -376,21 +378,25 @@ dentale, facciale, beauty</string>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="emailCap.png" id="sLl-3p-yuu">
-                                <rect key="frame" x="34" y="72" width="253" height="80"/>
+                                <rect key="frame" x="34" y="57" width="253" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="baseLoginFb.png" id="MlW-x4-BZw">
-                                <rect key="frame" x="20" y="294" width="280" height="64"/>
+                                <rect key="frame" x="20" y="267" width="280" height="64"/>
+                                <autoresizingMask key="autoresizingMask"/>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="specialdeal1@gmail.com" placeholder="Email" minimumFontSize="17" clearButtonMode="whileEditing" id="kMK-yp-5wU">
-                                <rect key="frame" x="67" y="79" width="209" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" clearButtonMode="whileEditing" id="kMK-yp-5wU">
+                                <rect key="frame" x="67" y="64" width="209" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                 <connections>
                                     <outlet property="delegate" destination="2LY-gU-UEY" id="unN-aj-5bg"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="barberaSPECIALdeal" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" id="10r-TD-KbJ">
-                                <rect key="frame" x="67" y="125" width="209" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" id="10r-TD-KbJ">
+                                <rect key="frame" x="67" y="102" width="209" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <connections>
@@ -398,7 +404,8 @@ dentale, facciale, beauty</string>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="a6R-ku-81Q">
-                                <rect key="frame" x="42" y="228" width="89" height="8"/>
+                                <rect key="frame" x="44" y="146" width="89" height="8"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Button" image="forgotPwd.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -407,9 +414,13 @@ dentale, facciale, beauty</string>
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="richiediPassword:" destination="2LY-gU-UEY" eventType="touchUpInside" id="bgP-8E-3JG"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" verticalHuggingPriority="1" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="sOq-Sg-KQN">
-                                <rect key="frame" x="224" y="226" width="52" height="7"/>
+                                <rect key="frame" x="224" y="146" width="52" height="7"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" image="creaAccount.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -423,7 +434,8 @@ dentale, facciale, beauty</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kUC-tZ-ctp">
-                                <rect key="frame" x="28" y="303" width="259" height="44"/>
+                                <rect key="frame" x="28" y="276" width="259" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" image="loginFB.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -666,7 +678,7 @@ dentale, facciale, beauty</string>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" id="Dxj-yx-qBY">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                 <connections>
                                     <outlet property="delegate" destination="RLs-tm-B6u" id="Nfe-fC-poD"/>
                                 </connections>
@@ -704,10 +716,12 @@ dentale, facciale, beauty</string>
                                 <color key="backgroundColor" red="0.97492825255102045" green="0.95642756603646828" blue="0.72424342399372854" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" id="0N0-U5-xXi">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="366"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="iU1-pg-jIe">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                        <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="offertaCell" rowHeight="80" id="m9j-EJ-iAr">
@@ -970,6 +984,7 @@ dentale, facciale, beauty</string>
                             </label>
                             <navigationBar contentMode="scaleToFill" id="obR-TS-10C">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem id="gjA-jq-ZRI">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="7Y5-fJ-ebp">
@@ -987,7 +1002,7 @@ dentale, facciale, beauty</string>
                             </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DY8-6l-bhh">
                                 <rect key="frame" x="159" y="421" width="150" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" image="pulsanteAcquista.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -1313,8 +1328,15 @@ dentale, facciale, beauty</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="82g-vK-Jv4">
-                                                    <rect key="frame" x="47" y="6" width="240" height="21"/>
+                                                    <rect key="frame" x="80" y="6" width="202" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Tel:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="71G-8v-ozj">
+                                                    <rect key="frame" x="6" y="6" width="35" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
@@ -1331,8 +1353,15 @@ dentale, facciale, beauty</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FvQ-XS-0TH">
-                                                    <rect key="frame" x="47" y="6" width="240" height="21"/>
+                                                    <rect key="frame" x="80" y="6" width="202" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sito web:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="72d-RB-I3e">
+                                                    <rect key="frame" x="6" y="6" width="58" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
@@ -1349,7 +1378,7 @@ dentale, facciale, beauty</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Foto" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="msh-7S-Tcw">
-                                                    <rect key="frame" x="20" y="6" width="35" height="21"/>
+                                                    <rect key="frame" x="6" y="6" width="35" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1372,7 +1401,7 @@ dentale, facciale, beauty</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Indicazioni fino a qui" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="C51-5b-F6c">
-                                                    <rect key="frame" x="20" y="6" width="240" height="21"/>
+                                                    <rect key="frame" x="6" y="6" width="240" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1554,6 +1583,9 @@ dentale, facciale, beauty</string>
         </class>
         <class className="CouponsAcquistatiViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CouponsAcquistatiViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="mostraScaduti:"/>
+            </relationships>
         </class>
         <class className="CustomLabel" superclassName="UILabel">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomLabel.h"/>
@@ -1587,6 +1619,7 @@ dentale, facciale, beauty</string>
             <relationships>
                 <relationship kind="action" name="logon:"/>
                 <relationship kind="action" name="performLogin:"/>
+                <relationship kind="action" name="richiediPassword:"/>
                 <relationship kind="outlet" name="txtEmail" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="txtPwd" candidateClass="UITextField"/>
             </relationships>

@@ -20,10 +20,32 @@
 {
     [super viewDidLoad];
     
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+        
+        CGSize result = [[UIScreen mainScreen] bounds].size;
+        CGFloat scale = [UIScreen mainScreen].scale;
+        result = CGSizeMake(result.width * scale, result.height * scale);
+        
+        if(result.height == 1136){
+            isIphone5=YES;
+        }
+    }
 
     
-    scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 374)];
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
+
+    int heigth=0;
+    
+    if (isIphone5)
+    {
+        heigth=460;
+    }
+    else
+        heigth=374;
+    
+    
+    
+    scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, heigth)];
     [scroll setContentSize:CGSizeMake(320, 453)];
     [scroll setBounces:YES];
     [scroll setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"sfondoRegistrati.png"]]];

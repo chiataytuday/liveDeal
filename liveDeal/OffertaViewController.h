@@ -21,6 +21,7 @@
     NSDate *today;
     UIImage *imgDeal;
     UIScrollView *scroll;
+    BOOL isIphone5;
 }
 @property (retain, nonatomic) GPPShare *share;
 @property (nonatomic, retain) Offerta *offertaSelezionata;

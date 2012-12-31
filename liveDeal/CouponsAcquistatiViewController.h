@@ -23,5 +23,7 @@
 @property (nonatomic, retain) Offerta *offertaSelezionata;
 @property (nonatomic, retain) NSDictionary *coupons;
 @property (nonatomic, retain) NSArray *sortedKey;
+@property (nonatomic, assign) BOOL mostraScaduti;
 
+-(IBAction)mostraScaduti:(id)sender;
 @end
