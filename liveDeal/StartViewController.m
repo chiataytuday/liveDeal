@@ -8,6 +8,7 @@
 
 #import "StartViewController.h"
 
+
 @interface StartViewController ()
 
 @end
@@ -20,36 +21,17 @@
 {
     [super viewDidLoad];
     isShowed=false;
-    
+       
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"sfondoHome.png"]]];
 
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
-
-    
-	    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-
-    NSString *des = [defaults objectForKey:@"citta.display"];
-  /*  NSString *foto = [defaults objectForKey:@"citta.foto"];
    
     
-    if (foto!=nil)
-    {
-        NSNumber *idf = [defaults objectForKey:@"citta.foto"];
-        [self aggiornaFoto: [idf stringValue]];
-        
-       
-        
-    }
-*/
+   
     
-
-    
-
-    lblCurrentAddress.text = [NSString stringWithFormat:@"SpecialDeal - %@", des];
 }
 
-   
+
 
 
 

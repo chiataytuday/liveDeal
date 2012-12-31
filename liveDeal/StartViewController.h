@@ -11,7 +11,8 @@
 #import "CitiesViewController.h"
 #import "CategorieViewController.h"
 
-@interface StartViewController : UIViewController<SelectDelegate, UIGestureRecognizerDelegate>
+
+@interface StartViewController : UIViewController< SelectDelegate, UIGestureRecognizerDelegate>
 {
     BOOL isShowed;
 }

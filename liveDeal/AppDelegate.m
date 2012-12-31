@@ -7,12 +7,17 @@
 //
 
 #import "AppDelegate.h"
+#import "PayPal.h"
 
 @implementation AppDelegate
 @synthesize locationManager, isIphone5, session, citta, categorie, managedObjectContext, managedObjectModel, persistentStoreCoordinator;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    [PayPal initializeWithAppID:@"APP-80W284485P519543T" forEnvironment:ENV_SANDBOX];
+    
+
     
     tipoRicerca=CITTA;
     

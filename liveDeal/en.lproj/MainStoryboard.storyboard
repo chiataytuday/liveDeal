@@ -553,7 +553,7 @@ dentale, facciale, beauty</string>
             <objects>
                 <tableViewController id="oiu-Bk-bbh" customClass="CitiesViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="4Pp-JE-d31">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -1447,6 +1447,7 @@ dentale, facciale, beauty</string>
                         <segue destination="SCD-6s-R0m" kind="relationship" relationship="viewControllers" id="R0Z-b6-aD4"/>
                         <segue destination="CYy-me-cnE" kind="relationship" relationship="viewControllers" id="Ts0-Kk-TH3"/>
                         <segue destination="5TU-eK-jKo" kind="relationship" relationship="viewControllers" id="uln-1A-CMQ"/>
+                        <segue destination="G64-Oo-Tuc" kind="relationship" relationship="viewControllers" id="0kX-ic-gKV"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Teg-H9-xYV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1504,6 +1505,21 @@ dentale, facciale, beauty</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qcS-WY-aM6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="934" y="539"/>
+        </scene>
+        <!--Test View Controller - Item-->
+        <scene sceneID="yoQ-KX-Qwm">
+            <objects>
+                <viewController id="G64-Oo-Tuc" customClass="TestViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1qU-Q6-jUh">
+                        <rect key="frame" x="0.0" y="20" width="320" height="411"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="hAe-fE-aCd"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zrf-Qn-3hT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="207" y="611"/>
         </scene>
         <!--Navigation Controller - Preferiti-->
         <scene sceneID="YBR-Vn-M6h">
@@ -1571,154 +1587,15 @@ dentale, facciale, beauty</string>
         <image name="signIn.png" width="251" height="31"/>
         <image name="user.png" width="13" height="15"/>
     </resources>
-    <classes>
-        <class className="CategorieViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategorieViewController.h"/>
-        </class>
-        <class className="CitiesViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CitiesViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
-            </relationships>
-        </class>
-        <class className="CouponsAcquistatiViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CouponsAcquistatiViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="mostraScaduti:"/>
-            </relationships>
-        </class>
-        <class className="CustomLabel" superclassName="UILabel">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomLabel.h"/>
-        </class>
-        <class className="DealsAcquistatiViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DealsAcquistatiViewController.h"/>
-        </class>
-        <class className="EsercenteVetrinaViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/EsercenteVetrinaViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="lblRagSoc" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="EsercenteViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/EsercenteViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="AggiungiAPreferiti:"/>
-                <relationship kind="outlet" name="btnPreferiti" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="img" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lblIndirizzo" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblRagioneSociale" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblTelefono" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblWebSite" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="EsercentiPreferitiViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/EsercentiPreferitiViewController.h"/>
-        </class>
-        <class className="LoginViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="logon:"/>
-                <relationship kind="action" name="performLogin:"/>
-                <relationship kind="action" name="richiediPassword:"/>
-                <relationship kind="outlet" name="txtEmail" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="txtPwd" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="NavViewController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NavViewController.h"/>
-        </class>
-        <class className="OffertaViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/OffertaViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="goBack:"/>
-                <relationship kind="action" name="showActionSheet:"/>
-                <relationship kind="outlet" name="btnAcquista" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnAction" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="lblCountdown" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="navBar" candidateClass="UINavigationBar"/>
-            </relationships>
-        </class>
-        <class className="OfferteViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/OfferteViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="switchMap:"/>
-                <relationship kind="outlet" name="gridView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="imgOffertaSelezionata" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lblAcquistatiOffertaSelezionata" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblDescrizioneOffertaSelezionata" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblTitoloOffertaSelezionata" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="mapButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="myTable" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="vwOfferta" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="PagamentoViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PagamentoViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="decrementa:"/>
-                <relationship kind="action" name="goBack:"/>
-                <relationship kind="action" name="incrementa:"/>
-                <relationship kind="action" name="test:"/>
-                <relationship kind="outlet" name="btnPaga" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="img" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="imgBorder" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="imgCell" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="imgPaypal" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lblCC" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblDescrizione" candidateClass="CustomLabel"/>
-                <relationship kind="outlet" name="lblQta" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblTitolo" candidateClass="CustomLabel"/>
-                <relationship kind="outlet" name="lblTot" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblValidita" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="RegistrazioneViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RegistrazioneViewController.h"/>
-        </class>
-        <class className="ScegliPagamentoViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ScegliPagamentoViewController.h"/>
-        </class>
-        <class className="StartViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/StartViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="lblCurrentAddress" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="mapButtonItem" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="viewControl" candidateClass="UIView"/>
-                <relationship kind="outlet" name="wait" candidateClass="UIActivityIndicatorView"/>
-            </relationships>
-        </class>
-        <class className="TitoloViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TitoloViewController.h"/>
-        </class>
-        <class className="UILabelStrikethrough" superclassName="UILabel">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UILabelStrikethrough.h"/>
-        </class>
-        <class className="UserDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UserDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="lblCognome" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblEMail" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblNome" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblSesso" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="UserViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UserViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="lblInt" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Z1E-Un-eaJ"/>
+        <segue reference="qVj-8x-8uO"/>
+        <segue reference="SCn-j2-MPx"/>
         <segue reference="yds-g9-CD9"/>
-        <segue reference="o5U-of-Ac7"/>
         <segue reference="R3H-lO-sFl"/>
     </inferredMetricsTieBreakers>
 </document>
