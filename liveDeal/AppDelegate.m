@@ -15,9 +15,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    [PayPal initializeWithAppID:@"APP-80W284485P519543T" forEnvironment:ENV_SANDBOX];
+    [[PayPal initializeWithAppID:PAYPAL_KEY forEnvironment:ENV_SANDBOX] setLang:@"it_IT"];
     
-
     
     tipoRicerca=CITTA;
     

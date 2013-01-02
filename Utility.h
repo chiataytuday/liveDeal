@@ -8,7 +8,8 @@
 
 }
 
-+(NSString *)getValiditaWithDataInizio:(NSString *)dataInizio andDataScadenza:(NSString *)dataScadenza;
 
++(NSString *)getValiditaWithDataInizio:(NSString *)dataInizio andDataScadenza:(NSString *)dataScadenza;
++(BOOL) isTokenValidWithToken:(NSString *)token;
 
 @end

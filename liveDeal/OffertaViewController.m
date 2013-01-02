@@ -13,7 +13,9 @@
 @end
 
 @implementation OffertaViewController
-@synthesize offertaSelezionata, lblCountdown, share, btnAction, btnAcquista, navBar;
+@synthesize offertaSelezionata, lblCountdown, share, btnAction, btnAcquista;
+
+
 
 - (void)viewDidLoad
 {
@@ -28,24 +30,14 @@
         }
     }
 
-    
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    [self.navBar setBackgroundImage:[UIImage imageNamed: @"backgroundTop.png"]
-                      forBarMetrics:UIBarMetricsDefault];
-    
-    UIImageView *img = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
-    
-    [img setFrame:CGRectMake(160 - 45,7,
-                             //navBar.bounds.size.width / 2 - img.bounds.size.width / 2,
-                             //navBar.bounds.size.height / 2 - img.bounds.size.height / 2,
-                             img.bounds.size.width,
-                             img.bounds.size.height)];
-    [navBar addSubview:img];
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
+   
     
     AppDelegate *app=[[UIApplication sharedApplication]delegate];
-    share = [[GPPShare alloc] initWithClientID:@"1028890509676.apps.googleusercontent.com"];
+    share = [[GPPShare alloc] initWithClientID:@"GOOGLE_PLUS_KEY"];
     share.delegate = self;
     app.share = share;
     
@@ -62,7 +54,7 @@
         heigth=374;
     
     
-    scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44, 320, heigth)];
+    scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, heigth)];
     [scroll setScrollEnabled:YES];
     [scroll setContentSize:CGSizeMake(320, 900)];
     [scroll setBackgroundColor:[UIColor colorWithRed:212.0f / 255 green:212.0f / 255 blue:212.0f / 255 alpha:1]];
@@ -282,6 +274,11 @@
 }
 
 
+-(void)didAutenticate
+{
+    [self performSegueWithIdentifier:@"pagamento" sender:self];
+
+}
 
 - (void)sessionStateChanged:(FBSession *)session
                       state:(FBSessionState) state
@@ -503,8 +500,29 @@
 
 }
 
-- (IBAction)goBack:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+-(IBAction)vaiAPagamento:(id)sender
+{
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSString *tokenAccess = [defaults objectForKey:@"token_access"];
+    
+    if (![Utility isTokenValidWithToken:tokenAccess]){
+    
+        UIStoryboard *storyboard = [UIApplication sharedApplication].delegate.window.rootViewController.storyboard;
+        LoginViewController *loginController = [storyboard instantiateViewControllerWithIdentifier:@"loginScreen"];
+        loginController.loginDelegate = self;
+       
+        [loginController setShowBackButton:YES];
+        
+        [self.navigationController pushViewController:loginController animated:NO];
+
+
+
+    }
+    else
+        [self performSegueWithIdentifier:@"pagamento" sender:self];
+    
 }
 
 -(IBAction)showActionSheet:(id)sender{

@@ -16,6 +16,40 @@
 @implementation UserViewController
 @synthesize loginController, user;
 
+-(void)viewWillAppear:(BOOL)animated
+{
+
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    UIStoryboard *storyboard = [UIApplication sharedApplication].delegate.window.rootViewController.storyboard;
+    
+    loginController = [storyboard instantiateViewControllerWithIdentifier:@"loginScreen"];
+    loginController.delegate = self;
+    
+    NSString *tokenAccess = [defaults objectForKey:@"token_access"];
+    
+    if (![Utility isTokenValidWithToken:tokenAccess])
+    {
+        [self.navigationController pushViewController:loginController animated:YES];
+        
+    }
+    /*
+    if (tokenAccess==nil)
+        [self.navigationController pushViewController:loginController animated:YES];
+    else{
+        NSString *url=@"";
+        
+        if ([defaults objectForKey:@"tokenAPN"]!= nil)
+            url =[NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/login?token_access=%@&tokenAPN=%@",
+                  tokenAccess, [defaults objectForKey:@"tokenAPN"]];
+        else
+            url= [NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/login?token_access=%@",
+                  tokenAccess];
+        
+        [self Ricerca:url];
+    }*/
+    
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -27,33 +61,14 @@
     [imgSfondo setFrame:self.view.frame];
     
     self.tableView.backgroundView = imgSfondo;
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    UIStoryboard *storyboard = [UIApplication sharedApplication].delegate.window.rootViewController.storyboard;
     
-    loginController = [storyboard instantiateViewControllerWithIdentifier:@"loginScreen"];
-    loginController.delegate = self;
-
     
-    NSString *tokenAccess = [defaults objectForKey:@"token_access"];
-    
-    if (tokenAccess==nil)
-              [self.navigationController pushViewController:loginController animated:NO];//
-    else{
-        NSString *url=@"";
-        
-        if ([defaults objectForKey:@"tokenAPN"]!= nil)
-            url =[NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/login?token_access=%@&tokenAPN=%@",
-                        tokenAccess, [defaults objectForKey:@"tokenAPN"]];
-        else
-            url= [NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/login?token_access=%@",
-                  tokenAccess];
-
-        [self Ricerca:url];
-    }
       
 
 }
+
+
 
 -(void)didSelect:(id)object andIdentifier:(NSString *)identifier
 {
@@ -63,7 +78,14 @@
         [self.tableView reloadData];
     }
 }
--(IBAction)logout:(id)sender{
+
+-(void)login
+{
+
+   // [self presentModalViewController:loginController animated:YES];
+
+}
+-(void)logout{
 
     
     if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded)
@@ -75,15 +97,14 @@
     [defaults setObject:NULL forKey:@"token_access"];
     [defaults synchronize];
     
-    [self.navigationController pushViewController:loginController animated:NO];//
-
+    [self.tableView reloadData];
+   [self.navigationController pushViewController:loginController animated:NO];
 }
 
 
 -(void)didAuthenticateWithFB:(BOOL)isFb
 {
     
-     
     if (isFb){
     [[[FBRequest alloc] initWithSession:FBSession.activeSession graphPath:@"me"]  startWithCompletionHandler:
      ^(FBRequestConnection *connection,
@@ -100,7 +121,7 @@
     {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         
-        NSString *emailLogged = [defaults objectForKey:@"emailLogged"];
+        NSString *emailLogged = [defaults objectForKey:@"email_logged"];
         
         NSString *url = [NSString stringWithFormat:@"http://www.psicologapalermo.com/userInfo.txt?email=%@", emailLogged];
         [self Ricerca:url];
@@ -144,19 +165,9 @@
         
         vc.user = user;
     }
-    else if ([[segue identifier] isEqualToString:@"dealsAcquistati"])
-    {
-        DealsAcquistatiViewController *dealsAcqVC = [segue destinationViewController];
-        dealsAcqVC.logDelegate = self;
-    }
+    
 }
 
--(void)didDisconnectForInvalidToken
-{
-   // [self logout:nil];
-  //  [dealsAcqVC dismissViewControllerAnimated:YES completion:NULL];
-
-}
 
 #pragma mark - dati relativi alla connessione
 
@@ -210,7 +221,7 @@
     
     [hud hide:YES];
    
-    [self.navigationController pushViewController:loginController animated:NO];//
+  //  [self.navigationController pushViewController:loginController animated:NO];//
     
 }
 
@@ -251,10 +262,14 @@
     
     UIButton *btnDisconnetti = [[UIButton alloc] initWithFrame:CGRectMake(20, 17, 240, 30)];
  //   [btnDisconnetti setTitle:@"Disconnetti" forState:UIControlStateNormal];
+    
+   
+    
     [btnDisconnetti setImage:[UIImage imageNamed:@"disconnetti.png"] forState:UIControlStateNormal];
 
-    [btnDisconnetti addTarget:self action:@selector(logout:) forControlEvents:UIControlEventTouchUpInside];
     
+        [btnDisconnetti addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
+   
     [base addSubview:btnDisconnetti];
 
 

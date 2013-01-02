@@ -13,19 +13,34 @@
 @end
 
 @implementation LoginViewController
-@synthesize txtEmail, txtPwd, loggedInUser, delegate;
+@synthesize txtEmail, txtPwd, loggedInUser, delegate, loginDelegate, showBackButton;
 
 -(void)viewWillAppear:(BOOL)animated
 {
+   
     txtPwd.text=@"";
     txtEmail.text=@"";
+    
+    if(!showBackButton)
+    {
+        self.navigationItem.hidesBackButton = YES;
+
+    }
+    
 }
 
+-(void)chiudi
+{
+    [self dismissModalViewControllerAnimated:YES];
+    
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+      
+        
 	// Do any additional setup after loading the view.
-    self.navigationItem.hidesBackButton = YES;
+   // self.navigationItem.hidesBackButton = YES;
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"sfondoRegistrati.png"]]];
 }
@@ -121,6 +136,7 @@
                 [u setSesso:@"Femmina"];
             
             [[NSUserDefaults standardUserDefaults] setObject:[member objectForKey:@"token_access"] forKey:@"token_access"];
+             [[NSUserDefaults standardUserDefaults] setObject:[member objectForKey:@"email"] forKey:@"email_logged"];
             
             [[NSUserDefaults standardUserDefaults] synchronize];
             
@@ -129,7 +145,13 @@
             
             [hud hide:YES];
             
-            [self.navigationController popViewControllerAnimated:YES];
+            
+            
+            [self.navigationController popViewControllerAnimated:NO];
+            
+            [self.loginDelegate didAutenticate];
+            
+            
             
         }
         else
@@ -268,5 +290,6 @@
         }
     }
 }
+
 
 @end

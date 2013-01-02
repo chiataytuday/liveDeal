@@ -250,7 +250,6 @@
 		F6F433971691E04B00782F6C /* libPayPalMPL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F6F4338C1691E04B00782F6C /* libPayPalMPL.a */; };
 		F6F433991691E12600782F6C /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F6F433981691E12600782F6C /* libz.dylib */; };
 		F6F4339B1691E13E00782F6C /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F6F4339A1691E13E00782F6C /* libxml2.dylib */; };
-		F6F4339E1691E37000782F6C /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F4339D1691E37000782F6C /* TestViewController.m */; };
 		F6F7569C1688821F00803DF6 /* EsercenteVetrinaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F7569B1688821F00803DF6 /* EsercenteVetrinaViewController.m */; };
 		F6F756A01688836F00803DF6 /* EsercenteVetrinaAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F7569F1688836F00803DF6 /* EsercenteVetrinaAnnotation.m */; };
 		F6F756CC1689BF0200803DF6 /* Citta.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F756CB1689BF0200803DF6 /* Citta.m */; };
@@ -604,8 +603,6 @@
 		F6F433961691E04B00782F6C /* PayPalReceiverPaymentDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPalReceiverPaymentDetails.h; sourceTree = "<group>"; };
 		F6F433981691E12600782F6C /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		F6F4339A1691E13E00782F6C /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
-		F6F4339C1691E36F00782F6C /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
-		F6F4339D1691E37000782F6C /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		F6F7569A1688821F00803DF6 /* EsercenteVetrinaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EsercenteVetrinaViewController.h; sourceTree = "<group>"; };
 		F6F7569B1688821F00803DF6 /* EsercenteVetrinaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EsercenteVetrinaViewController.m; sourceTree = "<group>"; };
 		F6F7569E1688836F00803DF6 /* EsercenteVetrinaAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EsercenteVetrinaAnnotation.h; sourceTree = "<group>"; };
@@ -911,8 +908,6 @@
 		F6905DED164FB52A00F9319B = {
 			isa = PBXGroup;
 			children = (
-				F6F4339A1691E13E00782F6C /* libxml2.dylib */,
-				F6F433981691E12600782F6C /* libz.dylib */,
 				F6A9ACEB165D37C300529E78 /* Default-568h@2x.png */,
 				F6905E02164FB52A00F9319B /* liveDeal */,
 				F6905DFB164FB52A00F9319B /* Frameworks */,
@@ -931,6 +926,8 @@
 		F6905DFB164FB52A00F9319B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F6F4339A1691E13E00782F6C /* libxml2.dylib */,
+				F6F433981691E12600782F6C /* libz.dylib */,
 				F6F756CD1689D72000803DF6 /* CoreData.framework */,
 				F60F00ED1675099500052CB9 /* MessageUI.framework */,
 				F60F00EB1675097200052CB9 /* QuartzCore.framework */,
@@ -1061,8 +1058,6 @@
 				F6411320168C507B00265403 /* UserDetailViewController.m */,
 				F601FF17168DA475003630E2 /* CouponsAcquistatiViewController.h */,
 				F601FF18168DA475003630E2 /* CouponsAcquistatiViewController.m */,
-				F6F4339C1691E36F00782F6C /* TestViewController.h */,
-				F6F4339D1691E37000782F6C /* TestViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1560,7 +1555,6 @@
 				F601FF15168CB8E5003630E2 /* Coupon.m in Sources */,
 				F601FF19168DA475003630E2 /* CouponsAcquistatiViewController.m in Sources */,
 				F6F433841691A89300782F6C /* NSString+UrlEncode.m in Sources */,
-				F6F4339E1691E37000782F6C /* TestViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

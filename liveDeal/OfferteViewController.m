@@ -28,6 +28,13 @@
     
 }
 
+-(void)dropViewDidBeginRefreshing
+{
+    tipo=0;
+    [self Ricerca:[NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/deals_list?city=%@&category=%i", cittaSelezionata.Slug, categoriaSelezionata.Codice]];
+
+}
+
 -(IBAction)switchMap:(id)sender{
     
     
@@ -296,7 +303,7 @@
                        [Esercenti addObject:es];
         }
         
-        
+        [refreshControl endRefreshing];
         [hud hide:YES];
         [myTable reloadData];
         
@@ -309,7 +316,7 @@
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Errore" message:@"Impossibile connettersi" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
     
     [alert show];
-    
+    [refreshControl endRefreshing];
     
 }
 #pragma mark - Table view data source
@@ -758,6 +765,7 @@
         // Get reference to the destination view controller
         OffertaViewController *vc = [segue destinationViewController];
         
+        vc.hidesBottomBarWhenPushed = YES;
         // get the selected index
         NSInteger selectedIndex = [[self.myTable indexPathForSelectedRow] row];
         

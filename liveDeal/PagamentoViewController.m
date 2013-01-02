@@ -9,12 +9,20 @@
 #import "PagamentoViewController.h"
 #define MAX_NUMBER_OF_COUPON 30
 
+#import "PayPalPayment.h"
+#import "PayPalAdvancedPayment.h"
+#import "PayPalAmounts.h"
+#import "PayPalReceiverAmounts.h"
+#import "PayPalAddress.h"
+#import "PayPalInvoiceItem.h"
+
 @interface PagamentoViewController ()
 
 @end
 
 @implementation PagamentoViewController
-@synthesize img, lblTitolo, lblDescrizione, offertaSelezionata, lblValidita, lblQta, lblTot, btnPaga, imgCell, lblCC, imgPaypal, imgBorder;
+@synthesize img, lblTitolo, lblDescrizione, offertaSelezionata, lblValidita, lblQta, lblTot, btnPaga, imgCell, lblCC, imgPaypal, imgBorder, navBar, paypalButton, loginController;
+
 
 
 - (void)viewDidLoad
@@ -22,6 +30,43 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+   
+    
+    paypalButton = [[PayPal getPayPalInst] getPayButtonWithTarget:self andAction:@selector(simplePayment) andButtonType:BUTTON_294x43];
+    
+    
+    
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+        
+        CGSize result = [[UIScreen mainScreen] bounds].size;
+        CGFloat scale = [UIScreen mainScreen].scale;
+        result = CGSizeMake(result.width * scale, result.height * scale);
+        
+        if(result.height == 1136){
+            isIphone5=YES;
+        }
+    }
+
+    int heigth=0;
+    
+    if (isIphone5)
+    {
+        heigth=339 + 92;
+    }
+    else
+        heigth=339;
+    
+
+    
+	CGRect frame = paypalButton.frame;
+	frame.origin.x = round((self.view.frame.size.width - paypalButton.frame.size.width) / 2.);
+	frame.origin.y = heigth; // + 176
+	paypalButton.frame = frame;
+	[self.view addSubview:paypalButton];
+    [self.paypalButton setHidden:NO];
+    [self.btnPaga setHidden:YES];
+    
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"sfondoDetail.png"]]];
    
     
@@ -92,16 +137,21 @@
 
 }
 
+
 -(void)didSelect:(id)object andIdentifier:(NSString *)identifier
 {
 
     if ([object isEqualToString:@"CC"])
     {
+        [self.btnPaga setHidden:NO];
+        [self.paypalButton setHidden:YES];
         [lblCC setHidden:NO];
         [imgPaypal setHidden:YES];
     }
     else
     {
+        [self.btnPaga setHidden:YES];
+        [self.paypalButton setHidden:NO];
         [lblCC setHidden:YES];
         [imgPaypal setHidden:NO];
     }
@@ -145,16 +195,177 @@
     }
 }
 
-- (IBAction)test:(id)sender {
-    
-    LoginViewController *l = [[LoginViewController alloc] init];
-    [self.navigationController presentViewController:l animated:YES completion:nil];
-}
+
 
 -(void)aggiornaTotaleWithQuantita:(int)quantita
 {
-    double tot = offertaSelezionata.PrezzoFinale * quantita;
+    tot = offertaSelezionata.PrezzoFinale * quantita;
     [lblTot setText:[NSString stringWithFormat:@"%.2f €",tot]];
     [btnPaga setTitle:[NSString stringWithFormat:@"Acquista  %.2f €", tot] forState:UIControlStateNormal];
 }
+
+
+
+- (void)simplePayment {
+	
+	//optional, set shippingEnabled to TRUE if you want to display shipping
+	//options to the user, default: TRUE
+	[PayPal getPayPalInst].shippingEnabled = TRUE;
+	
+	//optional, set dynamicAmountUpdateEnabled to TRUE if you want to compute
+	//shipping and tax based on the user's address choice, default: FALSE
+	[PayPal getPayPalInst].dynamicAmountUpdateEnabled = FALSE;
+	
+	//optional, choose who pays the fee, default: FEEPAYER_EACHRECEIVER
+	[PayPal getPayPalInst].feePayer = FEEPAYER_EACHRECEIVER;
+	
+	//for a payment with a single recipient, use a PayPalPayment object
+	PayPalPayment *payment = [[PayPalPayment alloc] init] ;
+	payment.recipient =    @"example-merchant-1@paypal.com";
+	payment.paymentCurrency = @"EUR";
+	payment.description = offertaSelezionata.Titolo;
+	payment.merchantName = @"Special Deal";
+		//subtotal of all items, without tax and shipping
+	payment.subTotal = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f", tot]];
+	
+	//invoiceData is a PayPalInvoiceData object which contains tax, shipping, and a list of PayPalInvoiceItem objects
+	payment.invoiceData = [[PayPalInvoiceData alloc] init];
+	payment.invoiceData.totalShipping = [NSDecimalNumber decimalNumberWithString:@"0"];
+	payment.invoiceData.totalTax = [NSDecimalNumber decimalNumberWithString:@"0"];
+	
+	//invoiceItems is a list of PayPalInvoiceItem objects
+	//NOTE: sum of totalPrice for all items must equal payment.subTotal
+	//NOTE: example only shows a single item, but you can have more than one
+	payment.invoiceData.invoiceItems = [NSMutableArray array];
+	PayPalInvoiceItem *item = [[PayPalInvoiceItem alloc] init];
+	item.totalPrice = payment.subTotal;
+	item.name = @"Deal";
+	[payment.invoiceData.invoiceItems addObject:item];
+	
+	[[PayPal getPayPalInst] checkoutWithPayment:payment];
+}
+
+
+#pragma mark -
+#pragma mark PayPalPaymentDelegate methods
+
+-(void)RetryInitialization
+{
+    [PayPal initializeWithAppID:PAYPAL_KEY forEnvironment:ENV_SANDBOX];
+    
+    //DEVPACKAGE
+    //	[PayPal initializeWithAppID:@"your live app id" forEnvironment:ENV_LIVE];
+    //	[PayPal initializeWithAppID:@"anything" forEnvironment:ENV_NONE];
+}
+
+//paymentSuccessWithKey:andStatus: is a required method. in it, you should record that the payment
+//was successful and perform any desired bookkeeping. you should not do any user interface updates.
+//payKey is a string which uniquely identifies the transaction.
+//paymentStatus is an enum value which can be STATUS_COMPLETED, STATUS_CREATED, or STATUS_OTHER
+- (void)paymentSuccessWithKey:(NSString *)payKey andStatus:(PayPalPaymentStatus)paymentStatus {
+    NSString *severity = [[PayPal getPayPalInst].responseMessage objectForKey:@"severity"];
+	NSLog(@"severity: %@", severity);
+	NSString *category = [[PayPal getPayPalInst].responseMessage objectForKey:@"category"];
+	NSLog(@"category: %@", category);
+	NSString *errorId = [[PayPal getPayPalInst].responseMessage objectForKey:@"errorId"];
+	NSLog(@"errorId: %@", errorId);
+	NSString *message = [[PayPal getPayPalInst].responseMessage objectForKey:@"message"];
+	NSLog(@"message: %@", message);
+    
+	status = PAYMENTSTATUS_SUCCESS;
+}
+
+//paymentFailedWithCorrelationID is a required method. in it, you should
+//record that the payment failed and perform any desired bookkeeping. you should not do any user interface updates.
+//correlationID is a string which uniquely identifies the failed transaction, should you need to contact PayPal.
+//errorCode is generally (but not always) a numerical code associated with the error.
+//errorMessage is a human-readable string describing the error that occurred.
+- (void)paymentFailedWithCorrelationID:(NSString *)correlationID {
+    
+    NSString *severity = [[PayPal getPayPalInst].responseMessage objectForKey:@"severity"];
+	NSLog(@"severity: %@", severity);
+	NSString *category = [[PayPal getPayPalInst].responseMessage objectForKey:@"category"];
+	NSLog(@"category: %@", category);
+	NSString *errorId = [[PayPal getPayPalInst].responseMessage objectForKey:@"errorId"];
+	NSLog(@"errorId: %@", errorId);
+	NSString *message = [[PayPal getPayPalInst].responseMessage objectForKey:@"message"];
+	NSLog(@"message: %@", message);
+    
+	status = PAYMENTSTATUS_FAILED;
+}
+
+//paymentCanceled is a required method. in it, you should record that the payment was canceled by
+//the user and perform any desired bookkeeping. you should not do any user interface updates.
+- (void)paymentCanceled {
+	status = PAYMENTSTATUS_CANCELED;
+}
+
+
+//paymentLibraryExit is a required method. this is called when the library is finished with the display
+//and is returning control back to your app. you should now do any user interface updates such as
+//displaying a success/failure/canceled message.
+- (void)paymentLibraryExit {
+	UIAlertView *alert = nil;
+	switch (status) {
+		case PAYMENTSTATUS_SUCCESS:
+            alert = [[UIAlertView alloc] initWithTitle:@"Ok"
+											   message:@"Pagamento effettuato con successo."
+											  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            
+            //	[self.navigationController pushViewController:[[[SuccessViewController alloc] init] autorelease] animated:TRUE];
+			break;
+		case PAYMENTSTATUS_FAILED:
+			alert = [[UIAlertView alloc] initWithTitle:@"Order failed"
+											   message:@"Your order failed. Touch \"Pay with PayPal\" to try again."
+											  delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+			break;
+		case PAYMENTSTATUS_CANCELED:
+						break;
+	}
+	[alert show];
+}
+
+
+//adjustAmountsForAddress:andCurrency:andAmount:andTax:andShipping:andErrorCode: is optional. you only need to
+//provide this method if you wish to recompute tax or shipping when the user changes his/her shipping address.
+//for this method to be called, you must enable shipping and dynamic amount calculation on the PayPal object.
+//the library will try to use the advanced version first, but will use this one if that one is not implemented.
+- (PayPalAmounts *)adjustAmountsForAddress:(PayPalAddress const *)inAddress andCurrency:(NSString const *)inCurrency andAmount:(NSDecimalNumber const *)inAmount
+									andTax:(NSDecimalNumber const *)inTax andShipping:(NSDecimalNumber const *)inShipping andErrorCode:(PayPalAmountErrorCode *)outErrorCode {
+	//do any logic here that would adjust the amount based on the shipping address
+	PayPalAmounts *newAmounts = [[PayPalAmounts alloc] init];
+	newAmounts.currency = @"EUR";
+	newAmounts.payment_amount = (NSDecimalNumber *)inAmount;
+	
+
+	newAmounts.shipping = (NSDecimalNumber *)inShipping;
+	
+	//if you need to notify the library of an error condition, do one of the following
+	//*outErrorCode = AMOUNT_ERROR_SERVER;
+	//*outErrorCode = AMOUNT_CANCEL_TXN;
+	//*outErrorCode = AMOUNT_ERROR_OTHER;
+    
+	return newAmounts;
+}
+
+//adjustAmountsAdvancedForAddress:andCurrency:andReceiverAmounts:andErrorCode: is optional. you only need to
+//provide this method if you wish to recompute tax or shipping when the user changes his/her shipping address.
+//for this method to be called, you must enable shipping and dynamic amount calculation on the PayPal object.
+//the library will try to use this version first, but will use the simple one if this one is not implemented.
+- (NSMutableArray *)adjustAmountsAdvancedForAddress:(PayPalAddress const *)inAddress andCurrency:(NSString const *)inCurrency
+								 andReceiverAmounts:(NSMutableArray *)receiverAmounts andErrorCode:(PayPalAmountErrorCode *)outErrorCode {
+	NSMutableArray *returnArray = [NSMutableArray arrayWithCapacity:[receiverAmounts count]];
+	
+	
+	return returnArray;
+}
+
+
+#pragma mark - Alert View Delegate
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+
+}
+
 @end

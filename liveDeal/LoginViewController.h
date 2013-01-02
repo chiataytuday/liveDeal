@@ -17,7 +17,9 @@
 
 @protocol LoginDelegate <NSObject>
 
+@optional
 -(void)didAuthenticateWithFB:(BOOL)isFb;
+-(void)didAutenticate;
 
 @end
 
@@ -33,10 +35,11 @@
 @property (nonatomic, retain) IBOutlet UITextField *txtPwd;
 @property (strong, nonatomic) id<FBGraphUser> loggedInUser;
 @property (nonatomic, retain) id<SelectDelegate> delegate;
+@property (nonatomic, retain) id<LoginDelegate> loginDelegate;
+@property (nonatomic, assign)  BOOL showBackButton;
 
 
 -(IBAction)logon:(id)sender;
-
 - (IBAction)performLogin:(id)sender;
 -(IBAction)richiediPassword:(id)sender;
 @end

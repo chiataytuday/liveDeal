@@ -13,7 +13,7 @@
 @end
 
 @implementation DealsAcquistatiViewController
-@synthesize deals, logDelegate;
+@synthesize deals;
 
 
 
@@ -25,14 +25,12 @@ static char * const myIndexPathAssociationKey = "";
 {
     
     [super viewDidLoad];
-    
-         
+
     
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
 
     imageQueue_ = dispatch_queue_create("com.company.app.imageQueue", NULL);
 
-    
     
     NSString *url = [NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/get_coupons?token_access=%@&get_info_deal=true&status=all", [[NSUserDefaults standardUserDefaults] objectForKey:@"token_access"]];
     

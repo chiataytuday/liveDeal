@@ -14,8 +14,9 @@
 #import "PagamentoViewController.h"
 #import "QuartzCore/QuartzCore.h"
 #import "Utility.h"
+#import "LoginViewController.h"
 
-@interface OffertaViewController : UIViewController <GPPShareDelegate, UIActionSheetDelegate, UIWebViewDelegate>
+@interface OffertaViewController : UIViewController <GPPShareDelegate, UIActionSheetDelegate, UIWebViewDelegate, LoginDelegate>
 {
      NSTimer *myticker;
     NSDate *today;
@@ -29,9 +30,8 @@
 @property (nonatomic, retain) IBOutlet  UIBarButtonItem *btnAction;
 @property (strong, nonatomic) id<FBGraphUser> loggedInUser;
 @property (retain, nonatomic) IBOutlet UIButton *btnAcquista;
-@property (retain, nonatomic) IBOutlet UINavigationBar *navBar;
 
-- (IBAction)goBack:(id)sender;
+-(IBAction)vaiAPagamento:(id)sender;
 -(IBAction)showActionSheet:(id)sender;
 
 @end

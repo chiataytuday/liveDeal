@@ -28,6 +28,5 @@
 //@property (nonatomic, retain) NSDictionary *deals;
 //@property (nonatomic, retain) NSArray *sortedKey;
 @property (nonatomic, retain) NSMutableArray *deals;
-@property(nonatomic, retain) id<LoginDelegate> logDelegate;
 
 @end

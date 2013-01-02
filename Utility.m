@@ -36,4 +36,46 @@
     
     return res;
 }
+
++(BOOL) isTokenValidWithToken:(NSString *)tokenAccess
+{
+    if (!tokenAccess)
+        return false;
+    
+    NSString *url=[NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/login?token_access=%@",tokenAccess];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:url]];
+    
+    NSURLResponse* response;
+    NSError* error = nil;
+    
+    //Capturing server response
+    NSData* result = [NSURLConnection sendSynchronousRequest:request  returningResponse:&response error:&error];
+    
+    if (!error)
+    {
+    
+        NSArray* json = [NSJSONSerialization
+                         JSONObjectWithData:result
+                         options:kNilOptions error:nil];
+        
+        
+        NSArray *result = [json valueForKeyPath:@"result"];
+        NSDictionary *member = [result valueForKeyPath:@"Member"];
+        
+        if (member!=nil)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+    
+    return false;
+}
+
 @end

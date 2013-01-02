@@ -13,11 +13,24 @@
 #import "ScegliPagamentoViewController.h"
 #import "LoginViewController.h"
 #import "QuartzCore/QuartzCore.h"
+#import "PayPal.h"
 
-@interface PagamentoViewController : UIViewController <SelectDelegate>
+typedef enum PaymentStatuses {
+	PAYMENTSTATUS_SUCCESS,
+	PAYMENTSTATUS_FAILED,
+	PAYMENTSTATUS_CANCELED,
+} PaymentStatus;
+
+
+@interface PagamentoViewController : UIViewController <SelectDelegate, PayPalPaymentDelegate, UIAlertViewDelegate>
 {
      UIImage *imgDeal;
-    
+    PaymentStatus status;
+    double tot;
+    BOOL isIphone5;
+    MBProgressHUD *hud;
+    NSMutableData *tempArray;
+
 }
 
 @property (nonatomic, retain) IBOutlet CustomLabel *lblTitolo;
@@ -32,12 +45,13 @@
 @property (nonatomic, retain) IBOutlet UIImageView *imgCell;
 @property (nonatomic, retain) IBOutlet UIImageView *imgPaypal;
 @property (nonatomic, retain) IBOutlet UILabel *lblCC;
+@property (retain, nonatomic) IBOutlet UINavigationBar *navBar;
+@property (retain, nonatomic) UIButton *paypalButton;
+@property (nonatomic, retain) LoginViewController *loginController;
 
 
-
-- (IBAction)goBack:(id)sender;
 - (IBAction)incrementa:(id)sender;
 - (IBAction)decrementa:(id)sender;
-- (IBAction)test:(id)sender;
+
 
 @end
