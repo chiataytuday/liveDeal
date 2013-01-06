@@ -78,4 +78,14 @@
     return false;
 }
 
++(NSString *)getStringFromHours:(NSDate *)d
+{
+    NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+    [outputFormatter setDateFormat:@"HH:mm"];
+    
+    
+    return [outputFormatter stringFromDate:d];
+
+}
+
 @end

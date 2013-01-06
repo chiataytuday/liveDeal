@@ -17,6 +17,7 @@
 @property (nonatomic, assign) double PrezzoPartenza;
 @property (nonatomic, retain) NSString *DataInizio;
 @property (nonatomic, retain) NSString *DataScadenza;
+@property (nonatomic, retain) NSString *DataFineValidita;
 @property (nonatomic, assign) double Sconto;
 @property (nonatomic, assign) double PrezzoFinale;
 @property (nonatomic, retain) NSString *Descrizione;

@@ -14,6 +14,7 @@
 #import "LoginViewController.h"
 #import "QuartzCore/QuartzCore.h"
 #import "PayPal.h"
+#import "SuccessViewController.h"
 
 typedef enum PaymentStatuses {
 	PAYMENTSTATUS_SUCCESS,
@@ -22,7 +23,7 @@ typedef enum PaymentStatuses {
 } PaymentStatus;
 
 
-@interface PagamentoViewController : UIViewController <SelectDelegate, PayPalPaymentDelegate, UIAlertViewDelegate>
+@interface PagamentoViewController : UIViewController <SelectDelegate, PayPalPaymentDelegate>
 {
      UIImage *imgDeal;
     PaymentStatus status;
@@ -52,6 +53,6 @@ typedef enum PaymentStatuses {
 
 - (IBAction)incrementa:(id)sender;
 - (IBAction)decrementa:(id)sender;
-
+-(IBAction)paga:(id)sender;
 
 @end

@@ -167,13 +167,14 @@
             }
             
             [offerta setValidita:[off valueForKey:@"validita"]];
-            [offerta setUrl:[off valueForKey:@"url"]];
+            [offerta setUrl:[NSString stringWithFormat:@"http://www.specialdeal.it/%@", [off valueForKey:@"id"]]];
             [offerta setPrezzoFinale:[[prices valueForKey:@"discounted"] doubleValue]];
             [offerta setEsercente:es];
             [offerta setPrezzoPartenza:[[prices valueForKey:@"original"] doubleValue]];
             [offerta setSconto:[[discounts valueForKey:@"percentage"] doubleValue]];
             [offerta setDataInizio:[off valueForKey:@"start_date"]];
             [offerta setDataScadenza:[off valueForKey:@"end_date"]];
+            [offerta setDataFineValidita:[off valueForKey:@"coupon_end_date"]];
             [offerta setCouponAcquistati:[[off valueForKey:@"purchased"] integerValue]];
             
             

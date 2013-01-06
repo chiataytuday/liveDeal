@@ -11,5 +11,5 @@
 
 +(NSString *)getValiditaWithDataInizio:(NSString *)dataInizio andDataScadenza:(NSString *)dataScadenza;
 +(BOOL) isTokenValidWithToken:(NSString *)token;
-
++(NSString *)getStringFromHours:(NSDate *)d;
 @end

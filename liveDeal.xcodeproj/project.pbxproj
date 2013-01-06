@@ -35,6 +35,10 @@
 		F60F00EE1675099500052CB9 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F60F00ED1675099500052CB9 /* MessageUI.framework */; };
 		F60F00F116750E1100052CB9 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F60F00EF16750E1100052CB9 /* logo.png */; };
 		F60F00F216750E1100052CB9 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F60F00F016750E1100052CB9 /* logo@2x.png */; };
+		F612DA7216960715009776EF /* SuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F612DA7116960715009776EF /* SuccessViewController.m */; };
+		F612DA7516960775009776EF /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F612DA7416960775009776EF /* EventKit.framework */; };
+		F612DA7B16975F36009776EF /* PreferenzeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F612DA7A16975F36009776EF /* PreferenzeViewController.m */; };
+		F612DA7E16976209009776EF /* OrariNotificheViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F612DA7D16976209009776EF /* OrariNotificheViewController.m */; };
 		F619D96314B05BC0003EB79F /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F619D96214B05BC0003EB79F /* UserViewController.m */; };
 		F61ADE2116523FA2009D4594 /* Offerta.m in Sources */ = {isa = PBXBuildFile; fileRef = F61ADE2016523FA2009D4594 /* Offerta.m */; };
 		F61ADE25165255A1009D4594 /* CitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F61ADE24165255A1009D4594 /* CitiesViewController.m */; };
@@ -308,6 +312,14 @@
 		F60F00ED1675099500052CB9 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		F60F00EF16750E1100052CB9 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = "../../../img liveDeal/logo.png"; sourceTree = "<group>"; };
 		F60F00F016750E1100052CB9 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo@2x.png"; path = "../../../img liveDeal/logo@2x.png"; sourceTree = "<group>"; };
+		F612DA7016960715009776EF /* SuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuccessViewController.h; sourceTree = "<group>"; };
+		F612DA7116960715009776EF /* SuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuccessViewController.m; sourceTree = "<group>"; };
+		F612DA7416960775009776EF /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		F612DA7916975F35009776EF /* PreferenzeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferenzeViewController.h; sourceTree = "<group>"; };
+		F612DA7A16975F36009776EF /* PreferenzeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferenzeViewController.m; sourceTree = "<group>"; };
+		F612DA7C16976209009776EF /* OrariNotificheViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrariNotificheViewController.h; sourceTree = "<group>"; };
+		F612DA7D16976209009776EF /* OrariNotificheViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrariNotificheViewController.m; sourceTree = "<group>"; };
+		F612DA7F16983ED7009776EF /* liveDeal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = liveDeal.entitlements; sourceTree = "<group>"; };
 		F619D96114B05BC0003EB79F /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
 		F619D96214B05BC0003EB79F /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
 		F61ADE1F16523FA2009D4594 /* Offerta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Offerta.h; sourceTree = "<group>"; };
@@ -626,6 +638,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F612DA7516960775009776EF /* EventKit.framework in Frameworks */,
 				F6F4339B1691E13E00782F6C /* libxml2.dylib in Frameworks */,
 				F6F433991691E12600782F6C /* libz.dylib in Frameworks */,
 				F6717161165FCE7200E593E6 /* Security.framework in Frameworks */,
@@ -926,30 +939,31 @@
 		F6905DFB164FB52A00F9319B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F6F4339A1691E13E00782F6C /* libxml2.dylib */,
-				F6F433981691E12600782F6C /* libz.dylib */,
-				F6F756CD1689D72000803DF6 /* CoreData.framework */,
-				F60F00ED1675099500052CB9 /* MessageUI.framework */,
-				F60F00EB1675097200052CB9 /* QuartzCore.framework */,
-				F6905E3B164FC6F300F9319B /* MBProgressHUD.h */,
-				F6905E3C164FC6F300F9319B /* MBProgressHUD.m */,
 				F6717169165FD03600E593E6 /* libGooglePlusUniversal.a */,
-				F6717168165FD03600E593E6 /* GPPShare.h */,
-				F67171D7165FD9B100E593E6 /* OpenSource */,
-				F65946861664EC1000C5387E /* Twitter.framework */,
-				F6717162165FCE7C00E593E6 /* SystemConfiguration.framework */,
-				F6717160165FCE7100E593E6 /* Security.framework */,
-				F673336914B0275700817C79 /* FacebookSDK.framework */,
-				F673337314B027B900817C79 /* Social.framework */,
-				F673337114B027B500817C79 /* AdSupport.framework */,
-				F673336F14B027A800817C79 /* Accounts.framework */,
 				F673336B14B0278400817C79 /* FacebookSDKResources.bundle */,
 				F673336C14B0278400817C79 /* FBUserSettingsViewResources.bundle */,
-				F6905E45165015D700F9319B /* MapKit.framework */,
-				F6905E39164FBDE100F9319B /* CoreLocation.framework */,
-				F6905DFC164FB52A00F9319B /* UIKit.framework */,
-				F6905DFE164FB52A00F9319B /* Foundation.framework */,
+				F6F4339A1691E13E00782F6C /* libxml2.dylib */,
+				F6F433981691E12600782F6C /* libz.dylib */,
+				F673336F14B027A800817C79 /* Accounts.framework */,
+				F673337114B027B500817C79 /* AdSupport.framework */,
+				F6F756CD1689D72000803DF6 /* CoreData.framework */,
 				F6905E00164FB52A00F9319B /* CoreGraphics.framework */,
+				F6905E39164FBDE100F9319B /* CoreLocation.framework */,
+				F612DA7416960775009776EF /* EventKit.framework */,
+				F673336914B0275700817C79 /* FacebookSDK.framework */,
+				F6905DFE164FB52A00F9319B /* Foundation.framework */,
+				F6905E45165015D700F9319B /* MapKit.framework */,
+				F60F00ED1675099500052CB9 /* MessageUI.framework */,
+				F60F00EB1675097200052CB9 /* QuartzCore.framework */,
+				F6717160165FCE7100E593E6 /* Security.framework */,
+				F673337314B027B900817C79 /* Social.framework */,
+				F6717162165FCE7C00E593E6 /* SystemConfiguration.framework */,
+				F65946861664EC1000C5387E /* Twitter.framework */,
+				F6905DFC164FB52A00F9319B /* UIKit.framework */,
+				F6717168165FD03600E593E6 /* GPPShare.h */,
+				F6905E3B164FC6F300F9319B /* MBProgressHUD.h */,
+				F6905E3C164FC6F300F9319B /* MBProgressHUD.m */,
+				F67171D7165FD9B100E593E6 /* OpenSource */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -957,6 +971,7 @@
 		F6905E02164FB52A00F9319B /* liveDeal */ = {
 			isa = PBXGroup;
 			children = (
+				F612DA7F16983ED7009776EF /* liveDeal.entitlements */,
 				F6905E03164FB52A00F9319B /* Supporting Files */,
 				F6905E34164FBB6500F9319B /* Object Model */,
 				F6905E35164FBB9300F9319B /* ViewControllers */,
@@ -1058,6 +1073,12 @@
 				F6411320168C507B00265403 /* UserDetailViewController.m */,
 				F601FF17168DA475003630E2 /* CouponsAcquistatiViewController.h */,
 				F601FF18168DA475003630E2 /* CouponsAcquistatiViewController.m */,
+				F612DA7016960715009776EF /* SuccessViewController.h */,
+				F612DA7116960715009776EF /* SuccessViewController.m */,
+				F612DA7916975F35009776EF /* PreferenzeViewController.h */,
+				F612DA7A16975F36009776EF /* PreferenzeViewController.m */,
+				F612DA7C16976209009776EF /* OrariNotificheViewController.h */,
+				F612DA7D16976209009776EF /* OrariNotificheViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1555,6 +1576,9 @@
 				F601FF15168CB8E5003630E2 /* Coupon.m in Sources */,
 				F601FF19168DA475003630E2 /* CouponsAcquistatiViewController.m in Sources */,
 				F6F433841691A89300782F6C /* NSString+UrlEncode.m in Sources */,
+				F612DA7216960715009776EF /* SuccessViewController.m in Sources */,
+				F612DA7B16975F36009776EF /* PreferenzeViewController.m in Sources */,
+				F612DA7E16976209009776EF /* OrariNotificheViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

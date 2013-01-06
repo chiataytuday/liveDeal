@@ -184,7 +184,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3J0-Kg-wwX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1404" y="933"/>
+            <point key="canvasLocation" x="1930" y="933"/>
         </scene>
         <!--Deals Acquistati View Controller-->
         <scene sceneID="ZWa-sZ-3qn">
@@ -553,7 +553,7 @@ dentale, facciale, beauty</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KvE-qK-a42" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="871" y="1130"/>
+            <point key="canvasLocation" x="1397" y="1130"/>
         </scene>
         <!--Registrazione View Controller-->
         <scene sceneID="KtS-gq-uks">
@@ -621,7 +621,7 @@ dentale, facciale, beauty</string>
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="2013" y="1070"/>
+            <point key="canvasLocation" x="2539" y="1070"/>
         </scene>
         <!--Esercente Vetrina View Controller-->
         <scene sceneID="CeS-sk-rsd">
@@ -648,7 +648,7 @@ dentale, facciale, beauty</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wkn-nn-nUO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2398" y="240"/>
+            <point key="canvasLocation" x="2924" y="240"/>
         </scene>
         <!--Categorie View Controller-->
         <scene sceneID="FXd-Iq-HfZ">
@@ -1061,15 +1061,9 @@ dentale, facciale, beauty</string>
                                 </items>
                             </navigationBar>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Jsp-0v-fd4" customClass="CustomLabel">
-                                <rect key="frame" x="98" y="14" width="207" height="30"/>
+                                <rect key="frame" x="98" y="9" width="207" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="characterWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="knV-Eb-HB8" customClass="CustomLabel">
-                                <rect key="frame" x="98" y="36" width="202" height="42"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
-                                <color key="textColor" red="0.42352941176470588" green="0.42352941176470588" blue="0.42352941176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Pek-zD-AMN">
@@ -1155,7 +1149,7 @@ dentale, facciale, beauty</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="sfondoBarraAcquista.png" id="7AE-5Y-Onb">
-                                <rect key="frame" x="0.0" y="279" width="320" height="88"/>
+                                <rect key="frame" x="0.0" y="298" width="320" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="sRe-SC-as9">
@@ -1169,6 +1163,9 @@ dentale, facciale, beauty</string>
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="paga:" destination="AW6-2t-BpH" eventType="touchUpInside" id="U80-fM-gYQ"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="logoPayPal.png" id="oEe-a9-NBL">
                                 <rect key="frame" x="20" y="200" width="75" height="22"/>
@@ -1185,6 +1182,11 @@ dentale, facciale, beauty</string>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="scaleAspectFill" id="WSV-WV-I9h">
                                 <rect key="frame" x="12" y="15" width="72" height="60"/>
                             </imageView>
+                            <webView contentMode="scaleToFill" id="czk-Tx-6WD">
+                                <rect key="frame" x="98" y="36" width="208" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -1196,17 +1198,97 @@ dentale, facciale, beauty</string>
                         <outlet property="imgCell" destination="Se7-IT-9j9" id="cyA-nG-Oce"/>
                         <outlet property="imgPaypal" destination="oEe-a9-NBL" id="Bta-hH-5Tl"/>
                         <outlet property="lblCC" destination="lmu-5t-Nk5" id="PI4-da-VlU"/>
-                        <outlet property="lblDescrizione" destination="knV-Eb-HB8" id="hjk-t4-CeW"/>
                         <outlet property="lblQta" destination="prs-7g-tdn" id="4Rb-7r-E5H"/>
                         <outlet property="lblTitolo" destination="Jsp-0v-fd4" id="JLD-Ly-ROU"/>
                         <outlet property="lblTot" destination="68g-8w-R1u" id="aNA-BL-zDm"/>
                         <outlet property="lblValidita" destination="Pek-zD-AMN" id="io9-z9-7gt"/>
                         <segue destination="d8p-28-qvR" kind="modal" identifier="sceltaPagamento" id="eTy-wc-iiF"/>
+                        <segue destination="dcn-yv-cqu" kind="push" identifier="success" id="Kgp-gi-TsY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Ex-SI-4We" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2968" y="-293"/>
+        </scene>
+        <!--Success View Controller-->
+        <scene sceneID="QUw-kf-cYY">
+            <objects>
+                <viewController id="dcn-yv-cqu" customClass="SuccessViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="l1D-k6-g0A">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NY2-D0-7le">
+                                <rect key="frame" x="37" y="260" width="252" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Aggiungi al calendario">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addToCalendar:" destination="dcn-yv-cqu" eventType="touchUpInside" id="Dw8-aj-Xlh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="98g-O2-huT">
+                                <rect key="frame" x="37" y="311" width="252" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Aggiungi promemoria">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addReminder:" destination="dcn-yv-cqu" eventType="touchUpInside" id="HeB-QD-Pdf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="L1e-Sf-pEM">
+                                <rect key="frame" x="37" y="209" width="252" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Ok">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backToHome:" destination="dcn-yv-cqu" eventType="touchUpInside" id="eKY-3M-EBt"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Operazione completata correttamente" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SU4-Hq-X6h">
+                                <rect key="frame" x="20" y="20" width="286" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7pf-VF-KbS" customClass="CustomLabel">
+                                <rect key="frame" x="20" y="56" width="286" height="115"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="kYA-sa-BAg"/>
+                    <connections>
+                        <outlet property="btnAddReminder" destination="98g-O2-huT" id="vXT-hp-J4k"/>
+                        <outlet property="lblTitolo" destination="7pf-VF-KbS" id="aXr-ig-yuS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lJ5-WC-Gts" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3522" y="-302"/>
         </scene>
         <!--Scegli Pagamento View Controller-->
         <scene sceneID="KdZ-lB-x2X">
@@ -1273,7 +1355,7 @@ dentale, facciale, beauty</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QFj-RJ-ijS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3448" y="-181"/>
+            <point key="canvasLocation" x="3966" y="362"/>
         </scene>
         <!--Esercente View Controller-->
         <scene sceneID="Mmm-oq-UaA">
@@ -1443,7 +1525,7 @@ dentale, facciale, beauty</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="elP-yV-pgw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2975" y="458"/>
+            <point key="canvasLocation" x="3501" y="458"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Ic4-AI-TEV">
@@ -1459,11 +1541,128 @@ dentale, facciale, beauty</string>
                         <segue destination="SCD-6s-R0m" kind="relationship" relationship="viewControllers" id="R0Z-b6-aD4"/>
                         <segue destination="CYy-me-cnE" kind="relationship" relationship="viewControllers" id="Ts0-Kk-TH3"/>
                         <segue destination="5TU-eK-jKo" kind="relationship" relationship="viewControllers" id="uln-1A-CMQ"/>
+                        <segue destination="xqz-Fb-ZPF" kind="relationship" relationship="viewControllers" id="6ML-Km-aNF"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Teg-H9-xYV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-229" y="135"/>
+        </scene>
+        <!--Preferenze View Controller-->
+        <scene sceneID="6JY-pV-aqh">
+            <objects>
+                <tableViewController id="K5z-Ea-pAh" customClass="PreferenzeViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="aah-vR-DZV">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection headerTitle="Calendario e Promemoria" id="qVf-Ah-0By">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="FuT-5h-llZ">
+                                        <rect key="frame" x="0.0" y="46" width="320" height="46"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="280" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Orario allarmi:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jfk-eG-XWt">
+                                                    <rect key="frame" x="14" y="11" width="122" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" text="20:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="e13-hh-9nd">
+                                                    <rect key="frame" x="151" y="11" width="109" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <segue destination="Svk-Xe-DDI" kind="push" identifier="orarioNotifiche" id="Wuj-2K-gpx"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="K5z-Ea-pAh" id="dcq-k0-rXY"/>
+                            <outlet property="delegate" destination="K5z-Ea-pAh" id="SSc-9b-ppK"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="MhM-LO-T9U"/>
+                    <connections>
+                        <outlet property="lblOrarioNotifiche" destination="e13-hh-9nd" id="6fX-JN-8oj"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wo6-Kl-xjC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-176" y="1025"/>
+        </scene>
+        <!--Orari Notifiche View Controller-->
+        <scene sceneID="ZS1-pv-h3d">
+            <objects>
+                <viewController id="Svk-Xe-DDI" customClass="OrariNotificheViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="w8b-Em-4Lm">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="30" id="yVH-Ia-XdN">
+                                <rect key="frame" x="0.0" y="151" width="320" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <date key="date" timeIntervalSinceReferenceDate="379019572.73141199">
+                                    <!--2013-01-04 19:12:52 +0000-->
+                                </date>
+                                <locale key="locale" localeIdentifier="it"/>
+                                <timeZone key="timeZone" name="America/Los_Angeles">
+                                    <mutableData key="data">
+VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
+y4kaoNIj9HDSYSYQ1v50INiArZDa/tGg28CQENzes6DdqayQ3r6VoN+JjpDgnneg4WlwkOJ+WaDjSVKQ
+5F47oOUpNJDmR1gg5xJREOgnOiDo8jMQ6gccIOrSFRDr5v4g7LH3EO3G4CDukdkQ76/8oPBxuxDxj96g
+8n/BkPNvwKD0X6OQ9U+ioPY/hZD3L4Sg+CiiEPkPZqD6CIQQ+viDIPvoZhD82GUg/chIEP64RyD/qCoQ
+AJgpIAGIDBACeAsgA3EokARhJ6AFUQqQBkEJoAcw7JAHjUOgCRDOkAmtvyAK8LCQC+CvoAzZzRANwJGg
+DrmvEA+priAQmZEQEYmQIBJ5cxATaXIgFFlVEBVJVCAWOTcQFyk2IBgiU5AZCRggGgI1kBryNKAb4heQ
+HNIWoB3B+ZAesfigH6HbkCB2KyAhgb2QIlYNICNq2hAkNe8gJUq8ECYV0SAnKp4QJ/7toCkKgBAp3s+g
+KupiECu+saAs036QLZ6ToC6zYJAvfnWgMJNCkDFnkiAycySQM0d0IDRTBpA1J1YgNjLokDcHOCA4HAUQ
+OOcaIDn75xA6xvwgO9vJEDywGKA9u6sQPo/6oD+bjRBAb9ygQYSpkEJPvqBDZIuQRC+goEVEbZBF89Mg
+Ry2KEEfTtSBJDWwQSbOXIErtThBLnLOgTNZqkE18laBOtkyQT1x3oFCWLpBRPFmgUnYQkFMcO6BUVfKQ
+VPwdoFY11JBW5TogWB7xEFjFHCBZ/tMQWqT+IFvetRBchOAgXb6XEF5kwiBfnnkQYE3eoGGHlZBiLcCg
+Y2d3kGQNoqBlR1mQZe2EoGcnO5BnzWagaQcdkGmtSKBq5v+Qa5ZlIGzQHBBtdkcgbq/+EG9WKSBwj+AQ
+cTYLIHJvwhBzFe0gdE+kEHT/CaB2OMCQdt7roHgYopB4vs2gefiEkHqer6B72GaQfH6RoH24SJB+XnOg
+f5gqkAABAAECAwEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
+AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
+AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
+AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
+</mutableData>
+                                </timeZone>
+                                <connections>
+                                    <action selector="selezionaData:" destination="Svk-Xe-DDI" eventType="valueChanged" id="ahz-5I-dn4"/>
+                                </connections>
+                            </datePicker>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" text="Sarai avvisato alle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BSf-uK-nIo">
+                                <rect key="frame" x="20" y="13" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="fEI-zo-cWG"/>
+                    <connections>
+                        <outlet property="lblOrarioNotifiche" destination="BSf-uK-nIo" id="tcH-YD-H9f"/>
+                        <outlet property="timePicker" destination="yVH-Ia-XdN" id="tpX-3Q-PGr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SMo-Pu-w8a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="267" y="832"/>
         </scene>
         <!--Esercenti Preferiti View Controller-->
         <scene sceneID="d93-Jy-oWU">
@@ -1515,7 +1714,7 @@ dentale, facciale, beauty</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qcS-WY-aM6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="934" y="539"/>
+            <point key="canvasLocation" x="1460" y="539"/>
         </scene>
         <!--Navigation Controller - Preferiti-->
         <scene sceneID="YBR-Vn-M6h">
@@ -1531,7 +1730,7 @@ dentale, facciale, beauty</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lv3-p6-o09" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="392" y="458"/>
+            <point key="canvasLocation" x="918" y="458"/>
         </scene>
         <!--Navigation Controller - Account-->
         <scene sceneID="kAl-qi-gSq">
@@ -1550,7 +1749,26 @@ dentale, facciale, beauty</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mQa-KR-rhM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="397" y="1081"/>
+            <point key="canvasLocation" x="923" y="1081"/>
+        </scene>
+        <!--Navigation Controller - Altro-->
+        <scene sceneID="ZZT-Yx-j6B">
+            <objects>
+                <navigationController id="xqz-Fb-ZPF" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Altro" id="rmj-XB-ZfL"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QI4-p4-DHJ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="K5z-Ea-pAh" kind="relationship" relationship="rootViewController" id="SyU-1Y-58L"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xjh-xM-WRO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-671" y="1323"/>
         </scene>
     </scenes>
     <resources>
@@ -1664,12 +1882,20 @@ dentale, facciale, beauty</string>
                 <relationship kind="outlet" name="vwOfferta" candidateClass="UIView"/>
             </relationships>
         </class>
+        <class className="OrariNotificheViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/OrariNotificheViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="selezionaData:"/>
+                <relationship kind="outlet" name="lblOrarioNotifiche" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="timePicker" candidateClass="UIDatePicker"/>
+            </relationships>
+        </class>
         <class className="PagamentoViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PagamentoViewController.h"/>
             <relationships>
                 <relationship kind="action" name="decrementa:"/>
-                <relationship kind="action" name="goBack:"/>
                 <relationship kind="action" name="incrementa:"/>
+                <relationship kind="action" name="paga:"/>
                 <relationship kind="outlet" name="btnPaga" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="img" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="imgBorder" candidateClass="UIImageView"/>
@@ -1682,6 +1908,12 @@ dentale, facciale, beauty</string>
                 <relationship kind="outlet" name="lblTot" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="lblValidita" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="navBar" candidateClass="UINavigationBar"/>
+            </relationships>
+        </class>
+        <class className="PreferenzeViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PreferenzeViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="lblOrarioNotifiche" candidateClass="UILabel"/>
             </relationships>
         </class>
         <class className="RegistrazioneViewController" superclassName="UIViewController">
@@ -1697,6 +1929,16 @@ dentale, facciale, beauty</string>
                 <relationship kind="outlet" name="mapButtonItem" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="viewControl" candidateClass="UIView"/>
                 <relationship kind="outlet" name="wait" candidateClass="UIActivityIndicatorView"/>
+            </relationships>
+        </class>
+        <class className="SuccessViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SuccessViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="addReminder:"/>
+                <relationship kind="action" name="addToCalendar:"/>
+                <relationship kind="action" name="backToHome:"/>
+                <relationship kind="outlet" name="btnAddReminder" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="lblTitolo" candidateClass="CustomLabel"/>
             </relationships>
         </class>
         <class className="TitoloViewController" superclassName="UITableViewController">
@@ -1724,9 +1966,9 @@ dentale, facciale, beauty</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="qVj-8x-8uO"/>
         <segue reference="SCn-j2-MPx"/>
-        <segue reference="R3H-lO-sFl"/>
+        <segue reference="qVj-8x-8uO"/>
         <segue reference="wVR-wb-8e3"/>
+        <segue reference="R3H-lO-sFl"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -30,8 +30,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-   
-    
     paypalButton = [[PayPal getPayPalInst] getPayButtonWithTarget:self andAction:@selector(simplePayment) andButtonType:BUTTON_294x43];
     
     
@@ -104,13 +102,15 @@
     [self aggiornaTotaleWithQuantita:1];
     
     
-    
-    [img.layer setBorderColor:[[UIColor whiteColor] CGColor]];
-    [img.layer setBorderWidth: 4.0];
-    
-    [imgBorder.layer setBorderColor:[[UIColor colorWithRed:245.0f / 255 green:101.0f / 255 blue:34.0f / 255 alpha:1] CGColor]];
-    [imgBorder.layer setBorderWidth: 2.0];
-    
+    if (offertaSelezionata.Categoria.ColoreCornice != nil)
+    {
+        [img.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+        [img.layer setBorderWidth: 4.0];
+        
+        
+        [imgBorder.layer setBorderColor:[offertaSelezionata.Categoria.ColoreCornice CGColor]];
+        [imgBorder.layer setBorderWidth: 2.0];
+    }
     
     if ([offertaSelezionata.immagini count]>=1)
     {
@@ -180,10 +180,19 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-
-    ScegliPagamentoViewController *vc = [segue destinationViewController];
-    vc.delegate = self;
+    if ([[segue identifier] isEqualToString:@"success"])
+    {
+        SuccessViewController *s = [segue destinationViewController];
+        s.offertaSelezionata = offertaSelezionata;
+    }
+    else
+    {
+        
+        ScegliPagamentoViewController *vc = [segue destinationViewController];
+        vc.delegate = self;
+    }
 }
+    
 
 - (IBAction)decrementa:(id)sender{
 
@@ -195,7 +204,10 @@
     }
 }
 
-
+-(IBAction)paga:(id)sender
+{
+    [self performSegueWithIdentifier:@"success" sender:self];
+}
 
 -(void)aggiornaTotaleWithQuantita:(int)quantita
 {
@@ -306,23 +318,22 @@
 //displaying a success/failure/canceled message.
 - (void)paymentLibraryExit {
 	UIAlertView *alert = nil;
+     
 	switch (status) {
 		case PAYMENTSTATUS_SUCCESS:
-            alert = [[UIAlertView alloc] initWithTitle:@"Ok"
-											   message:@"Pagamento effettuato con successo."
-											  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            
-            //	[self.navigationController pushViewController:[[[SuccessViewController alloc] init] autorelease] animated:TRUE];
-			break;
+                [self performSegueWithIdentifier:@"success" sender:self];
+           	break;
 		case PAYMENTSTATUS_FAILED:
 			alert = [[UIAlertView alloc] initWithTitle:@"Order failed"
 											   message:@"Your order failed. Touch \"Pay with PayPal\" to try again."
 											  delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 			break;
 		case PAYMENTSTATUS_CANCELED:
-						break;
+            break;
 	}
-	[alert show];
+    
+    if (!alert)
+        [alert show];
 }
 
 
@@ -361,11 +372,7 @@
 }
 
 
-#pragma mark - Alert View Delegate
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    [self.navigationController popToRootViewControllerAnimated:YES];
 
-}
+
 
 @end

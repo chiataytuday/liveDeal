@@ -17,6 +17,17 @@
     
     [[PayPal initializeWithAppID:PAYPAL_KEY forEnvironment:ENV_SANDBOX] setLang:@"it_IT"];
     
+     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"orarioNotifiche"]==nil)
+     {
+        
+         NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
+         [dateformatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+         
+         NSDate *d = [dateformatter dateFromString:@"2013-01-01 20:30:00"];
+         
+         [[NSUserDefaults standardUserDefaults] setObject:d forKey:@"orarioNotifiche"];
+         
+     }
     
     tipoRicerca=CITTA;
     

@@ -321,12 +321,11 @@
     // Post a status update to the user's feed via the Graph API, and display an alert view
     // with the results or an error.
    // NSString *name = self.loggedInUser.first_name;
-    NSString *message = @"Ok";
+    NSString *message = @"Post eseguito con successo";
     
-    
-    
-    NSMutableDictionary *postParams =  [[NSMutableDictionary alloc] initWithObjectsAndKeys:offertaSelezionata.Url, @"link", [offertaSelezionata.immagini objectAtIndex:0], @"picture",
-                                        offertaSelezionata.Titolo,@"name",nil];
+   
+    NSMutableDictionary *postParams =  [[NSMutableDictionary alloc] initWithObjectsAndKeys:offertaSelezionata.Url, @"link", [NSString stringWithFormat:@"http://www.specialdeal.it/crop/50x50/%@",  [offertaSelezionata.immagini objectAtIndex:0]], @"picture",
+                                        offertaSelezionata.Titolo, @"name",nil];
     
     [FBRequestConnection startWithGraphPath:@"me/feed"
                                  parameters:postParams
