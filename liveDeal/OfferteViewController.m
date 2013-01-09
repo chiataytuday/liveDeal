@@ -139,8 +139,7 @@
             NSDictionary *discounts = [off valueForKey:@"discounts"];
             NSDictionary *category = [off valueForKey:@"category"];
             
-            
-            
+        
             double lat = [[esercente valueForKey:@"latitude"] doubleValue];
             double lng = [[esercente valueForKey: @"longitude"] doubleValue];
             
@@ -150,10 +149,11 @@
                                                            Coordinate:CLLocationCoordinate2DMake(lat, lng)];
             
             
-            Offerta *offerta = [[Offerta alloc] initWithTitolo:[off valueForKey:@"title"]
-                                                   Descrizione:[off valueForKey:@"description"]
-                                                    Condizioni:[off valueForKey:@"conditions"]];
+            Offerta *offerta = [[Offerta alloc] init];
             
+            [offerta setTitolo:[off valueForKey:@"title"]];
+            [offerta setDescrizione:[off valueForKey:@"description"]];
+            [offerta setCondizioni:[off valueForKey:@"conditions"]];
             [offerta setIsLive:[[off valueForKey:@"is_live"] boolValue]];
             
             CLLocation *distanzaEsercente = [[CLLocation alloc] initWithCoordinate: CLLocationCoordinate2DMake(lat, lng) altitude:1 horizontalAccuracy:1 verticalAccuracy:-1 timestamp:nil];
@@ -166,6 +166,28 @@
                 
             }
             
+            if (![[off objectForKey:@"subdeals"] isKindOfClass: [NSNull class]])
+            {
+                NSArray *subdeals = [off valueForKey:@"subdeals"];
+                for (NSDictionary *subdeal in subdeals)
+                {
+                    NSDictionary *pricesSd = [subdeal valueForKey:@"prices"];
+                    NSDictionary *discountsSd = [subdeal valueForKey:@"discounts"];
+                    
+                    
+                    OpzioneOfferta *oo = [[OpzioneOfferta alloc] init];
+                    [oo setPrezzoPartenza:[[pricesSd valueForKey:@"original"] doubleValue]];
+                    [oo setPrezzoFinale:[[pricesSd valueForKey:@"discounted"] doubleValue]];
+                    [oo setSconto:[[discountsSd valueForKey:@"percentage"] doubleValue]];
+                    [oo setId:[[subdeal objectForKey:@"id"] intValue]];
+                    [oo setDescrizione:[subdeal objectForKey:@"title"]];
+                    [offerta.Subdeals addObject:oo];
+                    
+                }
+            }
+            
+            
+            [offerta setId:[[off valueForKey:@"id"] integerValue]];
             [offerta setValidita:[off valueForKey:@"validita"]];
             [offerta setUrl:[NSString stringWithFormat:@"http://www.specialdeal.it/%@", [off valueForKey:@"id"]]];
             [offerta setPrezzoFinale:[[prices valueForKey:@"discounted"] doubleValue]];

@@ -67,11 +67,11 @@
             </objects>
             <point key="canvasLocation" x="908" y="-150"/>
         </scene>
-        <!--Nav View Controller - Offerte-->
+        <!--Nav View Controller - OFFERTE-->
         <scene sceneID="C4c-pS-H5d">
             <objects>
                 <navigationController definesPresentationContext="YES" id="SCD-6s-R0m" customClass="NavViewController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Offerte" id="cIc-lW-kED"/>
+                    <tabBarItem key="tabBarItem" title="OFFERTE" id="cIc-lW-kED"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YxP-bz-NqZ">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -499,7 +499,7 @@ dentale, facciale, beauty</string>
                         <sections>
                             <tableViewSection headerTitle="Custom header" footerTitle="Button ecc" id="FIX-pk-xOq">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="kQM-Gf-Qap">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="kQM-Gf-Qap">
                                         <rect key="frame" x="0.0" y="46" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -520,7 +520,7 @@ dentale, facciale, beauty</string>
                                             <segue destination="b2q-M3-lXo" kind="push" identifier="datiUtente" id="uAi-yl-fFh"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="8ge-LW-n53">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="8ge-LW-n53">
                                         <rect key="frame" x="0.0" y="91" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -621,7 +621,63 @@ dentale, facciale, beauty</string>
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="2539" y="1070"/>
+            <point key="canvasLocation" x="2635" y="1114"/>
+        </scene>
+        <!--Subdeals View Controller-->
+        <scene sceneID="IdG-rY-qPS">
+            <objects>
+                <tableViewController id="8fA-Ql-MnM" customClass="SubdealsViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="PzV-AX-9Jo">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="subdeal" rowHeight="80" id="EjL-n4-ZsN">
+                                <rect key="frame" x="0.0" y="22" width="320" height="80"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="79"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Pc0-sD-HT8">
+                                            <rect key="frame" x="20" y="11" width="280" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="f8W-bO-Aw0">
+                                            <rect key="frame" x="20" y="32" width="280" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Snu-0h-sY0">
+                                            <rect key="frame" x="20" y="51" width="280" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <connections>
+                                    <segue destination="AW6-2t-BpH" kind="push" identifier="pagamento" id="pCU-3c-Ppg"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="8fA-Ql-MnM" id="jaG-ht-6hh"/>
+                            <outlet property="delegate" destination="8fA-Ql-MnM" id="XSJ-su-KDp"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Wa5-Iu-Rlu"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YTm-wP-awU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3064" y="-84"/>
         </scene>
         <!--Esercente Vetrina View Controller-->
         <scene sceneID="CeS-sk-rsd">
@@ -648,7 +704,7 @@ dentale, facciale, beauty</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wkn-nn-nUO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2924" y="240"/>
+            <point key="canvasLocation" x="2398" y="-975"/>
         </scene>
         <!--Categorie View Controller-->
         <scene sceneID="FXd-Iq-HfZ">
@@ -851,7 +907,7 @@ dentale, facciale, beauty</string>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <connections>
-                                                    <segue destination="K9T-H2-rCe" kind="modal" identifier="offertaLive" id="yds-g9-CD9"/>
+                                                    <segue destination="K9T-H2-rCe" kind="push" identifier="offertaLive" id="yds-g9-CD9"/>
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="vetrinaCell" rowHeight="60" id="HyU-DR-pec">
@@ -978,7 +1034,7 @@ dentale, facciale, beauty</string>
                         <outlet property="mapView" destination="Dxj-yx-qBY" id="vct-HT-C4a"/>
                         <outlet property="myTable" destination="iU1-pg-jIe" id="03M-Hn-ciG"/>
                         <outlet property="vwOfferta" destination="v22-Dw-Seh" id="oyU-j3-aDp"/>
-                        <segue destination="K9T-H2-rCe" kind="modal" identifier="offertaMap" id="3Ev-zc-g5U"/>
+                        <segue destination="K9T-H2-rCe" kind="push" identifier="offertaMap" id="3Ev-zc-g5U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ewW-P8-T3A" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1037,6 +1093,7 @@ dentale, facciale, beauty</string>
                         <outlet property="btnAction" destination="Y2I-kz-HOW" id="XHv-yM-kiM"/>
                         <outlet property="lblCountdown" destination="Vb8-xI-WQZ" id="Vh6-9N-6oB"/>
                         <segue destination="AW6-2t-BpH" kind="push" identifier="pagamento" id="Gwc-Rh-jkj"/>
+                        <segue destination="8fA-Ql-MnM" kind="push" identifier="subdeals" id="pY7-Ub-c3o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dpy-OV-G0N" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1171,7 +1228,7 @@ dentale, facciale, beauty</string>
                                 <rect key="frame" x="20" y="200" width="75" height="22"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Carta di credito" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lmu-5t-Nk5">
-                                <rect key="frame" x="20" y="200" width="144" height="21"/>
+                                <rect key="frame" x="20" y="199" width="144" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -1182,11 +1239,13 @@ dentale, facciale, beauty</string>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="scaleAspectFill" id="WSV-WV-I9h">
                                 <rect key="frame" x="12" y="15" width="72" height="60"/>
                             </imageView>
-                            <webView contentMode="scaleToFill" id="czk-Tx-6WD">
-                                <rect key="frame" x="98" y="36" width="208" height="39"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3rQ-1H-LMS">
+                                <rect key="frame" x="98" y="39" width="202" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </webView>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -1197,18 +1256,20 @@ dentale, facciale, beauty</string>
                         <outlet property="imgBorder" destination="rOy-6k-DCD" id="n1i-rn-Eqq"/>
                         <outlet property="imgCell" destination="Se7-IT-9j9" id="cyA-nG-Oce"/>
                         <outlet property="imgPaypal" destination="oEe-a9-NBL" id="Bta-hH-5Tl"/>
-                        <outlet property="lblCC" destination="lmu-5t-Nk5" id="PI4-da-VlU"/>
+                        <outlet property="lblCC" destination="lmu-5t-Nk5" id="LHF-Lr-Rb6"/>
                         <outlet property="lblQta" destination="prs-7g-tdn" id="4Rb-7r-E5H"/>
+                        <outlet property="lblRagioneSociale" destination="3rQ-1H-LMS" id="Xks-2h-bPX"/>
                         <outlet property="lblTitolo" destination="Jsp-0v-fd4" id="JLD-Ly-ROU"/>
                         <outlet property="lblTot" destination="68g-8w-R1u" id="aNA-BL-zDm"/>
                         <outlet property="lblValidita" destination="Pek-zD-AMN" id="io9-z9-7gt"/>
                         <segue destination="d8p-28-qvR" kind="modal" identifier="sceltaPagamento" id="eTy-wc-iiF"/>
                         <segue destination="dcn-yv-cqu" kind="push" identifier="success" id="Kgp-gi-TsY"/>
+                        <segue destination="7SF-N7-etH" kind="push" identifier="creditCard" id="7we-TX-gpV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Ex-SI-4We" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2968" y="-293"/>
+            <point key="canvasLocation" x="3656" y="-645"/>
         </scene>
         <!--Success View Controller-->
         <scene sceneID="QUw-kf-cYY">
@@ -1288,7 +1349,81 @@ dentale, facciale, beauty</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lJ5-WC-Gts" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3522" y="-302"/>
+            <point key="canvasLocation" x="4649" y="-751"/>
+        </scene>
+        <!--Scegli Carta Credito View Controller-->
+        <scene sceneID="QMY-wt-AD5">
+            <objects>
+                <tableViewController id="7SF-N7-etH" customClass="ScegliCartaCreditoViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="1Z7-od-IJI">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cc" rowHeight="80" id="xp4-HY-zTB">
+                                <rect key="frame" x="0.0" y="46" width="320" height="81"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="10" y="1" width="300" height="79"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6Oj-QP-Lbs">
+                                            <rect key="frame" x="20" y="11" width="280" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ssj-aq-gBr">
+                                            <rect key="frame" x="20" y="30" width="280" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WX4-c8-RAu">
+                                            <rect key="frame" x="20" y="50" width="280" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="nuovacc" id="GLg-QM-dhu">
+                                <rect key="frame" x="0.0" y="127" width="320" height="45"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Nuova carta" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WpS-iQ-okk">
+                                            <rect key="frame" x="20" y="11" width="238" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="7SF-N7-etH" id="6GP-Ja-mhT"/>
+                            <outlet property="delegate" destination="7SF-N7-etH" id="mYl-ch-bTU"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="kNA-Fa-ojS"/>
+                    <connections>
+                        <segue destination="dcn-yv-cqu" kind="push" identifier="pagamentoOk" id="0r3-zy-bt6"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bjj-8A-xxJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4124" y="-312"/>
         </scene>
         <!--Scegli Pagamento View Controller-->
         <scene sceneID="KdZ-lB-x2X">
@@ -1355,7 +1490,7 @@ dentale, facciale, beauty</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QFj-RJ-ijS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3966" y="362"/>
+            <point key="canvasLocation" x="4166" y="-1142"/>
         </scene>
         <!--Esercente View Controller-->
         <scene sceneID="Mmm-oq-UaA">
@@ -1525,12 +1660,12 @@ dentale, facciale, beauty</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="elP-yV-pgw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3501" y="458"/>
+            <point key="canvasLocation" x="2433" y="418"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="Ic4-AI-TEV">
             <objects>
-                <tabBarController id="D7F-ad-ohG" sceneMemberID="viewController">
+                <tabBarController id="D7F-ad-ohG" customClass="TabBarViewController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="J02-ud-0M1">
@@ -1620,7 +1755,7 @@ dentale, facciale, beauty</string>
                                 </date>
                                 <locale key="locale" localeIdentifier="it"/>
                                 <timeZone key="timeZone" name="America/Los_Angeles">
-                                    <mutableData key="data">
+                                    <data key="data">
 VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
 y4kaoNIj9HDSYSYQ1v50INiArZDa/tGg28CQENzes6DdqayQ3r6VoN+JjpDgnneg4WlwkOJ+WaDjSVKQ
 5F47oOUpNJDmR1gg5xJREOgnOiDo8jMQ6gccIOrSFRDr5v4g7LH3EO3G4CDukdkQ76/8oPBxuxDxj96g
@@ -1638,7 +1773,7 @@ f5gqkAABAAECAwEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
-</mutableData>
+</data>
                                 </timeZone>
                                 <connections>
                                     <action selector="selezionaData:" destination="Svk-Xe-DDI" eventType="valueChanged" id="ahz-5I-dn4"/>
@@ -1716,11 +1851,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="1460" y="539"/>
         </scene>
-        <!--Navigation Controller - Preferiti-->
+        <!--Navigation Controller - PREFERITI-->
         <scene sceneID="YBR-Vn-M6h">
             <objects>
                 <navigationController definesPresentationContext="YES" id="5TU-eK-jKo" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Preferiti" id="SCn-xf-SBr"/>
+                    <tabBarItem key="tabBarItem" title="PREFERITI" id="SCn-xf-SBr"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="x12-TQ-NgE">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1732,11 +1867,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="918" y="458"/>
         </scene>
-        <!--Navigation Controller - Account-->
+        <!--Navigation Controller - ACCOUNT-->
         <scene sceneID="kAl-qi-gSq">
             <objects>
                 <navigationController id="CYy-me-cnE" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Account" id="3B1-0J-UIp"/>
+                    <tabBarItem key="tabBarItem" title="ACCOUNT" id="3B1-0J-UIp"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="QAw-JX-CEv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1751,11 +1886,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="923" y="1081"/>
         </scene>
-        <!--Navigation Controller - Altro-->
+        <!--Navigation Controller - ALTRO-->
         <scene sceneID="ZZT-Yx-j6B">
             <objects>
                 <navigationController id="xqz-Fb-ZPF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Altro" id="rmj-XB-ZfL"/>
+                    <tabBarItem key="tabBarItem" title="ALTRO" id="rmj-XB-ZfL"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="QI4-p4-DHJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1779,8 +1914,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="baseLoginFb.png" width="280" height="64"/>
         <image name="baseNC.png" width="52" height="48"/>
         <image name="baseTot.png" width="86" height="48"/>
-        <image name="buttonFood.png" width="105" height="107"/>
-        <image name="buttonNonFood.png" width="105" height="107"/>
+        <image name="buttonFood.png" width="125" height="124"/>
+        <image name="buttonNonFood.png" width="119" height="124"/>
         <image name="cell.png" width="302" height="45"/>
         <image name="creaAccount.png" width="52" height="7"/>
         <image name="descrHome.png" width="240" height="288"/>
@@ -1902,8 +2037,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="imgCell" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="imgPaypal" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="lblCC" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblDescrizione" candidateClass="CustomLabel"/>
                 <relationship kind="outlet" name="lblQta" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblRagioneSociale" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="lblTitolo" candidateClass="CustomLabel"/>
                 <relationship kind="outlet" name="lblTot" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="lblValidita" candidateClass="UILabel"/>
@@ -1919,6 +2054,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="RegistrazioneViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RegistrazioneViewController.h"/>
         </class>
+        <class className="ScegliCartaCreditoViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ScegliCartaCreditoViewController.h"/>
+        </class>
         <class className="ScegliPagamentoViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ScegliPagamentoViewController.h"/>
         </class>
@@ -1931,6 +2069,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="wait" candidateClass="UIActivityIndicatorView"/>
             </relationships>
         </class>
+        <class className="SubdealsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SubdealsViewController.h"/>
+        </class>
         <class className="SuccessViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SuccessViewController.h"/>
             <relationships>
@@ -1940,6 +2081,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="btnAddReminder" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="lblTitolo" candidateClass="CustomLabel"/>
             </relationships>
+        </class>
+        <class className="TabBarViewController" superclassName="UITabBarController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TabBarViewController.h"/>
         </class>
         <class className="TitoloViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TitoloViewController.h"/>
@@ -1966,9 +2110,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="SCn-j2-MPx"/>
         <segue reference="qVj-8x-8uO"/>
-        <segue reference="wVR-wb-8e3"/>
+        <segue reference="SCn-j2-MPx"/>
         <segue reference="R3H-lO-sFl"/>
+        <segue reference="3Ev-zc-g5U"/>
+        <segue reference="pCU-3c-Ppg"/>
+        <segue reference="Kgp-gi-TsY"/>
     </inferredMetricsTieBreakers>
 </document>

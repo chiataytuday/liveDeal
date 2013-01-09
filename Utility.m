@@ -8,6 +8,7 @@
 
 #import "Utility.h"
 
+
 @implementation Utility
 
 
@@ -37,7 +38,7 @@
     return res;
 }
 
-+(BOOL) isTokenValidWithToken:(NSString *)tokenAccess
++ (User *) UserFromToken:(NSString *)tokenAccess
 {
     if (!tokenAccess)
         return false;
@@ -66,16 +67,32 @@
         
         if (member!=nil)
         {
-            return true;
+            User *u = [[User alloc] init];
+            [u setNome:[member objectForKey:@"firstname"]];
+            [u setCognome:[member objectForKey:@"lastname"]];
+            [u setEmail:[member objectForKey:@"email"]];
+            
+            
+            if ([[member objectForKey:@"gender"] isEqualToString:@"M"])
+                [u setSesso:@"Maschio"];
+            else if ([[member objectForKey:@"gender"] isEqualToString:@"F"])
+                [u setSesso:@"Femmina"];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:[member objectForKey:@"token_access"] forKey:@"token_access"];
+            [[NSUserDefaults standardUserDefaults] setObject:[member objectForKey:@"email"] forKey:@"email_logged"];
+            
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            return u;
         }
         else
         {
-            return false;
+            return nil;
         }
 
     }
     
-    return false;
+    return nil;
 }
 
 +(NSString *)getStringFromHours:(NSDate *)d
@@ -86,6 +103,17 @@
     
     return [outputFormatter stringFromDate:d];
 
+}
+
++ (void) hideGradientBackground:(UIView*)theView
+{
+    for (UIView * subview in theView.subviews)
+    {
+        if ([subview isKindOfClass:[UIImageView class]])
+            subview.hidden = YES;
+        
+        [self hideGradientBackground:subview];
+    }
 }
 
 @end

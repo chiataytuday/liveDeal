@@ -18,6 +18,7 @@
 #define GOOGLE_PLACES_KEY @"AIzaSyCb2aMRq1POO-aXsj5XdvWEIgzm_7y8OkQ"
 #define GOOGLE_PLUS_KEY @"1028890509676.apps.googleusercontent.com"
 #define PAYPAL_KEY @"APP-80W284485P519543T"
+#define PAYPAL_ENVIRONMENT ENV_SANDBOX
 
 #define CITTA 1
 #define CATEGORIE 2

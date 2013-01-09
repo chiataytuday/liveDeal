@@ -28,27 +28,14 @@
     
     NSString *tokenAccess = [defaults objectForKey:@"token_access"];
     
-    if (![Utility isTokenValidWithToken:tokenAccess])
+    user = [Utility UserFromToken:tokenAccess];
+    
+    if (!user)
     {
         [self.navigationController pushViewController:loginController animated:YES];
         
     }
-    /*
-    if (tokenAccess==nil)
-        [self.navigationController pushViewController:loginController animated:YES];
-    else{
-        NSString *url=@"";
-        
-        if ([defaults objectForKey:@"tokenAPN"]!= nil)
-            url =[NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/login?token_access=%@&tokenAPN=%@",
-                  tokenAccess, [defaults objectForKey:@"tokenAPN"]];
-        else
-            url= [NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/login?token_access=%@",
-                  tokenAccess];
-        
-        [self Ricerca:url];
-    }*/
-    
+
 }
 - (void)viewDidLoad
 {
@@ -61,10 +48,6 @@
     [imgSfondo setFrame:self.view.frame];
     
     self.tableView.backgroundView = imgSfondo;
-    
-    
-    
-      
 
 }
 

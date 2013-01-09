@@ -33,6 +33,6 @@
 @property (nonatomic, assign) BOOL isLive;
 @property (nonatomic, assign) int Id;
 @property (nonatomic, retain) NSMutableArray *Coupons;
+@property (nonatomic, retain) NSMutableArray *Subdeals;
 
--(id)initWithTitolo:(NSString *)titolo Descrizione:(NSString *)condizione Condizioni:(NSString *)condizioni;
 @end

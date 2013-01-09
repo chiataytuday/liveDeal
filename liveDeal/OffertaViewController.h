@@ -15,6 +15,7 @@
 #import "QuartzCore/QuartzCore.h"
 #import "Utility.h"
 #import "LoginViewController.h"
+#import "SubdealsViewController.h"
 
 @interface OffertaViewController : UIViewController <GPPShareDelegate, UIActionSheetDelegate, UIWebViewDelegate, LoginDelegate>
 {

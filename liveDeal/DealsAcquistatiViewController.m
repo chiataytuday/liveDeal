@@ -227,7 +227,6 @@ static char * const myIndexPathAssociationKey = "";
             NSDictionary *image = [deal objectForKey:@"image"];
             
             Offerta *o = [[Offerta alloc] init];
-            o.immagini = [[NSMutableArray alloc] initWithCapacity:1];
             
             [o setTitolo:[deal objectForKey:@"name"]];
             [o setId:[[deal objectForKey:@"id"] intValue]];
@@ -235,8 +234,6 @@ static char * const myIndexPathAssociationKey = "";
             
             Categoria *c = [app getCategoriaById:[[deal objectForKey:@"deal_category_id"] intValue]];
             [o setCategoria: c];
-            
-            o.Coupons = [[NSMutableArray alloc] init];
             
             [o.immagini addObject:[image objectForKey:@"id"]];
             
@@ -293,12 +290,7 @@ static char * const myIndexPathAssociationKey = "";
             
                        
         }
-
-
     }
-    
-   
-    
 }
 
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{

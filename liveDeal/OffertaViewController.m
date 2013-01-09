@@ -231,7 +231,7 @@
     [lblDescrizione setBackgroundColor:[UIColor clearColor]];
     lblDescrizione.opaque = NO;
     lblDescrizione.backgroundColor = [UIColor clearColor];
-    [self hideGradientBackground:lblDescrizione];
+    [Utility hideGradientBackground:lblDescrizione];
     [lblDescrizione.scrollView setScrollEnabled:NO];
     [scroll addSubview:lblDescrizione];
     
@@ -251,16 +251,7 @@
     
 }
 
-- (void) hideGradientBackground:(UIView*)theView
-{
-    for (UIView * subview in theView.subviews)
-    {
-        if ([subview isKindOfClass:[UIImageView class]])
-            subview.hidden = YES;
-        
-        [self hideGradientBackground:subview];
-    }
-}
+
 
 - (void)openSession
 {
@@ -276,7 +267,10 @@
 
 -(void)didAutenticate
 {
-    [self performSegueWithIdentifier:@"pagamento" sender:self];
+    if ([offertaSelezionata.Subdeals count] >=1)
+        [self performSegueWithIdentifier:@"subdeals" sender:self];
+    else
+        [self performSegueWithIdentifier:@"pagamento" sender:self];
 
 }
 
@@ -506,7 +500,10 @@
     
     NSString *tokenAccess = [defaults objectForKey:@"token_access"];
     
-    if (![Utility isTokenValidWithToken:tokenAccess]){
+    User *u = [Utility UserFromToken:tokenAccess];
+    
+    if (!u)
+    {
     
         UIStoryboard *storyboard = [UIApplication sharedApplication].delegate.window.rootViewController.storyboard;
         LoginViewController *loginController = [storyboard instantiateViewControllerWithIdentifier:@"loginScreen"];
@@ -519,9 +516,17 @@
 
 
     }
-    else
-        [self performSegueWithIdentifier:@"pagamento" sender:self];
+    else{
     
+        if ([offertaSelezionata.Subdeals count] >= 1)
+        {
+            [self performSegueWithIdentifier:@"subdeals" sender:self];  
+        }
+        else
+            [self performSegueWithIdentifier:@"pagamento" sender:self];
+        
+    }
+       
 }
 
 -(IBAction)showActionSheet:(id)sender{
@@ -581,9 +586,13 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    if ([[segue identifier] isEqualToString:@"subdeals"]){
     
+        SubdealsViewController *vc = [segue destinationViewController];
+        vc.offertaSelezionata = offertaSelezionata;
+    }
     // Make sure we're referring to the correct segue
-    if ([[segue identifier] isEqualToString:@"pagamento"]) {
+    else if ([[segue identifier] isEqualToString:@"pagamento"]) {
         
         
         // Get reference to the destination view controller

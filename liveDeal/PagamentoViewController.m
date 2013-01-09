@@ -21,16 +21,23 @@
 @end
 
 @implementation PagamentoViewController
-@synthesize img, lblTitolo, lblDescrizione, offertaSelezionata, lblValidita, lblQta, lblTot, btnPaga, imgCell, lblCC, imgPaypal, imgBorder, navBar, paypalButton, loginController;
+@synthesize img, lblTitolo, lblRagioneSociale, offertaSelezionata, lblValidita, lblQta, lblTot, btnPaga, imgCell, lblCC, imgPaypal, imgBorder, navBar, paypalButton, loginController, elencoCarte, opzioneSelezionata;
+
+
+
 
 
 
 - (void)viewDidLoad
 {
+     
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    paypalButton = [[PayPal getPayPalInst] getPayButtonWithTarget:self andAction:@selector(simplePayment) andButtonType:BUTTON_294x43];
+   
+
+    
+    paypalButton = [[PayPal getPayPalInst] getPayButtonWithTarget:self andAction:@selector(eseguiPagamentoPayPal) andButtonType:BUTTON_294x43];
     
     
     
@@ -49,10 +56,10 @@
     
     if (isIphone5)
     {
-        heigth=339 + 92;
+        heigth=349 + 92;
     }
     else
-        heigth=339;
+        heigth=349;
     
 
     
@@ -61,14 +68,14 @@
 	frame.origin.y = heigth; // + 176
 	paypalButton.frame = frame;
 	[self.view addSubview:paypalButton];
-    [self.paypalButton setHidden:NO];
-    [self.btnPaga setHidden:YES];
+    [self.paypalButton setHidden:YES];
+    [self.btnPaga setHidden:NO];
+    [imgPaypal setHidden:YES];
     
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"sfondoDetail.png"]]];
    
-    
-    [lblCC setHidden:YES];
+
     
     UITapGestureRecognizer *tapRecognize = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openSceltaPagamento)];
     
@@ -83,9 +90,7 @@
     [lblTitolo setTextColor:[UIColor colorWithRed:56.0f / 255 green:57.0f / 255 blue:59.0f / 255 alpha:1]];
     [lblTitolo setBackgroundColor:[UIColor clearColor]];
     
-    [lblDescrizione setLineHeight:10];
-    [lblDescrizione setVerticalAlignment:MSLabelVerticalAlignmentTop];
-    [lblDescrizione setText:offertaSelezionata.Descrizione];
+    [lblRagioneSociale setText:offertaSelezionata.Esercente.RagioneSociale];
     
     [lblValidita setText:offertaSelezionata.Validita];
     
@@ -137,11 +142,84 @@
 
 }
 
+-(void)Ricerca:(NSString *)searchText
+{
+    NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:searchText]  cachePolicy:NSURLRequestReloadIgnoringCacheData
+                                     timeoutInterval:60.0];
+    
+    
+    NSURLConnection *myConn = [[NSURLConnection alloc] initWithRequest:req delegate:self];
+    
+    if (myConn)
+    {
+        tempArray = [[NSMutableData alloc] init];
+        
+        hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.mode = MBProgressHUDModeIndeterminate;
+        hud.labelText = @"Attendere...";
+        
+    }
+    else{
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Errore" message:@"Impossibile connettersi" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+        
+        [alert show];
+    }
+}
+
+
+-(void)eseguiPagamentoPayPal
+{
+ 
+    gateway = PayPalIPN;
+    [self richiamaApiPagamentoConTipo];
+}
+
+-(void)richiamaApiPagamentoConTipo
+{
+    tipo = STARTPAY;
+    
+    NSString *chiaveGateway;
+    
+    if (gateway== PayPalIPN)
+        chiaveGateway=@"PayPalIPN";
+    else
+        chiaveGateway=@"ConsTriv";
+    
+    NSString *url=@"";
+    if (!opzioneSelezionata)
+        url=[NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/start_pay?token_access=%@&deal_id=%d&gateway=%@&quantity=%d", [[NSUserDefaults standardUserDefaults] objectForKey:@"token_access"], offertaSelezionata.Id, chiaveGateway, [lblQta.text integerValue]];
+    else
+        url=[NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/start_pay?token_access=%@&deal_id=%d&gateway=%@&quantity=%d&sub_deal_id=%d", [[NSUserDefaults standardUserDefaults] objectForKey:@"token_access"], offertaSelezionata.Id, chiaveGateway, [lblQta.text integerValue], opzioneSelezionata.Id];
+
+    [self Ricerca:url];
+
+}
 
 -(void)didSelect:(id)object andIdentifier:(NSString *)identifier
 {
-
-    if ([object isEqualToString:@"CC"])
+    if ([identifier isEqualToString:@"annullaPagamento"])
+    {
+        //viene richiamato per annullare il pagamento. Se viene impostato object rappresenta una stringa con un messaggio d'errore. lo mostro
+        
+        if (object!=nil)
+        {
+            NSString *errmsg = (NSString *)object;
+            UIAlertView *ui = [[UIAlertView alloc] initWithTitle:@"Ops" message:errmsg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [ui show];
+        }
+        
+        [self annullaPagamento];
+    }
+    else if ([identifier isEqualToString:@"errorePagamento"])
+    {
+        
+        //viene richiamato per dare un messaggio all'utente. Il pagamento è stato già annullato dalla chiamata all'api. dentro object trovo il messaggio d'errore, lo mostro
+        NSString *errmsg = (NSString *)object;
+        UIAlertView *ui = [[UIAlertView alloc] initWithTitle:@"Ops" message:errmsg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [ui show];
+    }
+    else if ([object isEqualToString:@"CC"])
     {
         [self.btnPaga setHidden:NO];
         [self.paypalButton setHidden:YES];
@@ -156,15 +234,12 @@
         [imgPaypal setHidden:NO];
     }
     
+    [hud hide:YES];
 }
 
 -(void)openSceltaPagamento
 {
     [self performSegueWithIdentifier:@"sceltaPagamento" sender:self];
-}
-
-- (IBAction)goBack:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)incrementa:(id)sender{
@@ -184,6 +259,14 @@
     {
         SuccessViewController *s = [segue destinationViewController];
         s.offertaSelezionata = offertaSelezionata;
+    }
+    else if ([[segue identifier] isEqualToString:@"creditCard"])
+    {
+        ScegliCartaCreditoViewController *vc = [segue destinationViewController];
+        vc.delegate = self;
+        vc.offertaSelezionata = offertaSelezionata;
+        vc.chiavePagamento = chiavePagamento;
+        vc.elencoCarte = elencoCarte;
     }
     else
     {
@@ -206,20 +289,27 @@
 
 -(IBAction)paga:(id)sender
 {
-    [self performSegueWithIdentifier:@"success" sender:self];
+    //richiamo l'api per il pagamento passando ConsTriv
+    gateway = ConsTriv;
+    [self richiamaApiPagamentoConTipo];
 }
 
 -(void)aggiornaTotaleWithQuantita:(int)quantita
 {
-    tot = offertaSelezionata.PrezzoFinale * quantita;
+    if (!opzioneSelezionata)
+        tot = offertaSelezionata.PrezzoFinale * quantita;
+    else
+        tot = opzioneSelezionata.PrezzoFinale * quantita;
+    
     [lblTot setText:[NSString stringWithFormat:@"%.2f €",tot]];
     [btnPaga setTitle:[NSString stringWithFormat:@"Acquista  %.2f €", tot] forState:UIControlStateNormal];
 }
 
 
 
-- (void)simplePayment {
-	
+- (void)doPayPalPayment {
+	   
+  
 	//optional, set shippingEnabled to TRUE if you want to display shipping
 	//options to the user, default: TRUE
 	[PayPal getPayPalInst].shippingEnabled = TRUE;
@@ -233,14 +323,16 @@
 	
 	//for a payment with a single recipient, use a PayPalPayment object
 	PayPalPayment *payment = [[PayPalPayment alloc] init] ;
-	payment.recipient =    @"example-merchant-1@paypal.com";
+	payment.recipient =    @"info@specialdeal.it";
 	payment.paymentCurrency = @"EUR";
 	payment.description = offertaSelezionata.Titolo;
 	payment.merchantName = @"Special Deal";
 		//subtotal of all items, without tax and shipping
 	payment.subTotal = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f", tot]];
 	
-	//invoiceData is a PayPalInvoiceData object which contains tax, shipping, and a list of PayPalInvoiceItem objects
+       [payment setIpnUrl:ipnUrl];
+	
+    //invoiceData is a PayPalInvoiceData object which contains tax, shipping, and a list of PayPalInvoiceItem objects
 	payment.invoiceData = [[PayPalInvoiceData alloc] init];
 	payment.invoiceData.totalShipping = [NSDecimalNumber decimalNumberWithString:@"0"];
 	payment.invoiceData.totalTax = [NSDecimalNumber decimalNumberWithString:@"0"];
@@ -251,7 +343,7 @@
 	payment.invoiceData.invoiceItems = [NSMutableArray array];
 	PayPalInvoiceItem *item = [[PayPalInvoiceItem alloc] init];
 	item.totalPrice = payment.subTotal;
-	item.name = @"Deal";
+	item.name = [NSString stringWithFormat:@"DealId: %d", offertaSelezionata.Id];
 	[payment.invoiceData.invoiceItems addObject:item];
 	
 	[[PayPal getPayPalInst] checkoutWithPayment:payment];
@@ -263,7 +355,7 @@
 
 -(void)RetryInitialization
 {
-    [PayPal initializeWithAppID:PAYPAL_KEY forEnvironment:ENV_SANDBOX];
+    [PayPal initializeWithAppID:PAYPAL_KEY forEnvironment:PAYPAL_ENVIRONMENT];
     
     //DEVPACKAGE
     //	[PayPal initializeWithAppID:@"your live app id" forEnvironment:ENV_LIVE];
@@ -294,6 +386,8 @@
 //errorMessage is a human-readable string describing the error that occurred.
 - (void)paymentFailedWithCorrelationID:(NSString *)correlationID {
     
+    [self annullaPagamento];
+    
     NSString *severity = [[PayPal getPayPalInst].responseMessage objectForKey:@"severity"];
 	NSLog(@"severity: %@", severity);
 	NSString *category = [[PayPal getPayPalInst].responseMessage objectForKey:@"category"];
@@ -309,7 +403,22 @@
 //paymentCanceled is a required method. in it, you should record that the payment was canceled by
 //the user and perform any desired bookkeeping. you should not do any user interface updates.
 - (void)paymentCanceled {
+    
+    [self annullaPagamento];
 	status = PAYMENTSTATUS_CANCELED;
+}
+
+-(void)annullaPagamento
+{
+    
+      
+    NSString *url=[NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/cancel_payment?token_access=%@&payment_key=%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"token_access"], chiavePagamento];
+    
+    
+    tipo = CANCELPAY;
+    
+    [self Ricerca:url];
+       
 }
 
 
@@ -324,8 +433,8 @@
                 [self performSegueWithIdentifier:@"success" sender:self];
            	break;
 		case PAYMENTSTATUS_FAILED:
-			alert = [[UIAlertView alloc] initWithTitle:@"Order failed"
-											   message:@"Your order failed. Touch \"Pay with PayPal\" to try again."
+			alert = [[UIAlertView alloc] initWithTitle:@"Ops.."
+											   message:@"Si è verificato un errore durante il pagamento."
 											  delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 			break;
 		case PAYMENTSTATUS_CANCELED:
@@ -374,5 +483,104 @@
 
 
 
+#pragma mark - dati relativi alla connessione
+
+-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
+    
+    [tempArray setLength:0];
+}
+
+-(void)connection:(NSURLConnection *) connection didReceiveData:(NSData *)data{
+    
+    [tempArray appendData:data];
+}
+
+-(void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+     
+    NSArray* json = [NSJSONSerialization
+                     JSONObjectWithData:tempArray
+                     options:kNilOptions error:nil];
+    
+    
+    if (tipo==STARTPAY){
+    
+        NSDictionary *result = [json valueForKeyPath:@"result"];
+        
+        if (result!=nil)
+        {
+            chiavePagamento = [result objectForKey:@"payment_key"];
+
+            
+            if (gateway==PayPalIPN){
+                 ipnUrl = [result objectForKey:@"ipn_url"];
+                [self doPayPalPayment];
+            }
+            else
+            {
+                if (![[result objectForKey:@"cards"] isKindOfClass: [NSNull class]])
+                {
+                     elencoCarte = [[NSMutableArray alloc] init];
+                    NSArray *cards = [result objectForKey:@"cards"];
+                    
+                    for (NSDictionary *card in cards)
+                    {
+                        CreditCard *c = [[CreditCard alloc] init];
+                        [c setId:[[card objectForKey:@"id"] integerValue]];
+                        [c setCardtype:[card objectForKey:@"cardtype"]];
+                        [c setExpdate:[card objectForKey:@"expdate"]];
+                        [c setCardlastfourdigits:[card objectForKey:@"cardlastfourdigits"]];
+                        [c setDescription_card:[card objectForKey:@"description_card"]];
+                        [c setDescription_cardtype:[card objectForKey:@"description_cardtype"]];
+                        [c setDescription_cardexpiry:[card objectForKey:@"description_cardexpiry"]];
+                        
+                        [elencoCarte addObject:c];
+                        
+                    }
+                }
+               
+                
+                [self performSegueWithIdentifier:@"creditCard" sender:nil];
+            }
+        }
+        else
+        {
+            NSDictionary *error = [json valueForKey:@"error"];
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Errore" message:[error objectForKey:@"message"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            
+            [alert show];
+        }
+        
+
+    }
+    else if (tipo==CANCELPAY)
+    {
+        NSDictionary *result = [json valueForKeyPath:@"result"];
+        
+        if (result==nil)
+        {
+            NSDictionary *error = [json valueForKey:@"error"];
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Errore" message:[error objectForKey:@"message"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            
+            [alert show];
+        }
+    }
+    
+   [hud hide:YES];
+    
+    
+    
+}
+
+-(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
+    
+    [hud hide:YES];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Errore" message:@"Impossibile connettersi" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+    
+    [alert show];
+    
+}
 
 @end

@@ -24,6 +24,7 @@
 #import "Utility.h"
 #import "ODRefreshControl.h"
 #import "EsercenteVetrinaViewController.h"
+#import "OpzioneOfferta.h"
 
 @interface OfferteViewController : UIViewController<UITableViewDelegate, MKMapViewDelegate, NSURLConnectionDelegate>
 {

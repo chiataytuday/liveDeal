@@ -15,7 +15,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    [[PayPal initializeWithAppID:PAYPAL_KEY forEnvironment:ENV_SANDBOX] setLang:@"it_IT"];
+        [[PayPal initializeWithAppID:PAYPAL_KEY forEnvironment:PAYPAL_ENVIRONMENT] setLang:@"it_IT"];
     
      if ([[NSUserDefaults standardUserDefaults] objectForKey:@"orarioNotifiche"]==nil)
      {
@@ -97,6 +97,14 @@
 {
     if ([url.absoluteString hasPrefix:@"fb"])
         return [FBSession.activeSession handleOpenURL:url];
+    else if ([url.absoluteString hasPrefix:@"livedeal"])
+    {
+        NSArray *res = [url pathComponents];
+
+        NSString *status = [res objectAtIndex:2];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"pagamentoNotificato" object:status];
+
+    }
     else
     {
         if ([self.share handleURL:url

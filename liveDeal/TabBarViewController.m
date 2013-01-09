@@ -26,12 +26,21 @@
 
     
     [[self.tabBar.items objectAtIndex:0]
-     setFinishedSelectedImage:[UIImage imageNamed:@"home.png"]
-     withFinishedUnselectedImage:[UIImage imageNamed:@"home.png"]];
+     setFinishedSelectedImage:[UIImage imageNamed:@"iconOfferteHover.png"]
+     withFinishedUnselectedImage:[UIImage imageNamed:@"iconOfferteHover.png"]];
     
     [[self.tabBar.items objectAtIndex:1]
-     setFinishedSelectedImage:[UIImage imageNamed:@"calendar.png"]
-     withFinishedUnselectedImage:[UIImage imageNamed:@"calendar.png"]];
+     setFinishedSelectedImage:[UIImage imageNamed:@"iconAccountNormal.png"]
+     withFinishedUnselectedImage:[UIImage imageNamed:@"iconAccountNormal.png"]];
+    
+    [[self.tabBar.items objectAtIndex:2]
+     setFinishedSelectedImage:[UIImage imageNamed:@"iconPreferitiHover.png"]
+     withFinishedUnselectedImage:[UIImage imageNamed:@"iconPreferitiNormal.png"]];
+    
+    [[self.tabBar.items objectAtIndex:3]
+     setFinishedSelectedImage:[UIImage imageNamed:@"iconAltroNormal.png"]
+     withFinishedUnselectedImage:[UIImage imageNamed:@"iconAltroNormal.png"]];
+
 
 }
 
