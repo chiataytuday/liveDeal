@@ -10,8 +10,11 @@
 #import "AppDelegate.h"
 #import "OrariNotificheViewController.h"
 #import "Utility.h"
+#import "RaggioRicercaViewController.h"
 
 @interface PreferenzeViewController : UITableViewController<SelectDelegate>
 
 @property (nonatomic, retain) IBOutlet UILabel *lblOrarioNotifiche;
+@property (nonatomic, retain) IBOutlet UILabel *lblRaggioRicerca;
+
 @end

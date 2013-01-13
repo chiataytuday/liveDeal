@@ -26,7 +26,7 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     
     
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    AppDelegate *app = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [app managedObjectContext];
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"EsercenteST"

@@ -239,7 +239,7 @@
 
 -(IBAction)AggiungiAPreferiti:(id)sender{
     
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    AppDelegate *app = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [app managedObjectContext];
     
     
@@ -309,7 +309,7 @@
     
     NSUInteger count;
     
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [app managedObjectContext];
     
     NSFetchRequest *request = [[NSFetchRequest alloc] init];

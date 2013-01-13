@@ -36,7 +36,7 @@
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
    
     
-    AppDelegate *app=[[UIApplication sharedApplication]delegate];
+    AppDelegate *app=(AppDelegate *)[[UIApplication sharedApplication]delegate];
     share = [[GPPShare alloc] initWithClientID:@"GOOGLE_PLUS_KEY"];
     share.delegate = self;
     app.share = share;

@@ -85,25 +85,32 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    AppDelegate *app = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     
     Coordinate = app.locationManager.location.coordinate;
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    // BOOL spiga = [defaults boolForKey:@"spiga"];
-    NSString *des = [defaults objectForKey:@"citta.display"];
-    NSString *sl = [defaults objectForKey:@"citta.slug"];
-    float lat = [defaults floatForKey:@"citta.location.latitude"];
-    float lon = [defaults floatForKey:@"citta.location.longitude"];
+    Citta *c;
     
-    
-    Citta *c = [[Citta alloc] initWithDescrizione:des];
-    c.Slug = sl;
-    c.Coordinate = CLLocationCoordinate2DMake(lat, lon);
-    
+    if ([defaults objectForKey:@"citta.display"]!= nil)
+    {
+        NSString *des = [defaults objectForKey:@"citta.display"];
+        NSString *sl = [defaults objectForKey:@"citta.slug"];
+        float lat = [defaults floatForKey:@"citta.location.latitude"];
+        float lon = [defaults floatForKey:@"citta.location.longitude"];
+        
+        c = [[Citta alloc] initWithDescrizione:des];
+        
+        c.Slug = sl;
+        c.Coordinate = CLLocationCoordinate2DMake(lat, lon);
+        
 
+    }
+ 
     
+    
+   
     if ([[segue identifier] isEqualToString:@"food"])
     {
         OfferteViewController *vc = [segue destinationViewController];
@@ -128,24 +135,36 @@
 
 -(void)didSelect:(id)object andIdentifier:(NSString *)identifier
 {
-    Citta *city = (Citta *)object;
-    
-    //memorizzo la città tra le preferenze
-    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    [defaults setObject:city.Descrizione forKey:@"citta.display"];
-    [defaults setObject:city.foto forKey:@"citta.foto"];
-
-    [defaults setObject:city.Slug forKey:@"citta.slug"];
-    [defaults setFloat:city.Coordinate.latitude forKey:@"citta.location.latitude"];
-    [defaults setFloat:city.Coordinate.longitude forKey:@"citta.location.longitude"];
     
+    if (object!=nil)
+    {
+        Citta *city = (Citta *)object;
+        
+        //memorizzo la città tra le preferenze
+        
+       
+        [defaults setObject:city.Descrizione forKey:@"citta.display"];
+        [defaults setObject:city.foto forKey:@"citta.foto"];
+        
+        [defaults setObject:city.Slug forKey:@"citta.slug"];
+        [defaults setFloat:city.Coordinate.latitude forKey:@"citta.location.latitude"];
+        [defaults setFloat:city.Coordinate.longitude forKey:@"citta.location.longitude"];
+        
+        
+    }
+    else
+    {
+        [defaults setObject:nil forKey:@"citta.display"];
+        [defaults setObject:nil forKey:@"citta.foto"];
+        
+        [defaults setObject:nil forKey:@"citta.slug"];
+        [defaults setFloat:0 forKey:@"citta.location.latitude"];
+        [defaults setFloat:0 forKey:@"citta.location.longitude"];
+    }
     [defaults synchronize];
-    
-  //  lblCurrentAddress.text = [NSString stringWithFormat:@"SpecialDeal - %@", city.Descrizione];
- //   [self aggiornaFoto:city.foto];
-    
+
 }
 
 @end

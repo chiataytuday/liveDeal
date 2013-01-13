@@ -13,7 +13,7 @@
 @end
 
 @implementation PreferenzeViewController
-@synthesize lblOrarioNotifiche;
+@synthesize lblOrarioNotifiche, lblRaggioRicerca;
 
 
 - (void)viewDidLoad
@@ -24,8 +24,11 @@
     
       
     NSDate *d = [[NSUserDefaults standardUserDefaults] objectForKey:@"orarioNotifiche"];
+    float rad = [[NSUserDefaults standardUserDefaults] floatForKey:@"searchRadius"];
     
     [lblOrarioNotifiche setText:[Utility getStringFromHours:d]];
+    [lblRaggioRicerca setText:[NSString stringWithFormat:@"%.0f Km", rad]];
+
 }
 
 -(void)didSelect:(id)object andIdentifier:(NSString *)identifier
@@ -38,7 +41,11 @@
          
         [[NSUserDefaults standardUserDefaults]synchronize];
     }
-      
+    else if ([identifier isEqualToString:@"searchRadius"])
+    {
+        NSString *s = (NSString *)object;
+        [lblRaggioRicerca setText:[NSString stringWithFormat:@"%@ Km", s]];
+    }
 }
 
 
@@ -47,6 +54,11 @@
     if ([[segue identifier] isEqualToString:@"orarioNotifiche"])
     {
         OrariNotificheViewController *vc = [segue destinationViewController];
+        vc.delegate = self;
+    }
+    else if ([[segue identifier] isEqualToString:@"raggioRicerca"])
+    {
+        RaggioRicercaViewController *vc = [segue destinationViewController];
         vc.delegate = self;
     }
 }

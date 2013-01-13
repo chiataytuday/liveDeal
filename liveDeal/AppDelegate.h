@@ -29,7 +29,7 @@
 
 @end
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate>
 {
     NSMutableData *tempArray;
     int tipoRicerca;

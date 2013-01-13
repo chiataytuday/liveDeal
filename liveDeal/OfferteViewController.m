@@ -18,20 +18,37 @@
     [refreshControl addTarget:self action:@selector(dropViewDidBeginRefreshing) forControlEvents:UIControlEventValueChanged];
     
     nextPageToken = @"";
-    Esercenti = [[NSMutableArray alloc] init];
+ 
      
     [self.mapView setHidden:YES];
     tipo=0;
     
 
-   [self Ricerca:[NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/deals_list?city=%@&category=%i", cittaSelezionata.Slug, categoriaSelezionata.Codice]];
+    if (cittaSelezionata)
+        [self Ricerca:[NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/deals_list?city=%@&category=%i", cittaSelezionata.Slug, categoriaSelezionata.Codice]];
+    else{
     
+        CLLocation *location = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).locationManager.location;
+        float radius = [[NSUserDefaults standardUserDefaults] floatForKey:@"searchRadius"];
+        
+        [self Ricerca:[NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/deals_list_by_distance?lat=%f&lng=%f&radius=%f&category=%i", location.coordinate.latitude, location.coordinate.longitude, radius, categoriaSelezionata.Codice]];
+    }
+          
 }
 
 -(void)dropViewDidBeginRefreshing
 {
     tipo=0;
-    [self Ricerca:[NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/deals_list?city=%@&category=%i", cittaSelezionata.Slug, categoriaSelezionata.Codice]];
+   
+    if (cittaSelezionata)
+        [self Ricerca:[NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/deals_list?city=%@&category=%i", cittaSelezionata.Slug, categoriaSelezionata.Codice]];
+    else{
+        
+        CLLocation *location = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).locationManager.location;
+        float radius = [[NSUserDefaults standardUserDefaults] floatForKey:@"searchRadius"];
+        
+        [self Ricerca:[NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/deals_list_by_distance?lat=%f&lng=%f&radius=%f&category=%i", location.coordinate.latitude, location.coordinate.longitude, radius, categoriaSelezionata.Codice]];    }
+    
 
 }
 
@@ -128,105 +145,130 @@
         
         
         NSArray *result = [json valueForKeyPath:@"result"];
-        NSArray *items = [result valueForKeyPath:@"items"];
-        
-        
-        for (NSDictionary *off in items)
-        {
+               
+        if (![[result valueForKeyPath:@"items"] isKindOfClass: [NSNull class]]){
             
-            NSDictionary *esercente = [off valueForKey:@"company"];
-            NSDictionary *prices = [off valueForKey:@"prices"];
-            NSDictionary *discounts = [off valueForKey:@"discounts"];
-            NSDictionary *category = [off valueForKey:@"category"];
-            
-        
-            double lat = [[esercente valueForKey:@"latitude"] doubleValue];
-            double lng = [[esercente valueForKey: @"longitude"] doubleValue];
-            
-            Esercente *es = [[Esercente alloc] initWithRagioneSociale:[esercente valueForKey:@"name"]
-                                                               Codice:[esercente valueForKey:@"id"]
-                                                            Indirizzo:[esercente valueForKey:@"address"]
-                                                           Coordinate:CLLocationCoordinate2DMake(lat, lng)];
-            
-            
-            Offerta *offerta = [[Offerta alloc] init];
-            
-            [offerta setTitolo:[off valueForKey:@"title"]];
-            [offerta setDescrizione:[off valueForKey:@"description"]];
-            [offerta setCondizioni:[off valueForKey:@"conditions"]];
-            [offerta setIsLive:[[off valueForKey:@"is_live"] boolValue]];
-            
-            CLLocation *distanzaEsercente = [[CLLocation alloc] initWithCoordinate: CLLocationCoordinate2DMake(lat, lng) altitude:1 horizontalAccuracy:1 verticalAccuracy:-1 timestamp:nil];
-            
-            offerta.distanza = [newLocation distanceFromLocation:distanzaEsercente] / 1000;
-            NSArray *images = [off valueForKey:@"images"];
-            for (NSDictionary *img in images)
+            NSArray *items = [result valueForKeyPath:@"items"];
+
+            for (NSDictionary *off in items)
             {
-                [offerta.immagini addObject:[[img valueForKey:@"id"] stringValue]];
                 
-            }
-            
-            if (![[off objectForKey:@"subdeals"] isKindOfClass: [NSNull class]])
-            {
-                NSArray *subdeals = [off valueForKey:@"subdeals"];
-                for (NSDictionary *subdeal in subdeals)
-                {
-                    NSDictionary *pricesSd = [subdeal valueForKey:@"prices"];
-                    NSDictionary *discountsSd = [subdeal valueForKey:@"discounts"];
-                    
-                    
-                    OpzioneOfferta *oo = [[OpzioneOfferta alloc] init];
-                    [oo setPrezzoPartenza:[[pricesSd valueForKey:@"original"] doubleValue]];
-                    [oo setPrezzoFinale:[[pricesSd valueForKey:@"discounted"] doubleValue]];
-                    [oo setSconto:[[discountsSd valueForKey:@"percentage"] doubleValue]];
-                    [oo setId:[[subdeal objectForKey:@"id"] intValue]];
-                    [oo setDescrizione:[subdeal objectForKey:@"title"]];
-                    [offerta.Subdeals addObject:oo];
+                NSDictionary *esercente = [off valueForKey:@"company"];
+                NSDictionary *prices = [off valueForKey:@"prices"];
+                NSDictionary *discounts = [off valueForKey:@"discounts"];
+                NSDictionary *category = [off valueForKey:@"category"];
+                
+                
+                double lat = [[esercente valueForKey:@"latitude"] doubleValue];
+                double lng = [[esercente valueForKey: @"longitude"] doubleValue];
+                
+                Esercente *es = [[Esercente alloc] initWithRagioneSociale:[esercente valueForKey:@"name"]
+                                                                   Codice:[esercente valueForKey:@"id"]
+                                                                Indirizzo:[esercente valueForKey:@"address"]
+                                                               Coordinate:CLLocationCoordinate2DMake(lat, lng)];
+                
+                
+                Offerta *offerta = [[Offerta alloc] init];
+                
+                [offerta setTitolo:[off valueForKey:@"title"]];
+                [offerta setDescrizione:[off valueForKey:@"description"]];
+                [offerta setCondizioni:[off valueForKey:@"conditions"]];
+                [offerta setIsLive:[[off valueForKey:@"is_live"] boolValue]];
+                
+                CLLocation *distanzaEsercente = [[CLLocation alloc] initWithCoordinate: CLLocationCoordinate2DMake(lat, lng) altitude:1 horizontalAccuracy:1 verticalAccuracy:-1 timestamp:nil];
+                
+                offerta.distanza = [newLocation distanceFromLocation:distanzaEsercente] / 1000;
+                
+                if (![[off objectForKey:@"images"] isKindOfClass: [NSNull class]]){
+                    NSArray *images = [off valueForKey:@"images"];
+                    for (NSDictionary *img in images)
+                    {
+                        [offerta.immagini addObject:[[img valueForKey:@"id"] stringValue]];
+                        
+                    }
                     
                 }
+                
+                if (![[off objectForKey:@"subdeals"] isKindOfClass: [NSNull class]])
+                {
+                    NSArray *subdeals = [off valueForKey:@"subdeals"];
+                    for (NSDictionary *subdeal in subdeals)
+                    {
+                        NSDictionary *pricesSd = [subdeal valueForKey:@"prices"];
+                        NSDictionary *discountsSd = [subdeal valueForKey:@"discounts"];
+                        
+                        
+                        OpzioneOfferta *oo = [[OpzioneOfferta alloc] init];
+                        [oo setPrezzoPartenza:[[pricesSd valueForKey:@"original"] doubleValue]];
+                        [oo setPrezzoFinale:[[pricesSd valueForKey:@"discounted"] doubleValue]];
+                        [oo setSconto:[[discountsSd valueForKey:@"percentage"] doubleValue]];
+                        [oo setId:[[subdeal objectForKey:@"id"] intValue]];
+                        [oo setDescrizione:[subdeal objectForKey:@"title"]];
+                        [offerta.Subdeals addObject:oo];
+                        
+                    }
+                }
+                
+                
+                [offerta setId:[[off valueForKey:@"id"] integerValue]];
+                [offerta setValidita:[off valueForKey:@"validita"]];
+                [offerta setUrl:[NSString stringWithFormat:@"http://www.specialdeal.it/%@", [off valueForKey:@"id"]]];
+                [offerta setPrezzoFinale:[[prices valueForKey:@"discounted"] doubleValue]];
+                [offerta setEsercente:es];
+                [offerta setPrezzoPartenza:[[prices valueForKey:@"original"] doubleValue]];
+                [offerta setSconto:[[discounts valueForKey:@"percentage"] doubleValue]];
+                [offerta setDataInizio:[off valueForKey:@"start_date"]];
+                [offerta setDataScadenza:[off valueForKey:@"end_date"]];
+                [offerta setDataFineValidita:[off valueForKey:@"coupon_end_date"]];
+                [offerta setCouponAcquistati:[[off valueForKey:@"purchased"] integerValue]];
+                
+                
+                
+                OffertaAnnotation *annotation = [[OffertaAnnotation alloc] initWithName:offerta.Titolo
+                                                                                address:offerta.Esercente.Indirizzo
+                                                                             coordinate:CLLocationCoordinate2DMake(lat, lng)];
+                Categoria *cg = [[Categoria alloc] init];
+                [cg setSlug:[category objectForKey:@"slug"]];
+                
+                if (![[category objectForKey:@"frame_color"] isKindOfClass: [NSNull class]])
+                {
+                    cg.ColoreCornice = [UIColor  colorWithHexString:[[category valueForKey:@"frame_color"] uppercaseString]];
+                }
+                
+                [cg setTipiGoogle:[category objectForKey:@"googleplaces"]];
+                
+                [offerta setCategoria:cg];
+                
+                [Offerte addObject:offerta];
+                [annotation setOfferta:offerta];
+                [mapView addAnnotation:annotation];
             }
-            
-            
-            [offerta setId:[[off valueForKey:@"id"] integerValue]];
-            [offerta setValidita:[off valueForKey:@"validita"]];
-            [offerta setUrl:[NSString stringWithFormat:@"http://www.specialdeal.it/%@", [off valueForKey:@"id"]]];
-            [offerta setPrezzoFinale:[[prices valueForKey:@"discounted"] doubleValue]];
-            [offerta setEsercente:es];
-            [offerta setPrezzoPartenza:[[prices valueForKey:@"original"] doubleValue]];
-            [offerta setSconto:[[discounts valueForKey:@"percentage"] doubleValue]];
-            [offerta setDataInizio:[off valueForKey:@"start_date"]];
-            [offerta setDataScadenza:[off valueForKey:@"end_date"]];
-            [offerta setDataFineValidita:[off valueForKey:@"coupon_end_date"]];
-            [offerta setCouponAcquistati:[[off valueForKey:@"purchased"] integerValue]];
-            
-            
-            
-            OffertaAnnotation *annotation = [[OffertaAnnotation alloc] initWithName:offerta.Titolo
-                                                                            address:offerta.Esercente.Indirizzo
-                                                                         coordinate:CLLocationCoordinate2DMake(lat, lng)];
-            Categoria *cg = [[Categoria alloc] init];
-            [cg setSlug:[category objectForKey:@"slug"]];
-            
-            if (![[category objectForKey:@"frame_color"] isKindOfClass: [NSNull class]])
-            {
-                cg.ColoreCornice = [UIColor  colorWithHexString:[[category valueForKey:@"frame_color"] uppercaseString]];
-            }
-            
-            [cg setTipiGoogle:[category objectForKey:@"googleplaces"]];
-            
-            [offerta setCategoria:cg];
-            
-            [Offerte addObject:offerta];
-            [annotation setOfferta:offerta];
-            [mapView addAnnotation:annotation];
+
         }
-        
+               
         tipo=1;
         
-        NSString *strUrl = [NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/_aziende_in_vetrina?lat=%f&lng=%f&radius=%i",
-                            cittaSelezionata.Coordinate.latitude,
-                            cittaSelezionata.Coordinate.longitude,
-                            2];
+        float lat;
+        float lng;
+        
+        if (cittaSelezionata){
+            
+            lat = cittaSelezionata.Coordinate.latitude;
+            lng = cittaSelezionata.Coordinate.longitude;
+        }
+        else
+        {
+            CLLocation *location = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).locationManager.location;
+            lat = location.coordinate.latitude;
+            lng = location.coordinate.longitude;
+        }
+        
+        float radius = [[NSUserDefaults standardUserDefaults] floatForKey:@"searchRadius"];
+        
+        NSString *strUrl = [NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/_aziende_in_vetrina?lat=%f&lng=%f&radius=%f",
+                            lat,
+                            lng,
+                            radius];
         
         [self Ricerca:[strUrl stringByAddingPercentEscapesUsingEncoding:NSStringEnumerationByWords]];        
     }
@@ -265,19 +307,34 @@
         
         tipo=2;
         
+        float lat;
+        float lng;
+        
+        if (cittaSelezionata){
+        
+            lat = cittaSelezionata.Coordinate.latitude;
+            lng = cittaSelezionata.Coordinate.longitude;
+        }
+        else
+        {
+            CLLocation *location = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).locationManager.location;
+            lat = location.coordinate.latitude;
+            lng = location.coordinate.longitude;
+        }
+            
+    
         
         NSString *strUrl = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f,%f&rankby=distance&types=%@&sensor=false&key=%@",
-                            cittaSelezionata.Coordinate.latitude,
-                            cittaSelezionata.Coordinate.longitude,
-                            categoriaSelezionata.TipiGoogle,
-                            GOOGLE_PLACES_KEY];
+                          lat,lng,
+                        categoriaSelezionata.TipiGoogle,
+                        GOOGLE_PLACES_KEY];
         
         [self Ricerca:[strUrl stringByAddingPercentEscapesUsingEncoding:NSStringEnumerationByWords]];
                
     }
     else if (tipo==2)
     {
-        
+        Esercenti = [[NSMutableArray alloc] init];
         
         NSArray* json = [NSJSONSerialization
                          JSONObjectWithData:tempArray //1

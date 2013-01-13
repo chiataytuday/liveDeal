@@ -29,6 +29,13 @@
          
      }
     
+    if ([[NSUserDefaults standardUserDefaults] floatForKey:@"searchRadius"]==0)
+    {
+        [[NSUserDefaults standardUserDefaults] setFloat:100 forKey:@"searchRadius"];
+        
+    }
+    
+     
     tipoRicerca=CITTA;
     
     [self Ricerca];
@@ -62,7 +69,7 @@
     locationManager.distanceFilter = kCLDistanceFilterNone; // whenever we move
     locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters; // 100 m
     [locationManager startUpdatingLocation];
-
+    locationManager.delegate = self;
     // Let the device know we want to receive push notifications
 	[[UIApplication sharedApplication] registerForRemoteNotificationTypes:
      (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
@@ -344,5 +351,7 @@
 - (NSString *)applicationDocumentsDirectory {
     return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
 }
+
+
 
 @end

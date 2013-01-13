@@ -266,6 +266,7 @@
 		F6D3B30914AFE19500E789FA /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6D3B30714AFE19500E789FA /* MainStoryboard.storyboard */; };
 		F6DB16A4167DDC0300F3CC07 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = F6DB16A3167DDC0300F3CC07 /* Utility.m */; };
 		F6DB16A8167E457500F3CC07 /* ODRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F6DB16A7167E457500F3CC07 /* ODRefreshControl.m */; };
+		F6E9B58716A31F3C00E581B6 /* RaggioRicercaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6E9B58616A31F3C00E581B6 /* RaggioRicercaViewController.m */; };
 		F6F3929B16551E8E0032180E /* EsercenteAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F3929A16551E8E0032180E /* EsercenteAnnotation.m */; };
 		F6F3929F165525D60032180E /* OffertaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F3929E165525D60032180E /* OffertaViewController.m */; };
 		F6F433841691A89300782F6C /* NSString+UrlEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F433831691A89300782F6C /* NSString+UrlEncode.m */; };
@@ -636,6 +637,8 @@
 		F6DB16A3167DDC0300F3CC07 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
 		F6DB16A6167E457500F3CC07 /* ODRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODRefreshControl.h; sourceTree = "<group>"; };
 		F6DB16A7167E457500F3CC07 /* ODRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODRefreshControl.m; sourceTree = "<group>"; };
+		F6E9B58516A31F3C00E581B6 /* RaggioRicercaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RaggioRicercaViewController.h; sourceTree = "<group>"; };
+		F6E9B58616A31F3C00E581B6 /* RaggioRicercaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RaggioRicercaViewController.m; sourceTree = "<group>"; };
 		F6F3929916551E8E0032180E /* EsercenteAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EsercenteAnnotation.h; sourceTree = "<group>"; };
 		F6F3929A16551E8E0032180E /* EsercenteAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EsercenteAnnotation.m; sourceTree = "<group>"; };
 		F6F3929D165525D60032180E /* OffertaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OffertaViewController.h; sourceTree = "<group>"; };
@@ -1121,6 +1124,8 @@
 				F6C046CF169C514A00A705EE /* ScegliCartaCreditoViewController.m */,
 				F6C046D8169D637A00A705EE /* SubdealsViewController.h */,
 				F6C046D9169D637C00A705EE /* SubdealsViewController.m */,
+				F6E9B58516A31F3C00E581B6 /* RaggioRicercaViewController.h */,
+				F6E9B58616A31F3C00E581B6 /* RaggioRicercaViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1651,6 +1656,7 @@
 				F6C046D0169C514C00A705EE /* ScegliCartaCreditoViewController.m in Sources */,
 				F6C046D7169D5CD500A705EE /* OpzioneOfferta.m in Sources */,
 				F6C046DA169D638100A705EE /* SubdealsViewController.m in Sources */,
+				F6E9B58716A31F3C00E581B6 /* RaggioRicercaViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

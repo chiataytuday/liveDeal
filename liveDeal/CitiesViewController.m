@@ -23,20 +23,51 @@
 }
 
 
+-(void)RicercaWithLatitude:(CGFloat)lat andLongitude:(CGFloat)lng andRadius:(CGFloat)radius
+{
+    //lat=37.5149&lng=15.082512&radius=80";
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/_city_list_by_coordinate?lat=%f&lng=%ff&radius=%dx",
+                           37.5149, 15.082512, 80];
+    
+    
+    NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]
+                                         cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                     timeoutInterval:60.0];
+    
+    
+    NSURLConnection *myConn = [[NSURLConnection alloc] initWithRequest:req delegate:self];
+    
+    if (myConn)
+    {
+        tempArray = [[NSMutableData alloc] init];
+        
+    }
+    else{
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Errore"
+                                                       message:@"Impossibile connettersi"
+                                                      delegate:nil
+                                             cancelButtonTitle:@"Cancel"
+                                             otherButtonTitles:nil];
+        
+        [alert show];
+    }
+}
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row==0)
     {
-        
-        
-        CLLocationCoordinate2D clloc = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).locationManager.location.coordinate;
+          [self.delegate didSelect:nil andIdentifier:@"citta"] ;
+        /*
+        CLLocation *location = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).locationManager.location;
         
         
         CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-        CLLocation *location = [[CLLocation alloc]
-                                initWithLatitude:clloc.latitude longitude:clloc.longitude];
+       
         
         [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
             NSLog(@"reverseGeocodeLocation:completionHandler: Completion Handler called!");
@@ -52,13 +83,13 @@
                     
                 Citta *c= [[Citta alloc] initWithDescrizione:topResult.locality];
                 c.Slug = topResult.locality;
-                c.Coordinate = CLLocationCoordinate2DMake(clloc.latitude, clloc.longitude);
+                c.Coordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
               
                 
                 [self.delegate didSelect:c andIdentifier:@"citta"] ;
             }
         }];
-
+         */
     }else
     {
         Citta *city = [citta objectAtIndex:indexPath.row -1];

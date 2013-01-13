@@ -49,7 +49,7 @@
     if ([r isEqualToString:@"PAID"])
         [self performSegueWithIdentifier:@"pagamentoOk" sender:self];
     else{
-         [self.delegate didSelect:@"Pagamento cancellato" andIdentifier:@"annullaPagamento"];
+        [self.delegate didSelect:@"Messaggio da impostare" andIdentifier:@"errorePagamento"];
         [self.navigationController popViewControllerAnimated:YES];
         
     }
@@ -161,7 +161,7 @@
     if ((section==1) && elencoCarte.count ==0)
         return @"";
     
-    if (section==1)
+    if (section==0)
         return @"Utilizza una carta memorizzata";
     else
         return @"Utilizza una nuova carta di credito";

@@ -66,17 +66,23 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    
-    UILabel *lblDescrizione = (UILabel *)[cell viewWithTag:1];
+    OpzioneOfferta *sub = [offertaSelezionata.Subdeals objectAtIndex:indexPath.row];
+
+    CustomLabel *lblDescrizione = (CustomLabel *)[cell viewWithTag:1];
     UILabel *lblPrezzo = (UILabel *)[cell viewWithTag:2];
     UILabel *lblSconto = (UILabel *)[cell viewWithTag:3];
+    UILabel *lblRisparmio = (UILabel *)[cell viewWithTag:4];
 
-    
-    OpzioneOfferta *sub = [offertaSelezionata.Subdeals objectAtIndex:indexPath.row];
-    
+    double risparmio = sub.PrezzoPartenza - sub.PrezzoFinale;
+
+      
+    [lblDescrizione setVerticalAlignment:MSLabelVerticalAlignmentTop];
+    [lblDescrizione setNumberOfLines:4];
+    [lblDescrizione setLineHeight:17];
     [lblDescrizione setText:sub.descrizione];
-    [lblPrezzo setText:[NSString stringWithFormat:@"Prezzo: %.2f€", sub.PrezzoFinale]];
-    [lblSconto setText:[NSString stringWithFormat:@"Sconto: %.2f", sub.Sconto]];
+    [lblPrezzo setText:[NSString stringWithFormat:@"%.2f€", sub.PrezzoFinale]];
+    [lblSconto setText:[NSString stringWithFormat:@"%.2f %%", sub.Sconto]];
+    [lblRisparmio setText:[NSString stringWithFormat:@"di sconto (Risparmi %.2f)", risparmio]];
     return cell;
 }
 
@@ -84,7 +90,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 80;
+    return 151;
 }
 
 @end
