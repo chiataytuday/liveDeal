@@ -80,6 +80,8 @@
 		F644D86A167A2E5A005008BD /* sfondoCellOfferta@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F644D866167A2E5A005008BD /* sfondoCellOfferta@2x.png */; };
 		F644D86D167C7EAB005008BD /* separatorOfferta.png in Resources */ = {isa = PBXBuildFile; fileRef = F644D86B167C7EAB005008BD /* separatorOfferta.png */; };
 		F644D86E167C7EAB005008BD /* separatorOfferta@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F644D86C167C7EAB005008BD /* separatorOfferta@2x.png */; };
+		F658A8D516A458F5003F3134 /* BrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F658A8D416A458F5003F3134 /* BrowserViewController.m */; };
+		F658A8D816A6A6EB003F3134 /* PostToFbViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F658A8D716A6A6EB003F3134 /* PostToFbViewController.m */; };
 		F659464B1661037B00C5387E /* sfondoDetail.png in Resources */ = {isa = PBXBuildFile; fileRef = F65946491661037B00C5387E /* sfondoDetail.png */; };
 		F659464C1661037B00C5387E /* sfondoDetail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F659464A1661037B00C5387E /* sfondoDetail@2x.png */; };
 		F659465016621A0C00C5387E /* sfondoBarraAcquista.png in Resources */ = {isa = PBXBuildFile; fileRef = F659464E16621A0C00C5387E /* sfondoBarraAcquista.png */; };
@@ -386,6 +388,10 @@
 		F644D866167A2E5A005008BD /* sfondoCellOfferta@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sfondoCellOfferta@2x.png"; path = "../../../img liveDeal/sfondoCellOfferta@2x.png"; sourceTree = "<group>"; };
 		F644D86B167C7EAB005008BD /* separatorOfferta.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = separatorOfferta.png; path = "../../../img liveDeal/separatorOfferta.png"; sourceTree = "<group>"; };
 		F644D86C167C7EAB005008BD /* separatorOfferta@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "separatorOfferta@2x.png"; path = "../../../img liveDeal/separatorOfferta@2x.png"; sourceTree = "<group>"; };
+		F658A8D316A458F5003F3134 /* BrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserViewController.h; sourceTree = "<group>"; };
+		F658A8D416A458F5003F3134 /* BrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserViewController.m; sourceTree = "<group>"; };
+		F658A8D616A6A6EB003F3134 /* PostToFbViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostToFbViewController.h; sourceTree = "<group>"; };
+		F658A8D716A6A6EB003F3134 /* PostToFbViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostToFbViewController.m; sourceTree = "<group>"; };
 		F65946491661037B00C5387E /* sfondoDetail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sfondoDetail.png; path = "../../../img liveDeal/sfondoDetail.png"; sourceTree = "<group>"; };
 		F659464A1661037B00C5387E /* sfondoDetail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sfondoDetail@2x.png"; path = "../../../img liveDeal/sfondoDetail@2x.png"; sourceTree = "<group>"; };
 		F659464E16621A0C00C5387E /* sfondoBarraAcquista.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sfondoBarraAcquista.png; path = "../../../img liveDeal/sfondoBarraAcquista.png"; sourceTree = "<group>"; };
@@ -1126,6 +1132,10 @@
 				F6C046D9169D637C00A705EE /* SubdealsViewController.m */,
 				F6E9B58516A31F3C00E581B6 /* RaggioRicercaViewController.h */,
 				F6E9B58616A31F3C00E581B6 /* RaggioRicercaViewController.m */,
+				F658A8D316A458F5003F3134 /* BrowserViewController.h */,
+				F658A8D416A458F5003F3134 /* BrowserViewController.m */,
+				F658A8D616A6A6EB003F3134 /* PostToFbViewController.h */,
+				F658A8D716A6A6EB003F3134 /* PostToFbViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1657,6 +1667,8 @@
 				F6C046D7169D5CD500A705EE /* OpzioneOfferta.m in Sources */,
 				F6C046DA169D638100A705EE /* SubdealsViewController.m in Sources */,
 				F6E9B58716A31F3C00E581B6 /* RaggioRicercaViewController.m in Sources */,
+				F658A8D516A458F5003F3134 /* BrowserViewController.m in Sources */,
+				F658A8D816A6A6EB003F3134 /* PostToFbViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

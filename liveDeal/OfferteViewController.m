@@ -23,17 +23,32 @@
     [self.mapView setHidden:YES];
     tipo=0;
     
-
+    NSMutableString *search = [[NSMutableString alloc] initWithString:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/deals_list?"];
+    
     if (cittaSelezionata)
-        [self Ricerca:[NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/deals_list?city=%@&category=%i", cittaSelezionata.Slug, categoriaSelezionata.Codice]];
+        [search appendFormat:@"city=%@", cittaSelezionata.Slug];
     else{
     
         CLLocation *location = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).locationManager.location;
         float radius = [[NSUserDefaults standardUserDefaults] floatForKey:@"searchRadius"];
         
-        [self Ricerca:[NSString stringWithFormat:@"http://www.specialdeal.it/api/jsonrpc2/v1/deals/deals_list_by_distance?lat=%f&lng=%f&radius=%f&category=%i", location.coordinate.latitude, location.coordinate.longitude, radius, categoriaSelezionata.Codice]];
+         [search appendFormat:@"lat=%f&lng=%f&radius=%.0f", location.coordinate.latitude, location.coordinate.longitude, radius];
+        
     }
-          
+    
+    //filtro su categoria
+    [search appendFormat:@"&category=%i", categoriaSelezionata.Codice];
+    
+    
+    //se utente loggato lo passo per ottenere il link per lo sharing con referal
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userId"])
+    {
+         [search appendFormat:@"&user_id=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]];
+    }
+
+    [self Ricerca:search];
+
 }
 
 -(void)dropViewDidBeginRefreshing
@@ -212,7 +227,7 @@
                 
                 [offerta setId:[[off valueForKey:@"id"] integerValue]];
                 [offerta setValidita:[off valueForKey:@"validita"]];
-                [offerta setUrl:[NSString stringWithFormat:@"http://www.specialdeal.it/%@", [off valueForKey:@"id"]]];
+                [offerta setUrl:[off valueForKey:@"link_share"]];
                 [offerta setPrezzoFinale:[[prices valueForKey:@"discounted"] doubleValue]];
                 [offerta setEsercente:es];
                 [offerta setPrezzoPartenza:[[prices valueForKey:@"original"] doubleValue]];
@@ -1003,7 +1018,7 @@
         
         OffertaViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"offertaVC"];
         [vc setOffertaSelezionata:of.offerta];
-        [self presentModalViewController:vc animated:YES];
+        [self.navigationController pushViewController:vc animated:YES];
     }
     else
     {

@@ -137,6 +137,7 @@
             
             [[NSUserDefaults standardUserDefaults] setObject:[member objectForKey:@"token_access"] forKey:@"token_access"];
              [[NSUserDefaults standardUserDefaults] setObject:[member objectForKey:@"email"] forKey:@"email_logged"];
+            [[NSUserDefaults standardUserDefaults] setObject:[member objectForKey:@"id"] forKey:@"userId"];
             
             [[NSUserDefaults standardUserDefaults] synchronize];
             

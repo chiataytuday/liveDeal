@@ -16,14 +16,21 @@
 #import "Utility.h"
 #import "LoginViewController.h"
 #import "SubdealsViewController.h"
+#import "Social/Social.h"
+#import "AdSupport/AdSupport.h"
+#import "Accounts/Accounts.h"
+#import "PostToFbViewController.h"
+#import "MBProgressHUD.h"
 
-@interface OffertaViewController : UIViewController <GPPShareDelegate, UIActionSheetDelegate, UIWebViewDelegate, LoginDelegate>
+@interface OffertaViewController : UIViewController <GPPShareDelegate, UIActionSheetDelegate, UIWebViewDelegate, LoginDelegate, SelectDelegate>
 {
      NSTimer *myticker;
     NSDate *today;
     UIImage *imgDeal;
     UIScrollView *scroll;
     BOOL isIphone5;
+    UIImage *img;
+    MBProgressHUD *hud;
 }
 @property (retain, nonatomic) GPPShare *share;
 @property (nonatomic, retain) Offerta *offertaSelezionata;

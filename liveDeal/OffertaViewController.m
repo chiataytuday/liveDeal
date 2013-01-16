@@ -102,7 +102,7 @@
             NSString *url = [NSString stringWithFormat:@"http://www.specialdeal.it/crop/150x122/%@",[offertaSelezionata.immagini objectAtIndex:0]];
             NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:url]];
             
-            UIImage *img = [UIImage imageWithData:data];
+           img = [UIImage imageWithData:data];
             
             
             dispatch_sync(dispatch_get_main_queue(), ^{
@@ -241,6 +241,25 @@
     
 }
 
+-(void)didSelect:(id)object andIdentifier:(NSString *)identifier
+{
+    NSString *status = (NSString *)object;
+    
+    if ([status isEqualToString:@"OK"])
+    {
+         UIAlertView *alertView = [[UIAlertView alloc]
+                                    initWithTitle:@"Ok"
+                                    message:@"Post inserito correttamente"
+                                    delegate:self
+                                    cancelButtonTitle:@"OK"
+                                    otherButtonTitles:nil];
+            [alertView show];
+    }
+    
+    [hud setHidden:YES];
+
+}
+
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 
 {
@@ -312,79 +331,46 @@
 }
 
 - (void)postUpdate{
-    // Post a status update to the user's feed via the Graph API, and display an alert view
-    // with the results or an error.
-   // NSString *name = self.loggedInUser.first_name;
-    NSString *message = @"Post eseguito con successo";
     
-   
-    NSMutableDictionary *postParams =  [[NSMutableDictionary alloc] initWithObjectsAndKeys:offertaSelezionata.Url, @"link", [NSString stringWithFormat:@"http://www.specialdeal.it/crop/50x50/%@",  [offertaSelezionata.immagini objectAtIndex:0]], @"picture",
-                                        offertaSelezionata.Titolo, @"name",nil];
-    
-    [FBRequestConnection startWithGraphPath:@"me/feed"
-                                 parameters:postParams
-                                 HTTPMethod:@"POST"
-                          completionHandler:^(FBRequestConnection *connection,id result,NSError *error) {
-                              
-                              [self showAlert:message result:result error:error];
-                          }];
+    NSURL *url = [NSURL URLWithString:offertaSelezionata.Url];
+    NSString *title = @"Dai un'occhiata a questo deal";
 
-    
-    // if it is available to us, we will post using the native dialog
-   /* BOOL displayedNativeDialog = [FBNativeDialogs presentShareDialogModallyFrom:self
-                                                                    initialText:nil
-                                                                          image:nil
-                                                                            url:nil
-                                                                        handler:nil];
-    
-    if (TRUE) {
-          
-   
-        NSMutableDictionary *postParams =  [[NSMutableDictionary alloc] initWithObjectsAndKeys:offertaSelezionata.Url, @"link", offertaSelezionata.ImmaginePrimoPiano, @"picture", 
-                                            offertaSelezionata.Titolo,@"name",nil];
+     BOOL displayedNativeDialog =
+    [FBNativeDialogs
+     presentShareDialogModallyFrom:self
+     initialText:title
+     image:nil
+     url: url
+        handler:^(FBNativeDialogResult res, NSError *error) {
+         if (error) {
+             /* handle failure */
+             NSLog(@"error:%@, %@", error, [error localizedDescription]);
+         } else {
+             if (res == FBNativeDialogResultSucceeded) {
+                 /* handle success */
+                                NSLog(@"handle success");
+             } else {
+                 /* handle user cancel */
+                 NSLog(@"user cancel");
+             }
+         }
+     }];
+    if (!displayedNativeDialog) {
+
         
-        [FBRequestConnection startWithGraphPath:@"me/feed"
-                                     parameters:postParams
-                                     HTTPMethod:@"POST"
-                              completionHandler:^(FBRequestConnection *connection,id result,NSError *error) {
-                                  
-                                  [self showAlert:message result:result error:error];
-                              }];
+        PostToFbViewController *b= [self.storyboard instantiateViewControllerWithIdentifier:@"postToFb"];
+        b.url = offertaSelezionata.Url;
+        b.titolo = title;
+        b.img  = img;
+        b.delegate = self;
+        
+        hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.mode = MBProgressHUDModeIndeterminate;
+        hud.labelText = @"Attendere";
+
+        [self presentModalViewController:b animated:YES];
 
     }
-    else
-    {
-        
-        if([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
-            
-            SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
-            
-            SLComposeViewControllerCompletionHandler myBlock = ^(SLComposeViewControllerResult result){
-                if (result == SLComposeViewControllerResultCancelled) {
-                    
-                    NSLog(@"Cancelled");
-                    
-                } else
-                    
-                {
-                    NSLog(@"Done");
-                }
-                
-                [controller dismissViewControllerAnimated:YES completion:Nil];
-            };
-                        
-             [controller setTitle:@"xxxx"];
-           // [controller addURL:[NSURL URLWithString:@"http://www.mobile.safilsunny.com"]];
-           // [controller addImage:[UIImage imageNamed:@"fb.png"]];
-            
-            controller.completionHandler =myBlock;
-
-            
-            [self presentViewController:controller animated:YES completion:Nil];
-            
-        }
-        
-    }*/
 }
 
 

@@ -12,8 +12,9 @@
 #import "MBProgressHUD.h"
 #import "Offerta.h"
 #import "SuccessViewController.h"
+#import "BrowserViewController.h"
 
-@interface ScegliCartaCreditoViewController : UITableViewController
+@interface ScegliCartaCreditoViewController : UITableViewController <SelectDelegate>
 {
     MBProgressHUD *hud;
     NSMutableData *tempArray;
@@ -25,6 +26,7 @@
 @property (nonatomic,retain) id<SelectDelegate> delegate;
 @property (nonatomic, retain) NSString *chiavePagamento;
 @property (nonatomic, retain) Offerta *offertaSelezionata;
+
 
 
 

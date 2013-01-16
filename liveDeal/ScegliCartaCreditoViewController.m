@@ -20,12 +20,8 @@
     [super viewDidLoad];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(paymentNotification:)
-                                                 name:@"pagamentoNotificato"
-                                               object:nil];
-    
-  
+   
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -42,19 +38,7 @@
       [self tableView:self.tableView didSelectRowAtIndexPath:selectedCellIndexPath];
 }
 
--(void )paymentNotification:(NSNotification *)notification
-{
-    NSString *r = notification.object;
-    
-    if ([r isEqualToString:@"PAID"])
-        [self performSegueWithIdentifier:@"pagamentoOk" sender:self];
-    else{
-        [self.delegate didSelect:@"Messaggio da impostare" andIdentifier:@"errorePagamento"];
-        [self.navigationController popViewControllerAnimated:YES];
-        
-    }
-      
-}
+
 
 -(void) viewWillDisappear:(BOOL)animated {
     
@@ -264,6 +248,23 @@
     [tempArray appendData:data];
 }
 
+-(void)didSelect:(id)object andIdentifier:(NSString *)identifier
+{
+    if ([identifier isEqualToString:@"statoPagamento"])
+    {
+        NSString *status = (NSString *)object;
+        
+        if ([status isEqualToString:@"OK"])
+        {
+            [self performSegueWithIdentifier:@"pagamentoOk" sender:self];
+        }
+        else
+        {
+            [self.delegate didSelect:@"Errore" andIdentifier:@"annullaPagamento"];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
+}
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     
@@ -284,8 +285,13 @@
             //utente ha deciso di inserire una nuova carta. Nella risposta riceviamo l'url al quale fare il redirect
           
             NSURL *url = [NSURL URLWithString:[result objectForKey:@"redirect"]];
-            [[UIApplication sharedApplication] openURL:url];
-
+            //[[UIApplication sharedApplication] openURL:url];
+            
+            
+            BrowserViewController *b= [self.storyboard instantiateViewControllerWithIdentifier:@"browserVC"];
+            b.url = url;
+            b.delegate = self;
+            [self presentModalViewController:b animated:YES];
         }
         else
         {
@@ -312,11 +318,6 @@
         [self.delegate didSelect:[error objectForKey:@"message"] andIdentifier:@"errorePagamento"];
         [self.navigationController popViewControllerAnimated:YES];
 
-        
-       
-
-        
-       // pagamentoGiaAnnullato = true;
     }
     
     
